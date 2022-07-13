@@ -1,0 +1,77 @@
+{
+  "name": "typescript-nextjs-starter",
+  "description": "A TypeScript starter for Next.js that includes all you need to build amazing projects",
+  "version": "1.0.0",
+  "private": true,
+  "author": "João Pedro Schmitz <hey@joaopedro.dev> (@jpedroschmitz)",
+  "license": "MIT",
+  "keywords": [
+    "nextjs",
+    "starter",
+    "typescript"
+  ],
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc",
+    "lint": "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\"",
+    "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
+    "postinstall": "husky install",
+    "commit": "cz"
+  },
+  "lint-staged": {
+    "./src/**/*.{ts,js,jsx,tsx}": [
+      "eslint --ignore-path .gitignore --fix",
+      "prettier --ignore-path .gitignore --write"
+    ]
+  },
+  "dependencies": {
+    "graphql": "16.5.0",
+    "graphql-request": "4.3.0",
+    "lodash": "4.17.21",
+    "next": "12.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-query": "3.39.1",
+    "zod": "3.17.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.0.3",
+    "@commitlint/config-conventional": "17.0.3",
+    "@sindresorhus/slugify": "^1.1.0",
+    "@types/isomorphic-fetch": "0.0.36",
+    "@types/lodash.isequal": "4.5.6",
+    "@types/node": "16.11.43",
+    "@types/react": "18.0.14",
+    "@types/react-dom": "18.0.5",
+    "@types/shopify-buy": "2.10.10",
+    "@typescript-eslint/eslint-plugin": "5.30.0",
+    "@typescript-eslint/parser": "5.30.0",
+    "commitizen": "4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "debounce": "^1.2.1",
+    "dotenv": "^10.0.0",
+    "eslint": "8.18.0",
+    "eslint-config-next": "12.2.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.1.5",
+    "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.1",
+    "isomorphic-fetch": "^3.0.0",
+    "lint-staged": "13.0.3",
+    "lodash.debounce": "^4.0.8",
+    "lodash.isequal": "^4.5.0",
+    "prettier": "2.7.1",
+    "query-string": "^7.0.0",
+    "react-icons": "^4.1.0",
+    "shopify-buy": "2.16.1",
+    "typescript": "4.7.4",
+    "urql": "2.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
