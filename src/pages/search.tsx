@@ -14,11 +14,7 @@ import { getCurrencySymbol } from '../utils/format-price';
 import { Spinner } from '../components/progress';
 import { Filters } from '../components/filters';
 import styles from './search-page.module.css';
-import {
-  getAllMetaFields,
-  getAllProducts,
-  getAllProductsWithMetaFields,
-} from '@/lib/queries';
+import { getAllProductsWithMetaFields } from '@/lib/queries';
 import { AllProductsType } from '@/lib/types';
 import { useRouter } from 'next/router';
 
@@ -190,11 +186,7 @@ function SearchPage({
               />
             </div>
           </section>
-          <section
-            className={styles.results}
-            aria-busy={isFetching}
-            aria-hidden={styles.modalOpen}
-          >
+          <section className={styles.results}>
             {isFetching ? (
               <p className={styles.progressStyle}>
                 <Spinner aria-valuetext="Searching" /> Searching
@@ -211,7 +203,7 @@ function SearchPage({
               </p>
             )}
             {!isFetching && (
-              <ul className={styles.productListStyle}>
+              <ul className={styles.productList}>
                 {products.map((node, index) => (
                   <li className={styles.productListItem} key={node.id}>
                     <ProductCard eager={index === 0} product={node} />

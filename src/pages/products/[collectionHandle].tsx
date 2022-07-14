@@ -33,6 +33,7 @@ export default function ProductTypeIndex({
   return (
     <Layout collections={collections}>
       <Seo title={`Category: ${collectionByHandle.handle}`} />
+      <h2 className={styles.subtitle}>{collectionByHandle.description}</h2>
       <h1 className={styles.title}>{collectionByHandle.handle}</h1>
 
       <ProductListing products={collectionByHandle.products} />

@@ -2,12 +2,12 @@ import * as React from 'react';
 import { StoreContext } from '../context/store-context';
 import Logo from '../icons/logo';
 import { Navigation } from './navigation';
-import { CartButton } from './cart-button';
 import SearchIcon from '../icons/search';
 import { Toast } from './toast';
 import styles from './header.module.css';
 import Link from 'next/link';
 import { AllCollectionsType } from '@/lib/types';
+import { CartButton } from './cart-button';
 
 interface HeaderProps {
   collections: AllCollectionsType;
@@ -35,13 +35,11 @@ export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
         <Link replace href="/search">
           <a className={styles.searchButton}>
             <SearchIcon />
-            </a>
+          </a>
         </Link>
         <Link href="/cart" replace>
-          <a
-          className={styles.cartButton}
-          >
-          <CartButton quantity={quantity} />
+          <a className={styles.cartButton}>
+            <CartButton quantity={quantity} />
           </a>
         </Link>
       </header>

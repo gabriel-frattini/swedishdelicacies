@@ -1,5 +1,4 @@
 import * as React from 'react';
-import slugify from '@sindresorhus/slugify';
 import styles from './navigation.module.css';
 import Link from 'next/link';
 import { AllCollectionsType } from '@/lib/types';
@@ -9,8 +8,28 @@ interface NavbarProps {
 }
 
 export const Navigation = ({ collections }: NavbarProps) => {
+  const [scrollPosX, setScrollPosX] = React.useState('0');
+  const [activeItem, setActiveItem] = React.useState('');
+  const ref = React.useRef();
+  const handleClickedNavItem = (id: string) => {
+    sessionStorage.setItem('navScrollX', scrollPosX);
+
+    setActiveItem(id);
+  };
+
+  React.useEffect(() => {
+    const storedScrollX = sessionStorage.getItem('navScrollX');
+    if (storedScrollX) ref.current?.scrollTo({ left: parseInt(storedScrollX) });
+  }, []);
+
   return (
-    <nav className={styles.navStyle}>
+    <nav
+      className={styles.navStyle}
+      ref={ref}
+      onScroll={() =>
+        setScrollPosX((ref.current && ref.current.scrollLeft) || '0')
+      }
+    >
       <Link key="All" href="/products/">
         <a className={styles.navLink}>All Products</a>
       </Link>
@@ -20,7 +39,15 @@ export const Navigation = ({ collections }: NavbarProps) => {
           replace
           href={`/products/${edge.node.handle}`}
         >
-          <a className={styles.navLink}>{edge.node.handle}</a>
+          <a
+            onClick={() => handleClickedNavItem(edge.node.id)}
+            className={[
+              styles.navLink,
+              activeItem === edge.node.id && styles.activeLink,
+            ].join(' ')}
+          >
+            {edge.node.handle}
+          </a>
         </Link>
       ))}
     </nav>

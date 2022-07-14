@@ -10,6 +10,7 @@ const collections = z.object({
             z.object({
               node: z.object({
                 handle: z.string(),
+                id: z.string(),
               }),
             }),
           ),
@@ -110,6 +111,7 @@ const AllproductsByHandle = z.object({
   data: z.object({
     collections,
     collectionByHandle: z.object({
+      description: z.string(),
       title: z.string(),
       handle: z.string(),
       products: z.object({

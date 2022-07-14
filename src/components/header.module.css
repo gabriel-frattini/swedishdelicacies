@@ -81,3 +81,19 @@
 .searchButton[aria-current='page'] {
   color: var(--primary);
 }
+
+.cartButton {
+  color: var(--text-color-secondary);
+  grid-area: cartButton;
+  width: var(--size-input);
+  height: var(--size-input);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  align-self: center;
+}
+
+.cartButton:hover {
+  color: var(--text-color);
+}

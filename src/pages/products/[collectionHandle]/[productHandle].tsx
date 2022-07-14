@@ -39,9 +39,6 @@ export default function Product({ collections }: any) {
     'getSingleProductByHandle',
     async () =>
       await getSingleProductByHandle(router.query.productHandle as string),
-    {
-      onSuccess(data) {},
-    },
   );
 
   React.useEffect(() => {
@@ -128,8 +125,8 @@ export default function Product({ collections }: any) {
                         className={styles.productImageListItem}
                       >
                         <Image
-                          width={400}
-                          height={200}
+                          width={700}
+                          height={500}
                           objectFit="contain"
                           loading={index === 0 ? 'eager' : 'lazy'}
                           alt={
@@ -177,7 +174,7 @@ export default function Product({ collections }: any) {
                         aria-label="Variants"
                         onChange={(event) => handleOptionChange(index, event)}
                       >
-                        <option value="">{`Select ${name}`}</option>
+                        <option value="">{`Select ${'Size' || name}`}</option>
                         {values.map((value) => (
                           <option value={value} key={`${name}-${value}`}>
                             {value}

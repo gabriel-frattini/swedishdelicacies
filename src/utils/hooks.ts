@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import queryString from 'query-string';
-import { useQuery } from 'urql';
+import { useQuery } from 'react-query';
 import { createQuery } from './search';
 import { getProductsFromQuery } from '@/lib/queries';
 import { AllProductsType } from '@/lib/types';
@@ -40,10 +40,12 @@ export function useProductSearch(
     () => query === createQuery(initialFilters) || pause,
     [query, pause, initialFilters],
   );
+  console.log(shouldPause);
   const [result, setResult] = useState<AllProductsType['data']>();
-  useEffect(() => {
-    const fetch = async () => {
-      const products: AllProductsType['data'] = await getProductsFromQuery({
+  const { isLoading } = useQuery(
+    ['getProductsBySearch', query],
+    async () =>
+      await getProductsFromQuery({
         variables: {
           query,
           sortKey: sortKey || initialSortKey,
@@ -52,11 +54,8 @@ export function useProductSearch(
           after: cursors.after,
           before: cursors.before,
         },
-      });
-      setResult(products);
-    };
-    fetch();
-  }, [shouldPause]);
+      }).then((res) => setResult(res)),
+  );
 
   useEffect(() => {
     const qs = queryString.stringify({
@@ -76,7 +75,7 @@ export function useProductSearch(
     const url = new URL(window.location.href);
     url.search = qs;
     url.hash = '';
-    window.history.replaceState({}, null, url.toString());
+    window.history.replaceState({}, '', url.toString());
     setQuery(createQuery(filters));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, cursors, sortKey]);
@@ -126,7 +125,7 @@ export function useProductSearch(
     hasNextPage = result ? result.products.pageInfo.hasNextPage : false;
   }
 
-  const isFetching = !initialRender && result;
+  const isFetching = isLoading;
   return {
     data: result,
     isFetching,

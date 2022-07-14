@@ -22,11 +22,14 @@
 .productImageWrapper {
   position: relative;
   padding-bottom: var(--space-2xl);
+  display: flex;
+  justify-content: center;
 }
 
 .productImageList {
   display: flex;
   overflow-x: auto;
+  max-width: 600px;
 }
 
 .productImageListItem {
@@ -116,7 +119,7 @@
 .selectVariant::after {
   background-image: url("data:image/svg+xml,%3Csvg fill='none' height='8' viewBox='0 0 13 8' width='13' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m6.87794 7.56356c-.19939.23023-.55654.23024-.75593 0l-5.400738-6.23623c-.280438-.32383-.050412-.82733.377968-.82733h10.80146c.4284 0 .6584.5035.378.82733z' fill='%2378757a'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  content: "";
+  content: '';
   height: 8px;
   position: absolute;
   right: var(--space-lg);

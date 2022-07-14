@@ -14,7 +14,6 @@ export default function CartPage({ collections }: any) {
   const handleCheckout = () => {
     window.open(checkout.webUrl);
   };
-
   return (
     <Layout collections={collections}>
       <div className={styles.wrap}>
@@ -51,9 +50,9 @@ export default function CartPage({ collections }: any) {
                 </tr>
               </thead>
               <tbody>
-                {/* {checkout.lineItems.map((item) => (
+                {checkout.lineItems.map((item) => (
                   <LineItem item={item} key={item.id} />
-                ))} */}
+                ))}
 
                 <tr className={styles.summary}>
                   <td className={styles.collapseColumn}></td>

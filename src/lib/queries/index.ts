@@ -8,6 +8,7 @@ export async function getAllProducts() {
     edges {
       node {
         handle
+        id
       }
     }
   }
@@ -38,7 +39,7 @@ export async function getAllProducts() {
                   }
                 }
               } 
-      priceRangeV2{
+      priceRange{
           maxVariantPrice {
               amount
               currencyCode
@@ -80,12 +81,14 @@ query getAllProductsByHandle($handle: String!) {
     edges {
       node {
         handle
+        id
       }
     }
   }
   collectionByHandle(handle: $handle) {
     title
     handle
+    description
     products(first: 10) {
     pageInfo {
       hasNextPage
@@ -114,7 +117,7 @@ query getAllProductsByHandle($handle: String!) {
                     }
                   }
                 } 
-        priceRangeV2{
+        priceRange{
             maxVariantPrice {
                 amount
                 currencyCode
@@ -226,6 +229,7 @@ export async function getAllCollections() {
   collections(first: 20) {
         edges {
           node {
+            id
             handle
           }
         }
@@ -358,7 +362,7 @@ export async function getAllProductsWithMetaFields() {
                   }
                 }
               } 
-      priceRangeV2{
+      priceRange{
           maxVariantPrice {
               amount
               currencyCode

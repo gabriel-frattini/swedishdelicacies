@@ -19,7 +19,7 @@ export function Toast({ show, duration = 1000, ...props }: any) {
 
   return visible ? (
     <div
-      className={[styles.toastWrapper, animation].join(' ')}
+      className={[styles.toastWrapper, styles.animation].join(' ')}
       {...props}
     />
   ) : null;

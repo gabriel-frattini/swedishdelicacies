@@ -15,7 +15,7 @@ export function LineItem({ item }) {
 
   const variantImage = {
     ...item.variant.image,
-    originalSrc: item.variant.image.originalSrc,
+    originalSrc: item.variant.image.src,
   };
   const price = formatPrice(
     item.variant.priceV2.currencyCode,
@@ -56,15 +56,16 @@ export function LineItem({ item }) {
     handleQuantityChange(Number(quantity || 0) - 1);
   }
 
-
   return (
     <tr>
       <td>
-        {image && (
+        {variantImage && (
           <Image
             key={variantImage.src}
-            image={image}
+            src={variantImage.originalSrc}
             alt={variantImage.altText ?? item.variant.title}
+            width={160}
+            height={100}
           />
         )}
       </td>

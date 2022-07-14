@@ -8,13 +8,12 @@ export function CartButton({ quantity }: any) {
     <Link
       aria-label={`Shopping Cart with ${quantity} items`}
       href="/cart"
-      className={styles.cartButton}
       replace
     >
-      <>
+      <div className={styles.cartButton}>
         <CartIcon />
         {quantity > 0 && <div className={styles.badge}>{quantity}</div>}
-      </>
+      </div>
     </Link>
   );
 }
