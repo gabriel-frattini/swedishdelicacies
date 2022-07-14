@@ -17,7 +17,6 @@ export default function Products({
   React.useEffect(() => {
     products.edges.forEach((product) => {
       const handle = product.node.handle;
-      console.log('prefetching...');
       queryClient.prefetchQuery('getSingleProductByHandle', async () => {
         await getSingleProductByHandle(handle);
       });

@@ -23,7 +23,6 @@ export default function ProductTypeIndex({
   React.useEffect(() => {
     collectionByHandle.products.edges.forEach((product) => {
       const handle = product.node.handle;
-      console.log('prefetching...');
       queryClient.prefetchQuery('getSingleProductByHandle', async () => {
         await getSingleProductByHandle(handle);
       });

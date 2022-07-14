@@ -19,13 +19,13 @@ export function LineItem({ item }: SingleLineItemType) {
     originalSrc: item.variant.image.src,
   };
   const price = formatPrice(
-    item.variant.price.currencyCode,
-    Number(item.variant.price.amount),
+    item.variant.priceV2.currencyCode,
+    Number(item.variant.priceV2.amount),
   );
 
   const subtotal = formatPrice(
-    item.variant.price.currencyCode,
-    Number(item.variant.price.amount) * quantity,
+    item.variant.priceV2.currencyCode,
+    Number(item.variant.priceV2.amount) * quantity,
   );
 
   const handleRemove = () => {
@@ -57,6 +57,8 @@ export function LineItem({ item }: SingleLineItemType) {
     handleQuantityChange(Number(quantity || 0) - 1);
   }
 
+  const variantIsOnSale = !!item.variant.compareAtPrice;
+
   return (
     <tr>
       <td>
@@ -81,7 +83,17 @@ export function LineItem({ item }: SingleLineItemType) {
           </button>
         </div>
       </td>
-      <td className={styles.priceColumn}>{price}</td>
+      <td className={styles.priceColumn}>
+        <p className={styles.sale}>
+          {variantIsOnSale && item.variant.compareAtPrice}
+        </p>
+        <p className={[variantIsOnSale && styles.oldPrice].join(' ')}>
+          {formatPrice(
+            item.variant.priceV2.currencyCode,
+            parseInt(item.variant.priceV2.amount),
+          )}
+        </p>
+      </td>
       <td>
         <NumericInput
           disabled={loading}
@@ -92,7 +104,18 @@ export function LineItem({ item }: SingleLineItemType) {
           onChange={(e: any) => handleQuantityChange(e.currentTarget.value)}
         />
       </td>
-      <td className={styles.totals}>{subtotal}</td>
+      <td className={styles.totals}>
+        <p className={styles.saleSubtotal}>
+          {variantIsOnSale &&
+            formatPrice(
+              checkout.currencyCode,
+              Number(item.variant.priceV2.amount) * quantity,
+            )}
+        </p>
+        <p className={[variantIsOnSale && styles.oldSubtotal].join(' ')}>
+          {subtotal}
+        </p>
+      </td>
     </tr>
   );
 }

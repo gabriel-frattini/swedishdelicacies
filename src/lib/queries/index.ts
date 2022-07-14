@@ -39,7 +39,7 @@ export async function getAllProducts() {
                   }
                 }
               } 
-      priceRange{
+      priceRangeV2{
           maxVariantPrice {
               amount
               currencyCode
@@ -49,6 +49,16 @@ export async function getAllProducts() {
               currencyCode
           }
       }
+    priceRange{
+              maxVariantPrice {
+                  amount
+                  currencyCode
+              }
+              minVariantPrice {
+                  amount 
+                  currencyCode
+              }
+          }
           variants(first: 5) {
           edges {
               node {
@@ -118,6 +128,16 @@ query getAllProductsByHandle($handle: String!) {
                   }
                 } 
         priceRange{
+            maxVariantPrice {
+                amount
+                currencyCode
+            }
+            minVariantPrice {
+                amount 
+                currencyCode
+            }
+        }
+         priceRangeV2{
             maxVariantPrice {
                 amount
                 currencyCode
@@ -199,6 +219,14 @@ export async function getSingleProductByHandle(handle: string) {
               currencyCode
           }
       }
+      compareAtPriceRange {
+            maxVariantPrice {
+                amount
+            }
+            minVariantPrice {
+                amount
+            }
+        }
           variants(first: 10) {
               nodes {
                   id 
@@ -300,6 +328,16 @@ export async function getProductsFromQuery({ variables }: variableProps) {
               currencyCode
           }
       }
+      priceRangeV2{
+                maxVariantPrice {
+                    amount
+                    currencyCode
+                }
+                minVariantPrice {
+                    amount 
+                    currencyCode
+                }
+            }
           variants(first: 10) {
               nodes {
                   id 

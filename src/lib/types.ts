@@ -42,7 +42,27 @@ const node = z.object({
       values: z.array(z.string()),
     }),
   ),
+  compareAtPriceRange: z.object({
+    minVariantPrice: z.object({
+      amount: z.string(),
+      currencyCode: z.string(),
+    }),
+    maxVariantPrice: z.object({
+      amount: z.string(),
+      currencyCode: z.string(),
+    }),
+  }),
   priceRange: z.object({
+    minVariantPrice: z.object({
+      amount: z.string(),
+      currencyCode: z.string(),
+    }),
+    maxVariantPrice: z.object({
+      amount: z.string(),
+      currencyCode: z.string(),
+    }),
+  }),
+  priceRangeV2: z.object({
     minVariantPrice: z.object({
       amount: z.string(),
       currencyCode: z.string(),
@@ -163,7 +183,7 @@ const lineItemObj = z.object({
         id: z.string(),
         src: z.string(),
       }),
-      price: z.object({
+      priceV2: z.object({
         amount: z.string(),
         currencyCode: z.string(),
       }),

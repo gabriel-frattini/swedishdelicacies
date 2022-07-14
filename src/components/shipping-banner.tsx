@@ -4,18 +4,20 @@ import { formatPrice } from '../utils/format-price';
 import styles from './shipping-banner.module.css';
 
 interface PageProps {
-  total: {
-    currencyCode: string;
-    amount: string;
-  };
+  total: string;
+  currencyCode: string;
   freeShippingLimit: number;
 }
 
-const ShippingBanner = ({ total, freeShippingLimit }: PageProps) => {
-  const shippingLeft = Number(freeShippingLimit) - Number(total.amount);
+const ShippingBanner = ({
+  total,
+  currencyCode,
+  freeShippingLimit,
+}: PageProps) => {
+  const shippingLeft = Number(freeShippingLimit) - Number(total);
 
   const shippingProgress = Math.round(
-    (Number(total.amount) / freeShippingLimit) * 100,
+    (Number(total) / freeShippingLimit) * 100,
   );
 
   return (
@@ -35,7 +37,7 @@ const ShippingBanner = ({ total, freeShippingLimit }: PageProps) => {
           <span className={styles.bannerText}>
             You are{' '}
             <strong>
-              {total.currencyCode} {shippingLeft}
+              {currencyCode} {shippingLeft}
             </strong>{' '}
             away from <strong>Free Shipping</strong>
             &#128666;

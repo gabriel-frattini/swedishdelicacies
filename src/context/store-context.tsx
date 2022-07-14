@@ -25,6 +25,10 @@ interface defaultValuesType {
   client: any;
   checkout: {
     id: string;
+    totalPrice: string;
+    subtotalPrice: string;
+    currencyCode: string;
+    totalTax: string;
     lineItems: LineItemsType['lineItems'];
   };
 }
@@ -65,7 +69,6 @@ export const StoreProvider = ({ children }: any) => {
   };
 
   React.useEffect(() => {
-    console.log('lineitems', checkout.lineItems);
   }, [checkout.lineItems]);
 
   React.useEffect(() => {

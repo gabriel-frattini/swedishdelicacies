@@ -21,6 +21,7 @@ import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
 import { AllCollectionsType, SingleProductType } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ProductPrice } from '@/components/product-price';
 
 export interface OptionValue {
   name: string;
@@ -69,10 +70,13 @@ export default function Product({ collections }: any) {
       id,
       options,
       collections: productCollection,
+      compareAtPriceRange,
       handle,
       vendor,
       tags,
     }: SingleProductType = productByHandle;
+
+
 
     const handleOptionChange = (index: any, event: any) => {
       const value = event.target.value;
@@ -97,11 +101,6 @@ export default function Product({ collections }: any) {
     // React.useEffect(() => {
     //   checkAvailablity(data.storefrontId);
     // }, [productVariant.id, checkAvailablity, id]);
-
-    const price = formatPrice(
-      priceRange.minVariantPrice.currencyCode,
-      parseInt(initialvariant.price),
-    );
 
     const hasVariants = variants.nodes.length > 1;
     const hasImages = images.edges.length > 0;
@@ -163,9 +162,7 @@ export default function Product({ collections }: any) {
               </div>
               <h1 className={styles.header}>{title}</h1>
               <p className={styles.productDescription}>{description}</p>
-              <h2 className={styles.priceValue}>
-                <span>{price}</span>
-              </h2>
+              <ProductPrice compareAtPriceRange={compareAtPriceRange} initialPrice={initialvariant.price} />
               <fieldset className={styles.optionsWrapper}>
                 {hasVariants &&
                   options.map(({ id, name, values }, index) => (

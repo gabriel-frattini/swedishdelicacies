@@ -11,7 +11,6 @@ import ShippingBanner from '@/components/shipping-banner';
 export default function CartPage({ collections }: any) {
   const { checkout, loading } = React.useContext(StoreContext);
   const emptyCart = checkout.lineItems.length === 0;
-
   const handleCheckout = () => {
     window.open(checkout.webUrl);
   };
@@ -37,7 +36,8 @@ export default function CartPage({ collections }: any) {
           <>
             <h1 className={styles.title}>Your cart</h1>
             <ShippingBanner
-              total={checkout.totalPriceV2}
+              currencyCode={checkout.currencyCode}
+              total={checkout.totalPrice}
               freeShippingLimit={300}
             />
             <table className={styles.table}>
@@ -65,10 +65,7 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Subtotal</td>
                   <td className={styles.totals}>
-                    {formatPrice(
-                      checkout.subtotalPriceV2.currencyCode,
-                      checkout.subtotalPriceV2.amount,
-                    )}
+                    {formatPrice(checkout.currencyCode, checkout.subtotalPrice)}
                   </td>
                 </tr>
                 <tr className={styles.summary}>
@@ -77,10 +74,7 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Taxes</td>
                   <td className={styles.totals}>
-                    {formatPrice(
-                      checkout.totalTaxV2.currencyCode,
-                      checkout.totalTaxV2.amount,
-                    )}
+                    {formatPrice(checkout.currencyCode, checkout.totalTax)}
                   </td>
                 </tr>
                 <tr className={styles.summary}>
@@ -96,10 +90,7 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Total Price</td>
                   <td className={styles.totals}>
-                    {formatPrice(
-                      checkout.totalPriceV2.currencyCode,
-                      checkout.totalPriceV2.amount,
-                    )}
+                    {formatPrice(checkout.currencyCode, checkout.totalPrice)}
                   </td>
                 </tr>
               </tbody>

@@ -1,0 +1,30 @@
+.priceValue > span {
+  font-size: 2rem;
+  font-weight: normal;
+  line-height: var(--dense);
+}
+.priceValue > p {
+  font-size: 0.8rem;
+  display: inline;
+  color: var(--blue-100);
+}
+
+.priceValue {
+  padding: var(--space-lg) 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.regularSale,
+.oldSale {
+  color: var(--blue-100);
+}
+
+.oldSale {
+  text-decoration: line-through;
+}
+
+.onSale {
+  color: var(--yellow-80);
+}

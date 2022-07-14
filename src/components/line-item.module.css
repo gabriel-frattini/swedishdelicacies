@@ -1,8 +1,8 @@
 .title {
-  font-size: var(--text-2xl);
   font-weight: var(--semibold);
   line-height: var(--solid);
   padding-bottom: var(--space-md);
+  color: var(--blue-80);
 }
 
 .variant {
@@ -31,9 +31,42 @@
   display: none;
 }
 
+.imageWrapper {
+  width: 160px;
+  height: 160px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
 @media (min-width: 640px) {
   .priceColumn,
   .totals {
     display: block;
+  }
+
+  .sale {
+    color: var(--yellow-80);
+  }
+
+  .title {
+    font-size: var(--text-2xl);
+  }
+
+  .oldSubTotal,
+  .oldPrice {
+    text-decoration: line-through;
+  }
+}
+
+@media (max-width: 1000px) {
+  .imageWrapper {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 640px) {
+  .imageWrapper {
+    height: 60px;
   }
 }

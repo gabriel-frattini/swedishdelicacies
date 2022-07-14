@@ -13,12 +13,19 @@ interface Props {
 }
 
 export function ProductCard({ product: { node }, eager }: Props) {
-  const { title, priceRange, handle, images, vendor, collections } = node;
+  const {
+    title,
+    priceRangeV2,
+    priceRange,
+    handle,
+    images,
+    vendor,
+    collections,
+  } = node;
   const price = formatPrice(
     priceRange.minVariantPrice.currencyCode,
     parseInt(priceRange.minVariantPrice.amount),
   );
-
   const defaultImageHeight = 200;
   const defaultImageWidth = 400;
   return (
