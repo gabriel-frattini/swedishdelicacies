@@ -18,18 +18,23 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { StoreContext } from '@/context/store-context';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
-  if (!data) return null;
+  React.useEffect(() => {
+    if (Object.keys(data).length > 0) {
+      collectionByHandle.products.edges.forEach((product) => {
+        const handle = product.node.handle;
+        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
+          await getSingleProductByHandle(handle);
+        });
+      });
+    }
+  }, []);
+
+  if (!Object.keys(data).length) {
+    return null;
+  }
+
   const { queryClient } = React.useContext(StoreContext);
   const { collectionByHandle, collections } = data;
-
-  React.useEffect(() => {
-    collectionByHandle.products.edges.forEach((product) => {
-      const handle = product.node.handle;
-      queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-        await getSingleProductByHandle(handle);
-      });
-    });
-  }, []);
 
   return (
     <Layout collections={collections}>
@@ -68,6 +73,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
   return {
-    props: { data: null },
+    props: { data: {} },
   };
 };

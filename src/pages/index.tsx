@@ -29,6 +29,9 @@ function Hero(props: any) {
 }
 
 export default function IndexPage({ data }: AllproductsByHandleType) {
+  if (!Object.keys(data).length) {
+    return null;
+  }
   return (
     <Layout collections={data.collections}>
       <Hero />
@@ -40,7 +43,12 @@ export default function IndexPage({ data }: AllproductsByHandleType) {
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await getAllProductsByHandle('chocolate');
 
+  if (data) {
+    return {
+      props: { data: data },
+    };
+  }
   return {
-    props: { data },
+    props: { data: {} },
   };
 };
