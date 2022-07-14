@@ -42,13 +42,6 @@ interface PageProps {
 }
 
 export default function SearchPage({ data }: PageProps) {
-  if (!data) return null;
-
-  const {
-    collections,
-    products: initialdata,
-    shop: { productTags, productTypes, productVendors },
-  } = data;
   // These default values come from the page query string
   const router = useRouter();
   const queryParams = getValuesFromQuery(router.query);
@@ -79,14 +72,14 @@ export default function SearchPage({ data }: PageProps) {
   } = useProductSearch(
     filters,
     {
-      allProductTypes: productTypes['edges'],
-      allVendors: productVendors['edges'],
-      allTags: productTags['edges'],
+      allProductTypes: data.shop ? data.shop.productTypes.edges : [],
+      allVendors: data.shop ? data.shop.productVendors.edges : [],
+      allTags: data.shop ? data.shop.productTags.edges : [],
     },
     sortKey,
     false,
     DEFAULT_PRODUCTS_PER_PAGE,
-    initialdata,
+    data.products,
     initialFilters,
   );
 
@@ -127,15 +120,12 @@ export default function SearchPage({ data }: PageProps) {
     }
   }, [hash, hasNextPage, fetchNextPage]);
 
-  const currencyCode = getCurrencySymbol(
-    initialdata.edges?.[0]?.node?.priceRange?.minVariantPrice?.currencyCode,
-  );
-
-  console.log(initialdata);
-
+  if (!Object.keys(data).length) {
+    return null;
+  }
   return (
     <>
-      <Layout collections={collections}>
+      <Layout collections={data.collections}>
         <div className={styles.main}>
           <div className={styles.search}>
             <SearchBar defaultTerm={filters.term} setFilters={setFilters} />
@@ -184,10 +174,10 @@ export default function SearchPage({ data }: PageProps) {
               <Filters
                 setFilters={setFilters}
                 filters={filters}
-                tags={productTags}
-                vendors={productVendors}
-                productTypes={productTypes}
-                currencyCode={currencyCode}
+                tags={data.shop.productTags}
+                vendors={data.shop.productVendors}
+                productTypes={data.shop.productTypes}
+                currencyCode={'EUR'}
               />
             </div>
           </section>
@@ -321,6 +311,6 @@ export async function getStaticProps() {
   }
 
   return {
-    props: { data: null },
+    props: { data: {} },
   };
 }

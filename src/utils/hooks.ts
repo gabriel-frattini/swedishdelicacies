@@ -8,11 +8,11 @@ import { AllProductsType, ShopType } from '@/lib/types';
 import { queryTypes } from '@/utils/search';
 
 interface filterType {
-  [key: string]: [node: string];
+  [key: string]: [node: string] | [];
 }
 
 export interface useSearchType {
-  products: AllProductsType["data"]["products"];
+  products: AllProductsType['data']['products'];
   isFetching: boolean;
   filterCount: number;
   hasNextPage?: boolean;
@@ -140,7 +140,6 @@ export function useProductSearch(
     hasPreviousPage = result ? result.products.pageInfo.hasPreviousPage : false;
     hasNextPage = result ? result.products.pageInfo.hasNextPage : false;
   }
-  console.log('result', result, 'initial', initialData);
   const isFetching = isLoading;
   return {
     products: result ? result.products : initialData,
