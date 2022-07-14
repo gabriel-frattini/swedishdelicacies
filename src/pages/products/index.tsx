@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { StoreContext } from '@/context/store-context'
- 
+import { StoreContext } from '@/context/store-context';
+
 import { getAllProducts, getSingleProductByHandle } from '@/lib/queries';
 import { AllProductsType } from '@/lib/types';
 
@@ -13,7 +13,6 @@ import { MoreButton } from '../../components/more-button';
 import styles from './index.module.css';
 
 export default function Products({ data }: AllProductsType) {
-
   const { queryClient } = React.useContext(StoreContext);
 
   const { collections, products } = data;
@@ -42,13 +41,7 @@ export default function Products({ data }: AllProductsType) {
 export async function getStaticProps() {
   const { data } = await getAllProducts();
 
-  if (data) {
-    return {
-      props: { data },
-    };
-  }
-
   return {
-    props: { data: null },
+    props: { data },
   };
 }
