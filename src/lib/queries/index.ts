@@ -12,7 +12,7 @@ export async function getAllProducts() {
       }
     }
   }
-  products(first: 25) {
+  products(first: 20) {
     pageInfo {
       hasNextPage
       hasPreviousPage
@@ -329,16 +329,7 @@ export async function getProductsFromQuery({ variables }: variableProps) {
               currencyCode
           }
       }
-      priceRangeV2{
-                maxVariantPrice {
-                    amount
-                    currencyCode
-                }
-                minVariantPrice {
-                    amount 
-                    currencyCode
-                }
-            }
+     
           variants(first: 10) {
               nodes {
                   id 

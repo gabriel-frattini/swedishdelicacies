@@ -12,7 +12,7 @@ interface filterType {
 }
 
 export interface useSearchType {
-  products?: AllProductsType['data']['products'];
+  products: AllProductsType["data"]["products"];
   isFetching: boolean;
   filterCount: number;
   hasNextPage?: boolean;
@@ -35,7 +35,7 @@ export function useProductSearch(
   sortKey: string,
   pause = false,
   count = 20,
-  initialData: AllProductsType['data']['products']['edges'],
+  initialData: AllProductsType['data']['products'],
   initialFilters: queryTypes,
 ): useSearchType {
   const [query, setQuery] = useState(createQuery(filters));
@@ -140,10 +140,10 @@ export function useProductSearch(
     hasPreviousPage = result ? result.products.pageInfo.hasPreviousPage : false;
     hasNextPage = result ? result.products.pageInfo.hasNextPage : false;
   }
-
+  console.log('result', result, 'initial', initialData);
   const isFetching = isLoading;
   return {
-    products: result?.products,
+    products: result ? result.products : initialData,
     isFetching,
     hasPreviousPage,
     hasNextPage,

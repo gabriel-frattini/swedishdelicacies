@@ -46,7 +46,7 @@ export const Navigation = ({ collections }: NavbarProps) => {
               onClick={() => handleClickedNavItem(edge.node.id)}
               className={[
                 styles.navLink,
-                activeItem === edge.node.handle && styles.activeLink,
+                activeItem === edge.node.id && styles.activeLink,
               ].join(' ')}
             >
               {edge.node.handle}

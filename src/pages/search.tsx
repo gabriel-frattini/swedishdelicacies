@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 
 import { queryTypes } from '@/utils/search';
 import { useSearchType } from '@/utils/hooks';
-import { AllProductsType } from '@/lib/types';
+import { AllProductsType, SingleProductType } from '@/lib/types';
 
 const DEFAULT_PRODUCTS_PER_PAGE = 24;
 
@@ -86,7 +86,7 @@ export default function SearchPage({ data }: PageProps) {
     sortKey,
     false,
     DEFAULT_PRODUCTS_PER_PAGE,
-    initialdata.edges,
+    initialdata,
     initialFilters,
   );
 
@@ -131,10 +131,11 @@ export default function SearchPage({ data }: PageProps) {
     initialdata.edges?.[0]?.node?.priceRange?.minVariantPrice?.currencyCode,
   );
 
+  console.log(initialdata);
+
   return (
     <>
       <Layout collections={collections}>
-        <h1 className={styles.visuallyHidden}>Search Results</h1>
         <div className={styles.main}>
           <div className={styles.search}>
             <SearchBar defaultTerm={filters.term} setFilters={setFilters} />
