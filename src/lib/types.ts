@@ -1,3 +1,4 @@
+import { LineItem } from '@/components/line-item';
 import { string, z } from 'zod';
 
 const collections = z.object({
@@ -138,3 +139,73 @@ export interface variableProps {
     before?: string | null;
   };
 }
+
+const lineItemObj = z.object({
+  item: z.object({
+    id: z.string(),
+    hasNextPage: z.object({
+      value: z.boolean(),
+    }),
+    hasPreviousPage: z.object({
+      value: z.boolean(),
+    }),
+    quantity: z.number(),
+    refetchQuery: z.function(),
+    title: z.string(),
+    variant: z.object({
+      available: z.boolean(),
+      compareAtPrice: z.string(),
+      id: z.string(),
+      image: z.object({
+        altText: z.string(),
+        height: z.number(),
+        width: z.number(),
+        id: z.string(),
+        src: z.string(),
+      }),
+      price: z.object({
+        amount: z.string(),
+        currencyCode: z.string(),
+      }),
+      title: z.string(),
+    }),
+  }),
+});
+
+export type SingleLineItemType = z.infer<typeof lineItemObj>;
+
+const lineItemsObj = z.object({
+  lineItems: z.array(
+    z.object({
+      id: z.string(),
+      hasNextPage: z.object({
+        value: z.boolean(),
+      }),
+      hasPreviousPage: z.object({
+        value: z.boolean(),
+      }),
+      quantity: z.number(),
+      refetchQuery: z.function(),
+      title: z.string(),
+      variant: z.object({
+        available: z.boolean(),
+        compareAtPrice: z.string(),
+        id: z.string(),
+        image: z.object({
+          altText: z.string(),
+          height: z.number(),
+          width: z.number(),
+          id: z.string(),
+          src: z.string(),
+        }),
+        price: z.object({
+          amount: z.string(),
+          currencyCode: z.string(),
+        }),
+        title: z.string(),
+      }),
+    }),
+  ),
+});
+
+export type LineItemsType = z.infer<typeof lineItemsObj>;

@@ -67,6 +67,7 @@
   height: var(--space-xl);
   border-radius: var(--radius-sm);
   margin-right: var(--space-md);
+  cursor: pointer;
 }
 
 @media (min-width: 640px) {
@@ -97,5 +98,4 @@
   font-size: var(--text-sm);
   font-weight: var(--bold);
   color: var(--text-color-inverted);
-  content: "\2713";
 }

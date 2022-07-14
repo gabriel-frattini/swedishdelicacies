@@ -6,6 +6,7 @@ import { LineItem } from '../components/line-item';
 import { formatPrice } from '../utils/format-price';
 import styles from './cart.module.css';
 import { getAllCollections } from '@/lib/queries';
+import ShippingBanner from '@/components/shipping-banner';
 
 export default function CartPage({ collections }: any) {
   const { checkout, loading } = React.useContext(StoreContext);
@@ -35,6 +36,10 @@ export default function CartPage({ collections }: any) {
         ) : (
           <>
             <h1 className={styles.title}>Your cart</h1>
+            <ShippingBanner
+              total={checkout.totalPriceV2}
+              freeShippingLimit={300}
+            />
             <table className={styles.table}>
               <thead>
                 <tr>

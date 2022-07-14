@@ -13,7 +13,6 @@ interface Props {
 }
 
 export function ProductCard({ product: { node }, eager }: Props) {
-  console.log('node', node);
   const { title, priceRange, handle, images, vendor, collections } = node;
   const price = formatPrice(
     priceRange.minVariantPrice.currencyCode,

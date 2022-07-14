@@ -1,11 +1,33 @@
 import * as React from 'react';
-import fetch from 'isomorphic-fetch';
 import Client from 'shopify-buy';
+
+import { LineItemsType } from '@/lib/types';
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL,
   storefrontAccessToken: process.env.NEXT_PUBLIC_STOREFRONT_ACCESS_TOKEN_DEV,
 });
+
+interface defaultValuesType {
+  didJustAddToCart: boolean;
+  cart: any[];
+  isOpen: boolean;
+  loading: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  addVariantToCart: (variantId: string, quantity: string) => {};
+  removeLineItem: (checkoutID: string, lineItemID: string) => {};
+  updateLineItem: (
+    checkoutID: string,
+    lineItemID: string,
+    quantity: string,
+  ) => {};
+  client: any;
+  checkout: {
+    id: string;
+    lineItems: LineItemsType['lineItems'];
+  };
+}
 
 const defaultValues = {
   didJustAddToCart: false,
@@ -19,11 +41,12 @@ const defaultValues = {
   updateLineItem: (checkoutID: any, lineItemID: any, quantity: string) => {},
   client,
   checkout: {
-    lineItems: [] as any,
+    lineItems: [],
   },
-};
+} as unknown as defaultValuesType;
 
-export const StoreContext = React.createContext(defaultValues);
+export const StoreContext =
+  React.createContext<defaultValuesType>(defaultValues);
 
 const isBrowser = typeof window !== `undefined`;
 const localStorageKey = `shopify_checkout_id`;
@@ -40,6 +63,10 @@ export const StoreProvider = ({ children }: any) => {
 
     setCheckout(checkout);
   };
+
+  React.useEffect(() => {
+    console.log('lineitems', checkout.lineItems);
+  }, [checkout.lineItems]);
 
   React.useEffect(() => {
     const initializeCheckout = async () => {
@@ -68,7 +95,7 @@ export const StoreProvider = ({ children }: any) => {
     initializeCheckout();
   }, []);
 
-  const addVariantToCart = (variantId: number, quantity: string) => {
+  const addVariantToCart = (variantId: string, quantity: string) => {
     setLoading(true);
 
     const checkoutID = checkout.id;

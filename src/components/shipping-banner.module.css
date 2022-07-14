@@ -1,0 +1,27 @@
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.bannerText {
+  font-size: var(--text-lg);
+  margin-bottom: 1rem;
+}
+
+.progresswrapper {
+  max-width: 1024px;
+  width: 90%;
+  min-height: 20px;
+  border-radius: var(--radius-md);
+  background-color: var(--light-gray);
+}
+
+.progress {
+  height: 20px;
+  background-color: var(--yellow-80);
+  border-radius: var(--radius-md);
+  transition: width 300ms;
+}

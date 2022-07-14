@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
       </header>
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
-          'Updating…'
+          'Updating...'
         ) : (
           <>
             Added to cart{' '}

@@ -7,8 +7,9 @@ import { formatPrice } from '../utils/format-price';
 import DeleteIcon from '../icons/delete';
 import { NumericInput } from './numeric-input';
 import styles from './line-item.module.css';
+import { SingleLineItemType } from '@/lib/types';
 
-export function LineItem({ item }) {
+export function LineItem({ item }: SingleLineItemType) {
   const { removeLineItem, checkout, updateLineItem, loading } =
     React.useContext(StoreContext);
   const [quantity, setQuantity] = React.useState(item.quantity);
@@ -18,13 +19,13 @@ export function LineItem({ item }) {
     originalSrc: item.variant.image.src,
   };
   const price = formatPrice(
-    item.variant.priceV2.currencyCode,
-    Number(item.variant.priceV2.amount),
+    item.variant.price.currencyCode,
+    Number(item.variant.price.amount),
   );
 
   const subtotal = formatPrice(
-    item.variant.priceV2.currencyCode,
-    Number(item.variant.priceV2.amount) * quantity,
+    item.variant.price.currencyCode,
+    Number(item.variant.price.amount) * quantity,
   );
 
   const handleRemove = () => {
@@ -36,9 +37,9 @@ export function LineItem({ item }) {
     300,
   );
   // eslint-disable-next-line
-  const debouncedUli = React.useCallback((value) => uli(value), []);
+  const debouncedUli = React.useCallback((value: any) => uli(value), []);
 
-  const handleQuantityChange = (value) => {
+  const handleQuantityChange = (value: any) => {
     if (value !== '' && Number(value) < 1) {
       return;
     }
@@ -88,7 +89,7 @@ export function LineItem({ item }) {
           aria-label="Quantity"
           onIncrement={doIncrement}
           onDecrement={doDecrement}
-          onChange={(e) => handleQuantityChange(e.currentTarget.value)}
+          onChange={(e: any) => handleQuantityChange(e.currentTarget.value)}
         />
       </td>
       <td className={styles.totals}>{subtotal}</td>

@@ -23,7 +23,7 @@ export function CheckFilter({
   setSelectedItems,
   open = true,
 }: pageProps) {
-  const toggleItem = ({ currentTarget: input }) => {
+  const toggleItem = ({ currentTarget: input }: any) => {
     if (input.checked) {
       setSelectedItems([...selectedItems, input.value]);
     } else {
@@ -60,7 +60,9 @@ export function CheckFilter({
         {items.edges.map((item, idx) => (
           <label
             className={
-              selectedItems.includes(item) ? styles.selectedLabel : undefined
+              selectedItems.includes(item.node)
+                ? styles.selectedLabel
+                : undefined
             }
             key={idx}
           >
@@ -69,7 +71,7 @@ export function CheckFilter({
               className={styles.checkbox}
               onChange={toggleItem}
               value={item.node}
-              checked={selectedItems.includes(item)}
+              checked={selectedItems.includes(item.node)}
             />{' '}
             {item.node || 'None'}
           </label>

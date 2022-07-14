@@ -40,7 +40,6 @@ export function useProductSearch(
     () => query === createQuery(initialFilters) || pause,
     [query, pause, initialFilters],
   );
-  console.log(shouldPause);
   const [result, setResult] = useState<AllProductsType['data']>();
   const { isLoading } = useQuery(
     ['getProductsBySearch', query],
