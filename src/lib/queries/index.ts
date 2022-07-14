@@ -172,7 +172,7 @@ query getAllProductsByHandle($handle: String!) {
       handle: handle,
     },
   });
-  console.log(data);
+
   return { data };
 }
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { queryClient } from '@/lib/queryClient';
+import { StoreContext } from '@/context/store-context'
+ 
 import { getAllProducts, getSingleProductByHandle } from '@/lib/queries';
 import { AllProductsType } from '@/lib/types';
 
@@ -12,7 +13,8 @@ import { MoreButton } from '../../components/more-button';
 import styles from './index.module.css';
 
 export default function Products({ data }: AllProductsType) {
-  if (!data) return null;
+
+  const { queryClient } = React.useContext(StoreContext);
 
   const { collections, products } = data;
   React.useEffect(() => {
