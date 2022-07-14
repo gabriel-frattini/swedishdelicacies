@@ -13,13 +13,13 @@ import {
   getSingleProductByHandle,
 } from '@/lib/queries';
 import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
-import { queryClient } from '@/lib/queryClient';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { StoreContext } from '@/context/store-context';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   if (!data) return null;
-
+  const { queryClient } = React.useContext(StoreContext);
   const { collectionByHandle, collections } = data;
 
   React.useEffect(() => {
