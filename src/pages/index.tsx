@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { AllproductsByHandleType } from '@/lib/types';
 import { getAllProducts, getAllProductsByHandle } from '@/lib/queries';
+import { GetStaticProps } from 'next';
 
 import { Layout } from '../components/layout';
 import { ProductListing } from '@/components/product-listing';
@@ -27,23 +28,27 @@ function Hero(props: any) {
   );
 }
 
-export default function IndexPage({
-  data: { collectionByHandle, collections },
-}: AllproductsByHandleType) {
+export default function IndexPage({ data }: AllproductsByHandleType) {
+  if (!data) {
+    return null;
+  }
   return (
-    <Layout collections={collections}>
+    <Layout collections={data.collections}>
       <Hero />
-      {collectionByHandle && (
-        <ProductListing products={collectionByHandle.products} />
-      )}
+      <ProductListing products={data.collectionByHandle.products} />
     </Layout>
   );
 }
 
-export async function getStaticProps(context: any) {
-  const { data } = await getAllProductsByHandle('startsida');
+export const getStaticProps: GetStaticProps = async () => {
+  const { data } = await getAllProductsByHandle('chocolate');
 
+  if (data) {
+    return {
+      props: { data },
+    };
+  }
   return {
-    props: { data },
+    props: { data: null },
   };
-}
+};

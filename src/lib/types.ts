@@ -5,13 +5,14 @@ const collections = z.object({
   edges: z.array(
     z.object({
       node: z.object({
+        id: z.string(),
         handle: z.string(),
         products: z.object({
           edges: z.array(
             z.object({
               node: z.object({
-                handle: z.string(),
                 id: z.string(),
+                handle: z.string(),
               }),
             }),
           ),
@@ -87,6 +88,7 @@ const node = z.object({
     edges: z.array(
       z.object({
         node: z.object({
+          id: z.string(),
           handle: z.string(),
           title: z.string(),
         }),
@@ -132,7 +134,7 @@ const AllproductsByHandle = z.object({
   data: z.object({
     collections,
     collectionByHandle: z.object({
-      description: z.string(),
+      description: z.string().optional(),
       title: z.string(),
       handle: z.string(),
       products: z.object({
@@ -218,6 +220,10 @@ const lineItemsObj = z.object({
           id: z.string(),
           src: z.string(),
         }),
+        priceV2: z.object({
+          amount: z.string(),
+          currencyCode: z.string(),
+        }),
         price: z.object({
           amount: z.string(),
           currencyCode: z.string(),
@@ -229,3 +235,22 @@ const lineItemsObj = z.object({
 });
 
 export type LineItemsType = z.infer<typeof lineItemsObj>;
+
+const shop = z.object({
+  allProductTypes: z.object({
+    edges: z.array(z.object({ node: z.string() })),
+  }),
+
+  allTags: z.object({
+    edges: z.array(z.object({ node: z.string() })),
+  }),
+  allVendors: z.object({
+    edges: z.array(
+      z.object({
+        node: z.string(),
+      }),
+    ),
+  }),
+});
+
+export type ShopType = z.infer<typeof shop>;

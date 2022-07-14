@@ -65,7 +65,10 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Subtotal</td>
                   <td className={styles.totals}>
-                    {formatPrice(checkout.currencyCode, checkout.subtotalPrice)}
+                    {formatPrice(
+                      checkout.currencyCode,
+                      parseInt(checkout.subtotalPrice),
+                    )}
                   </td>
                 </tr>
                 <tr className={styles.summary}>
@@ -74,7 +77,10 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Taxes</td>
                   <td className={styles.totals}>
-                    {formatPrice(checkout.currencyCode, checkout.totalTax)}
+                    {formatPrice(
+                      checkout.currencyCode,
+                      parseInt(checkout.totalTax),
+                    )}
                   </td>
                 </tr>
                 <tr className={styles.summary}>
@@ -90,7 +96,10 @@ export default function CartPage({ collections }: any) {
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.labelColumn}>Total Price</td>
                   <td className={styles.totals}>
-                    {formatPrice(checkout.currencyCode, checkout.totalPrice)}
+                    {formatPrice(
+                      checkout.currencyCode,
+                      parseInt(checkout.totalPrice),
+                    )}
                   </td>
                 </tr>
               </tbody>

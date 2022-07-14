@@ -15,8 +15,11 @@ import { Spinner } from '../components/progress';
 import { Filters } from '../components/filters';
 import styles from './search-page.module.css';
 import { getAllProductsWithMetaFields } from '@/lib/queries';
-import { AllProductsType } from '@/lib/types';
 import { useRouter } from 'next/router';
+
+import { queryTypes } from '@/utils/search';
+import { useSearchType } from '@/utils/hooks';
+import { AllProductsType } from '@/lib/types';
 
 const DEFAULT_PRODUCTS_PER_PAGE = 24;
 
@@ -38,13 +41,14 @@ interface PageProps {
   };
 }
 
-function SearchPage({
-  data: {
+export default function SearchPage({ data }: PageProps) {
+  if (!data) return null;
+
+  const {
     collections,
     products: initialdata,
     shop: { productTags, productTypes, productVendors },
-  },
-}: PageProps) {
+  } = data;
   // These default values come from the page query string
   const router = useRouter();
   const queryParams = getValuesFromQuery(router.query);
@@ -59,7 +63,7 @@ function SearchPage({
   // // This modal is only used on mobile
   const [showModal, setShowModal] = React.useState(false);
 
-  const [hash, setHash] = React.useState(null);
+  const [hash, setHash] = React.useState('');
   React.useEffect(() => {
     setHash(window.location.hash);
   }, []);
@@ -75,9 +79,9 @@ function SearchPage({
   } = useProductSearch(
     filters,
     {
-      allProductTypes: productTypes,
-      allVendors: productVendors,
-      allTags: productTags,
+      allProductTypes: productTypes['edges'],
+      allVendors: productVendors['edges'],
+      allTags: productTags['edges'],
     },
     sortKey,
     false,
@@ -204,21 +208,22 @@ function SearchPage({
             )}
             {!isFetching && (
               <ul className={styles.productList}>
-                {products.map((node, index) => (
-                  <li className={styles.productListItem} key={node.id}>
-                    <ProductCard eager={index === 0} product={node} />
-                  </li>
-                ))}
+                {products &&
+                  products.edges.map((node, index) => (
+                    <li className={styles.productListItem} key={index}>
+                      <ProductCard eager={index === 0} product={node} />
+                    </li>
+                  ))}
               </ul>
             )}
-            {!isFetching && products.length === 0 && (
+            {!isFetching && products && products.edges.length === 0 && (
               <div className={styles.emptyState}>No results found</div>
             )}
             {hasPreviousPage || hasNextPage ? (
               <Pagination
-                previousPage={fetchPreviousPage}
+                fetchPreviousPage={fetchPreviousPage}
                 hasPreviousPage={hasPreviousPage}
-                nextPage={fetchNextPage}
+                fetchNextPage={fetchNextPage}
                 hasNextPage={hasNextPage}
               />
             ) : undefined}
@@ -228,13 +233,17 @@ function SearchPage({
     </>
   );
 }
+interface searchProps {
+  defaultTerm: string;
+  setFilters: React.Dispatch<React.SetStateAction<queryTypes>>;
+}
 
-function SearchBar({ defaultTerm, setFilters }) {
+function SearchBar({ defaultTerm, setFilters }: searchProps) {
   const [term, setTerm] = React.useState(defaultTerm);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSetFilters = React.useCallback(
-    debounce((value) => {
+    debounce((value: string) => {
       setFilters((filters) => ({ ...filters, term: value }));
     }, 200),
     [setFilters],
@@ -271,13 +280,21 @@ function SearchBar({ defaultTerm, setFilters }) {
 /**
  * Shopify only supports next & previous navigation
  */
-function Pagination({ previousPage, hasPreviousPage, nextPage, hasNextPage }) {
+function Pagination({
+  fetchPreviousPage,
+  hasPreviousPage,
+  fetchNextPage,
+  hasNextPage,
+}: Pick<
+  useSearchType,
+  'fetchNextPage' | 'hasNextPage' | 'fetchPreviousPage' | 'hasPreviousPage'
+>) {
   return (
     <nav className={styles.pagination}>
       <button
         className={styles.paginationButton}
         disabled={!hasPreviousPage}
-        onClick={previousPage}
+        onClick={fetchPreviousPage}
         aria-label="Previous page"
       >
         <CgChevronLeft />
@@ -285,7 +302,7 @@ function Pagination({ previousPage, hasPreviousPage, nextPage, hasNextPage }) {
       <button
         className={styles.paginationButton}
         disabled={!hasNextPage}
-        onClick={nextPage}
+        onClick={fetchNextPage}
         aria-label="Next page"
       >
         <CgChevronRight />
@@ -294,13 +311,15 @@ function Pagination({ previousPage, hasPreviousPage, nextPage, hasNextPage }) {
   );
 }
 
-export default function SearchPageTemplate(props) {
-  return <SearchPage {...props} />;
-}
-
 export async function getStaticProps() {
   const { data } = await getAllProductsWithMetaFields();
+  if (data) {
+    return {
+      props: { data },
+    };
+  }
+
   return {
-    props: { data },
+    props: { data: null },
   };
 }

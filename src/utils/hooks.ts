@@ -3,7 +3,23 @@ import queryString from 'query-string';
 import { useQuery } from 'react-query';
 import { createQuery } from './search';
 import { getProductsFromQuery } from '@/lib/queries';
-import { AllProductsType } from '@/lib/types';
+
+import { AllProductsType, ShopType } from '@/lib/types';
+import { queryTypes } from '@/utils/search';
+
+interface filterType {
+  [key: string]: [node: string];
+}
+
+export interface useSearchType {
+  products?: AllProductsType['data']['products'];
+  isFetching: boolean;
+  filterCount: number;
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+  fetchNextPage: () => void;
+  fetchPreviousPage: () => void;
+}
 
 function makeQueryStringValue(allItems: any, selectedItems: any) {
   if (allItems.length === selectedItems.length) {
@@ -13,14 +29,15 @@ function makeQueryStringValue(allItems: any, selectedItems: any) {
 }
 
 export function useProductSearch(
-  filters,
-  { allTags, allProductTypes, allVendors },
-  sortKey,
+  filters: queryTypes,
+  { allTags, allProductTypes, allVendors }: filterType,
+
+  sortKey: string,
   pause = false,
   count = 20,
-  initialData = [],
-  initialFilters,
-) {
+  initialData: AllProductsType['data']['products']['edges'],
+  initialFilters: queryTypes,
+): useSearchType {
   const [query, setQuery] = useState(createQuery(filters));
   const [cursors, setCursors] = useState<{
     before: string | null;
@@ -126,11 +143,10 @@ export function useProductSearch(
 
   const isFetching = isLoading;
   return {
-    data: result,
+    products: result?.products,
     isFetching,
     hasPreviousPage,
     hasNextPage,
-    products,
     filterCount,
     fetchNextPage,
     fetchPreviousPage,

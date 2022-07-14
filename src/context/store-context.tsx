@@ -30,6 +30,7 @@ interface defaultValuesType {
     currencyCode: string;
     totalTax: string;
     lineItems: LineItemsType['lineItems'];
+    webUrl: any;
   };
 }
 
@@ -68,8 +69,7 @@ export const StoreProvider = ({ children }: any) => {
     setCheckout(checkout);
   };
 
-  React.useEffect(() => {
-  }, [checkout.lineItems]);
+  React.useEffect(() => {}, [checkout.lineItems]);
 
   React.useEffect(() => {
     const initializeCheckout = async () => {

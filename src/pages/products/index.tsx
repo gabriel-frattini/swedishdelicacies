@@ -11,9 +11,10 @@ import { MoreButton } from '../../components/more-button';
 
 import styles from './index.module.css';
 
-export default function Products({
-  data: { collections, products },
-}: AllProductsType) {
+export default function Products({ data }: AllProductsType) {
+  if (!data) return null;
+
+  const { collections, products } = data;
   React.useEffect(() => {
     products.edges.forEach((product) => {
       const handle = product.node.handle;
@@ -29,7 +30,7 @@ export default function Products({
       <h1 className={styles.title}>Products</h1>
       <ProductListing products={products} />
 
-      {products.pageInfo.hasNextPage && (
+      {products && products.pageInfo.hasNextPage && (
         <MoreButton href={'search#more'}>More products</MoreButton>
       )}
     </Layout>
@@ -39,7 +40,13 @@ export default function Products({
 export async function getStaticProps() {
   const { data } = await getAllProducts();
 
+  if (data) {
+    return {
+      props: { data },
+    };
+  }
+
   return {
-    props: { data },
+    props: { data: null },
   };
 }

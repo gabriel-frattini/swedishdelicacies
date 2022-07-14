@@ -1,6 +1,16 @@
 import queryString from 'query-string';
 
-function arrayify(value) {
+export interface queryTypes {
+  term: string;
+  sortKey: string;
+  maxPrice: number;
+  minPrice: number;
+  productTypes: string[];
+  tags: string[];
+  vendors: string[];
+}
+
+function arrayify(value: any) {
   if (!value) {
     return [];
   }
@@ -10,7 +20,7 @@ function arrayify(value) {
   return value;
 }
 
-function makeFilter(field, selectedItems) {
+function makeFilter(field: string, selectedItems: string[]) {
   if (!selectedItems?.length) return;
   if (selectedItems && !Array.isArray(selectedItems)) {
     selectedItems = [selectedItems];
@@ -20,7 +30,7 @@ function makeFilter(field, selectedItems) {
     .join(' OR ')})`;
 }
 
-export function createQuery(filters) {
+export function createQuery(filters: queryTypes) {
   const { term, tags, productTypes, minPrice, maxPrice, vendors } = filters;
   const parts = [
     term,
@@ -43,7 +53,8 @@ export function createQuery(filters) {
  * Extracts default search values from the query string or object
  * @param {string|object} query
  */
-export function getValuesFromQuery(query) {
+
+export function getValuesFromQuery(query: any): queryTypes {
   const isClient = typeof query === 'string';
   const {
     q: term,
@@ -63,24 +74,4 @@ export function getValuesFromQuery(query) {
     tags: arrayify(t),
     vendors: arrayify(v),
   };
-}
-
-export async function getSearchResults({ query, count = 24 }) {
-  const filters = getValuesFromQuery(query);
-
-  // Relevance is non-deterministic if there is no query, so we default to "title" instead
-  const initialSortKey = filters.term ? 'RELEVANCE' : 'TITLE';
-
-  const urqlQuery = createQuery(filters);
-
-  // const results = await urqlClient
-  //   .query(ProductsQuery, {
-  //     query: urqlQuery,
-  //     // this does not support paginated results
-  //     first: count,
-  //     sortKey: filters.sortKey || initialSortKey,
-  //   })
-  //   .toPromise()
-
-  return results.data?.products?.edges || [];
 }

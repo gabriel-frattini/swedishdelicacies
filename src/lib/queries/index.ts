@@ -167,13 +167,13 @@ query getAllProductsByHandle($handle: String!) {
     }
   }
 `;
-  const data = await useServerSideShopify(query, {
+  const { data } = await useServerSideShopify(query, {
     variables: {
       handle: handle,
     },
   });
-
-  return data;
+  console.log(data);
+  return { data };
 }
 
 export async function getSingleProductByHandle(handle: string) {
@@ -259,6 +259,7 @@ export async function getAllCollections() {
           node {
             id
             handle
+            title
           }
         }
       }  

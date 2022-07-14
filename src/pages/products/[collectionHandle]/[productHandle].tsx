@@ -76,8 +76,6 @@ export default function Product({ collections }: any) {
       tags,
     }: SingleProductType = productByHandle;
 
-
-
     const handleOptionChange = (index: any, event: any) => {
       const value = event.target.value;
 
@@ -162,7 +160,10 @@ export default function Product({ collections }: any) {
               </div>
               <h1 className={styles.header}>{title}</h1>
               <p className={styles.productDescription}>{description}</p>
-              <ProductPrice compareAtPriceRange={compareAtPriceRange} initialPrice={initialvariant.price} />
+              <ProductPrice
+                compareAtPriceRange={compareAtPriceRange}
+                initialPrice={initialvariant.price}
+              />
               <fieldset className={styles.optionsWrapper}>
                 {hasVariants &&
                   options.map(({ id, name, values }, index) => (

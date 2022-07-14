@@ -17,9 +17,11 @@ import { queryClient } from '@/lib/queryClient';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-export default function ProductTypeIndex({
-  data: { collectionByHandle, collections },
-}: AllproductsByHandleType) {
+export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
+  if (!data) return null;
+
+  const { collectionByHandle, collections } = data;
+
   React.useEffect(() => {
     collectionByHandle.products.edges.forEach((product) => {
       const handle = product.node.handle;
@@ -59,7 +61,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const param = JSON.stringify(context.params).split(':')[1].slice(1, -2);
 
   const { data } = await getAllProductsByHandle(param);
+
+  if (data) {
+    return {
+      props: { data },
+    };
+  }
   return {
-    props: { data },
+    props: { data: null },
   };
 };
