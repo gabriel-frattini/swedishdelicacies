@@ -40,7 +40,7 @@ const node = z.object({
       values: z.array(z.string()),
     }),
   ),
-  priceRangeV2: z.object({
+  priceRange: z.object({
     minVariantPrice: z.object({
       amount: z.string(),
       currencyCode: z.string(),
@@ -72,17 +72,15 @@ const node = z.object({
     ),
   }),
   variants: z.object({
-    edges: z.array(
+    nodes: z.array(
       z.object({
-        node: z.object({
-          id: z.string(),
-          title: z.string(),
-          price: z.string(),
-          availableForSale: z.boolean(),
-          selectedOptions: z.object({
-            name: z.string(),
-            value: z.string(),
-          }),
+        id: z.string(),
+        title: z.string(),
+        price: z.string(),
+        availableForSale: z.boolean(),
+        selectedOptions: z.object({
+          name: z.string(),
+          value: z.string(),
         }),
       }),
     ),
@@ -98,6 +96,7 @@ const AllProducts = z.object({
       pageInfo,
       edges: z.array(
         z.object({
+          cursor: z.string(),
           node,
         }),
       ),
@@ -125,3 +124,15 @@ const AllproductsByHandle = z.object({
   }),
 });
 export type AllproductsByHandleType = z.infer<typeof AllproductsByHandle>;
+
+export interface variableProps {
+  variables: {
+    handle?: string;
+    query?: string;
+    sortKey?: string;
+    first?: number | null;
+    last?: number | null;
+    after?: string | null;
+    before?: string | null;
+  };
+}

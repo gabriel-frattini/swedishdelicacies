@@ -37,21 +37,21 @@ function Hero(props: any) {
 }
 
 export default function IndexPage({
-  data: {
-    collectionByHandle: { products },
-    collections,
-  },
+  data: { collectionByHandle, collections },
 }: AllproductsByHandleType) {
   return (
     <Layout collections={collections}>
       <Hero />
-      <ProductListing products={products} />
+      {collectionByHandle && (
+        <ProductListing products={collectionByHandle.products} />
+      )}
     </Layout>
   );
 }
 
 export async function getStaticProps(context: any) {
-  const { data } = await getAllProductsByHandle('chocolate');
+  const { data } = await getAllProductsByHandle('startsida');
+
   return {
     props: { data },
   };

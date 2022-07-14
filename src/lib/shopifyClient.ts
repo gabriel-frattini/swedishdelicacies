@@ -1,21 +1,15 @@
 import Client from 'shopify-buy';
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL;
-
+import { variableProps } from '@/lib/types';
 // Initializing a client to return content in the store's primary language
 export const client = Client.buildClient({
   domain,
   storefrontAccessToken: process.env.NEXT_PUBLIC_STOREFRONT_ACCESS_TOKEN_DEV,
 });
 
-interface variableProps {
-  variables: {
-    handle: string;
-  };
-}
-
 export async function useServerSideShopify(
-  query: any,
-  variables?: variableProps,
+  graphql: any,
+  { variables }: variableProps,
 ) {
   const URL = `https://${domain}/admin/api/2022-07/graphql.json`;
   const options = {
@@ -27,9 +21,8 @@ export async function useServerSideShopify(
 
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query, ...variables }),
+    body: JSON.stringify({ query: graphql, variables: { ...variables } }),
   };
-
   try {
     const data = await fetch(URL, options).then((response) => {
       return response.json();
@@ -37,11 +30,11 @@ export async function useServerSideShopify(
 
     return data;
   } catch (error) {
-    throw new Error('Products not fetched');
+    console.log(error);
   }
 }
 
-export async function useShopify(query: any, variables?: variableProps) {
+export async function useShopify(graphql: any, { variables }: variableProps) {
   const URL = `https://${domain}/api/2022-07/graphql.json`;
   const options = {
     endpoint: URL,
@@ -52,7 +45,7 @@ export async function useShopify(query: any, variables?: variableProps) {
 
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query, ...variables }),
+    body: JSON.stringify({ query: graphql, variables: { ...variables } }),
   };
 
   try {
@@ -62,6 +55,6 @@ export async function useShopify(query: any, variables?: variableProps) {
 
     return data;
   } catch (error) {
-    throw new Error('Products not fetched');
+    console.error(error);
   }
 }

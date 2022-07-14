@@ -6,19 +6,23 @@
   top: 0;
 }
 
+.cartButton {
+  cursor: pointer;
+}
+
 .header {
   display: grid;
   width: 100%;
   padding: var(--size-gap) var(--size-gutter);
   grid-template-columns: var(--size-input) 1fr min-content min-content;
-  grid-template-areas: "logo nada searchButton cartButton" "navHeader navHeader navHeader navHeader";
+  grid-template-areas: 'logo nada searchButton cartButton' 'navHeader navHeader navHeader navHeader';
   align-items: center;
   background-color: var(--background);
 }
 
 .header::after {
   grid-area: navHeader;
-  content: "";
+  content: '';
   display: block;
   width: var(--space-2xl);
   z-index: 1;
@@ -33,7 +37,7 @@
 
 @media (min-width: 640px) {
   .header {
-    grid-template-areas: "logo navHeader searchButton cartButton";
+    grid-template-areas: 'logo navHeader searchButton cartButton';
   }
 }
 
@@ -52,7 +56,7 @@
   text-decoration: none;
 }
 
-.logo[aria-current="page"] {
+.logo[aria-current='page'] {
   color: var(--primary);
 }
 
@@ -74,6 +78,6 @@
   color: var(--text-color);
 }
 
-.searchButton[aria-current="page"] {
+.searchButton[aria-current='page'] {
   color: var(--primary);
 }

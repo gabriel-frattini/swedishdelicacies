@@ -10,6 +10,9 @@ type ProductListingType = Omit<
 >;
 
 export function ProductListing({ products }: ProductListingType) {
+  if (!products.edges.length) {
+    return <div></div>;
+  }
   return (
     <div className={styles.listingContainerStyle}>
       {products.edges.map((p, index) => (

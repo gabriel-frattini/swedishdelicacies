@@ -32,10 +32,18 @@ export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
         <div className={styles.nav}>
           <Navigation collections={collections} />
         </div>
-        <Link replace href="/search" className={styles.searchButton}>
-          <SearchIcon />
+        <Link replace href="/search">
+          <a className={styles.searchButton}>
+            <SearchIcon />
+            </a>
         </Link>
-        <CartButton quantity={quantity} />
+        <Link href="/cart" replace>
+          <a
+          className={styles.cartButton}
+          >
+          <CartButton quantity={quantity} />
+          </a>
+        </Link>
       </header>
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
