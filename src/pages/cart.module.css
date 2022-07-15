@@ -122,6 +122,12 @@
   flex-direction: column;
 }
 
+.emptyStateContainer > p {
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--text-color-primary);
+}
+
 .emptyStateHeading {
   color: var(--text-color);
   font-size: var(--text-display);
@@ -135,6 +141,7 @@
   font-weight: var(--bold);
   margin-top: var(--space-xl);
   font-size: var(--text-xl);
+  cursor: pointer;
 }
 
 @media (min-width: 640px) {

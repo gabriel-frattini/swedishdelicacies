@@ -24,12 +24,8 @@ export default function CartPage({ collections }: any) {
               Looks like you haven’t found anything yet. We understand that
               sometimes it’s hard to choose — maybe this helps:
             </p>
-            <Link
-              replace
-              href="/search?s=BEST_SELLING"
-              className={styles.emptyStateLink}
-            >
-              View trending products
+            <Link replace href="/search?s=BEST_SELLING">
+              <p className={styles.emptyStateLink}>View trending products</p>
             </Link>
           </div>
         ) : (
