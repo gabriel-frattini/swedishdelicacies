@@ -35,7 +35,6 @@ export default function Product({ collections }: any) {
   const [quantity, setQuantity] = React.useState(1);
   const [variant, setVariant] = React.useState<any>();
   const [available, setAvailable] = React.useState<any>();
-
   const { data, isLoading, isError } = useQuery(
     'getSingleProductByHandle',
     async () =>
@@ -281,6 +280,6 @@ export async function getStaticProps() {
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
     paths: [], //indicates that no page needs be created at build time
-    fallback: false, //indicates the type of fallback
+    fallback: true, //indicates the type of fallback
   };
 };

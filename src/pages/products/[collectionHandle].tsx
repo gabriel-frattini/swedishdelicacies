@@ -31,7 +31,7 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
       });
     }
   }, []);
-
+  
   if (Object.keys(data).length === 0) {
     return <></>;
   }
@@ -61,7 +61,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { collectionHandle: param.node.handle },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
