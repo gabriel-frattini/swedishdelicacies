@@ -105,7 +105,7 @@ export default function Product({ collections }: any) {
 
     const hasVariants = variants.nodes.length > 1;
     const hasImages = images.edges.length > 0;
-    const hasMultipleImages = true || images.edges.length > 1;
+    const hasMultipleImages = images.edges.length > 1;
 
     return (
       <Layout collections={collections}>
@@ -130,8 +130,9 @@ export default function Product({ collections }: any) {
                       >
                         <div className={styles.previous}>
                           <PreviousButton
+                            show={hasMultipleImages}
                             className={styles.previousbutton}
-                            onClick={() => {
+                            onPress={() => {
                               index !== 0 &&
                                 setViewActiveImage(
                                   images.edges[index - 1].node.id,
@@ -153,8 +154,9 @@ export default function Product({ collections }: any) {
                         />
                         <div className={styles.previous}>
                           <NextButton
+                            show={hasMultipleImages}
                             className={styles.nextbutton}
-                            onClick={() => {
+                            onPress={() => {
                               index !== images.edges.length - 1 &&
                                 setViewActiveImage(
                                   images.edges[index + 1].node.id,
@@ -171,7 +173,7 @@ export default function Product({ collections }: any) {
             {!hasImages && (
               <span className={styles.noImagePreview}>No Preview image</span>
             )}
-            <div>
+            <div className={styles.productInfo}>
               <div className={styles.breadcrumb}>
                 <Link
                   replace

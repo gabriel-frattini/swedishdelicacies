@@ -1,6 +1,15 @@
 import React from 'react';
 
-export function NextButton({ ...props }) {
+interface buttonProps {
+  show: boolean;
+  onPress: () => void;
+  className: any;
+}
+
+export function NextButton({ show, ...props }: buttonProps) {
+  if (!show) {
+    return <div></div>;
+  }
   return (
     <div {...props}>
       <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">
@@ -10,7 +19,10 @@ export function NextButton({ ...props }) {
   );
 }
 
-export function PreviousButton({ ...props }) {
+export function PreviousButton({ show, ...props }: buttonProps) {
+  if (!show) {
+    return <div></div>;
+  }
   return (
     <div {...props}>
       <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24">

@@ -29,12 +29,6 @@ const ProductSkeleton: React.FC<Props> = () => {
                 <p className={styles.tagList}></p>
               </div>
             </div>
-            <div className={styles.metaProduct}>
-              <span className={styles.labelFont}></span>
-              <span className={styles.tagList}></span>
-              <span className={styles.labelFont}></span>
-              <span className={styles.tagList}></span>
-            </div>
           </div>
         </div>
       </div>
