@@ -31,7 +31,7 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
       });
     }
   }, []);
-  
+
   if (Object.keys(data).length === 0) {
     return <></>;
   }
@@ -45,11 +45,6 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
       <h1 className={styles.title}>{collectionByHandle.handle}</h1>
 
       <ProductListing products={collectionByHandle.products} />
-      {collectionByHandle.products.pageInfo.hasNextPage && (
-        <MoreButton href={`/search?p=${collectionByHandle.handle}#more`}>
-          More Products
-        </MoreButton>
-      )}
     </Layout>
   );
 }

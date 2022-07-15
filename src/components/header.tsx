@@ -27,7 +27,9 @@ export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
     <div className={styles.container}>
       <header className={styles.header}>
         <Link replace href="/" className={styles.logoCss}>
-          <Logo />
+          <a className={styles.logo}>
+            <Logo />
+          </a>
         </Link>
         <div className={styles.nav}>
           <Navigation collections={collections} />

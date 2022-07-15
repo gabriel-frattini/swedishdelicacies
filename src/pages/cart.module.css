@@ -186,21 +186,22 @@
   gap: 2rem;
   margin: auto;
   padding: 18px;
+  max-width: 630px;
 }
 
 .quickbuy {
   display: flex;
+  flex-direction: column;
   gap: 0.6rem;
   justify-content: center;
   align-items: center;
 }
 
 @media (min-width: 640px) {
-  .recommendedSection {
-    display: none;
-    max-width: 640px;
-  }
   .recommendedListing {
+    flex-direction: row;
+  }
+  .quickbuy {
     flex-direction: row;
   }
 }

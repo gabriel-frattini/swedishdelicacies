@@ -11,6 +11,13 @@
   cursor: pointer;
 }
 
+.logo {
+  cursor: pointer;
+}
+.logo:hover {
+  filter: brightness(103%);
+}
+
 .header {
   display: grid;
   width: 100%;

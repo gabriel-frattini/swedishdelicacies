@@ -3,7 +3,7 @@
   padding-right: var(--size-gutter-raw);
   padding-top: var(--space-lg);
   padding-bottom: var(--space-3xl);
-  max-width: 120ch;
+  max-width: 140ch;
 }
 
 .intro {
@@ -18,8 +18,7 @@
   padding-bottom: var(--space-lg);
   font-size: var(--text-display);
   font-weight: 600;
-  line-height: var(--dense);
-  line-height: var(--dense);
+  line-height: var(--default);
   letter-spacing: var(--tight);
   color: var(--text-color-secondary);
 }

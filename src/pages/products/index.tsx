@@ -33,10 +33,6 @@ export default function Products({ data }: AllProductsType) {
       <Seo title="All Products" />
       <h1 className={styles.title}>Products</h1>
       <ProductListing products={products} />
-
-      {products && products.pageInfo.hasNextPage && (
-        <MoreButton href={'search#more'}>More products</MoreButton>
-      )}
     </Layout>
   );
 }

@@ -41,7 +41,7 @@ export default function IndexPage({ data }: AllproductsByHandleType) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await getAllProductsByHandle('chocolate');
+  const { data } = await getAllProductsByHandle('sour-herring-surstromming');
 
   if (data) {
     return {

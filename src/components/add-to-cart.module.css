@@ -8,7 +8,7 @@
   font-weight: var(--bold);
   height: var(--size-input);
   font-size: large;
-  min-width: 12rem;
+  padding: 1rem 1rem;
 }
 
 .addToCart:hover {
