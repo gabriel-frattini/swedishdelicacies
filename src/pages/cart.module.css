@@ -67,10 +67,6 @@
   transition: var(--transition);
 }
 
-.checkoutButton:hover {
-  box-shadow: var(--shadow);
-}
-
 /* Apply only to first of class */
 .summary td {
   padding-top: var(--space-3xl);
