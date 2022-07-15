@@ -1,6 +1,6 @@
 import { formatPrice } from '@/utils/format-price';
 import * as React from 'react';
-import { StoreContext } from '../context/store-context';
+import { StoreContext } from '../../context/store-context';
 import styles from './add-to-cart.module.css';
 
 interface CompProps {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatPrice } from '../utils/format-price';
+import { formatPrice } from '../../utils/format-price';
 
 import styles from './shipping-banner.module.css';
 

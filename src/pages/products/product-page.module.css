@@ -5,7 +5,9 @@
 }
 
 .container {
+  max-width: 1600px;
   padding: 10px;
+  margin: auto;
 }
 
 .header {
@@ -21,6 +23,7 @@
 
 .productInfo {
   max-width: 700px;
+  margin-left: 20px;
 }
 
 .productImageWrapper {
@@ -185,6 +188,9 @@
 }
 
 @media (min-width: 800px) {
+  .container {
+    padding: 24px;
+  }
   .productBox {
     margin-top: 18px;
 

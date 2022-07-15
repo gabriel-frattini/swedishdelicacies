@@ -6,7 +6,7 @@ import { formatPrice } from '../utils/format-price';
 import { getAllCollections, getRecommendedProducts } from '@/lib/queries';
 import { AllCollectionsType, AllProductsType } from '@/lib/types';
 
-import ShippingBanner from '@/components/shipping-banner';
+import ShippingBanner from '@/components/shipping';
 import { Layout } from '../components/layout';
 import { LineItem } from '../components/line-item';
 import { ProductCard } from '@/components/product-card';

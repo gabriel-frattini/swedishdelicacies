@@ -1,5 +1,4 @@
 import * as React from 'react';
-import slugify from '@sindresorhus/slugify';
 import debounce from 'debounce';
 import { CgChevronRight, CgChevronLeft } from 'react-icons/cg';
 import { Layout } from '@/components/layout';
@@ -11,7 +10,7 @@ import { ProductCard } from '../components/product-card';
 import { useProductSearch } from '../utils/hooks';
 import { getValuesFromQuery } from '../utils/search';
 import { getCurrencySymbol } from '../utils/format-price';
-import { Spinner } from '../components/progress';
+import { Spinner } from '../components/spinner';
 import { Filters } from '../components/filters';
 import styles from './search-page.module.css';
 import { getAllProductsWithMetaFields } from '@/lib/queries';

@@ -5,13 +5,10 @@ import isEqual from 'lodash.isequal';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
-
 import { Layout } from '@/components/layout';
 import { StoreContext } from '@/context/store-context';
 import { AddToCart } from '@/components/add-to-cart';
 import { NumericInput } from '@/components/numeric-input';
-import { formatPrice } from '@/utils/format-price';
 import { Seo } from '@/components/seo';
 import { ProductPrice } from '@/components/product-price';
 import ProductSkeleton from '@/components/product-skeleton';
@@ -23,6 +20,7 @@ import { AllCollectionsType, SingleProductType } from '@/lib/types';
 import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
 
 import styles from '../product-page.module.css';
+import Reviews from '@/components/reviews';
 
 export interface OptionValue {
   name: string;
@@ -291,6 +289,7 @@ export default function Product({ collections }: any) {
               </div>
             </div>
           </div>
+          <Reviews />
         </div>
       </Layout>
     );

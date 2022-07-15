@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CartIcon from '../icons/cart';
+import CartIcon from '../../icons/cart';
 import styles from './cart-button.module.css';
 import Link from 'next/link';
 

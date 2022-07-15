@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { formatPrice } from '../utils/format-price';
+import { formatPrice } from '../../utils/format-price';
 import styles from './product-card.module.css';
 import { SingleProductType } from '@/lib/types';
 import Image from 'next/image';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ProductCard } from './product-card';
+import { ProductCard } from '../product-card';
 import styles from './product-listing.module.css';
 import { AllproductsByHandleType } from '@/lib/types';
 // To optimize LCP we mark the first product card as eager so the image gets loaded faster
