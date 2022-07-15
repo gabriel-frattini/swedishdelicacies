@@ -31,6 +31,10 @@ const ProductSkeleton: React.FC<Props> = () => {
             </div>
           </div>
         </div>
+        <div>
+          <div className={styles.reviewBox}></div>
+          <div className={styles.reviewSection}></div>
+        </div>
       </div>
     </div>
   );

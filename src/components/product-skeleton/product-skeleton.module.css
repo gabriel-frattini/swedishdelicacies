@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: 1fr;
   column-gap: var(--space-3xl);
+  max-width: 1700px;
+  margin: auto;
 }
 
 .container {
@@ -39,8 +41,7 @@
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;
   max-width: 600px;
-  margin: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 100px;
 }
 
 .productInfoWrapper {
@@ -97,6 +98,27 @@
   gap: 0.4rem;
   width: 100%;
   height: 50px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.reviewBox {
+  max-width: 800px;
+  height: 80px;
+  background: #eee;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  animation: 1.5s shine linear infinite;
+}
+
+.reviewSection {
+  margin-top: 40px;
+  max-width: 800px;
+  height: 160px;
   background: #eee;
   background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
   border-radius: 5px;

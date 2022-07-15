@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StoreContext } from '../../../context/store-context';
 import Logo from '../../../icons/logo';
-import { Navigation } from '../navigation/navigation';
+import { Navigation } from '../navigation';
 import SearchIcon from '../../../icons/search';
 import { Toast } from '../../toast';
 import styles from './header.module.css';

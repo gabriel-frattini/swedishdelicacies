@@ -11,16 +11,29 @@ export const Navigation = ({ collections }: NavbarProps) => {
   const [scrollPosX, setScrollPosX] = React.useState('0');
   const [activeItem, setActiveItem] = React.useState('');
   const ref = React.useRef<HTMLParagraphElement>(null);
+
   const handleClickedNavItem = (id: string) => {
     sessionStorage.setItem('navScrollX', scrollPosX);
 
+    const _id = sessionStorage.getItem('page');
+
+    if (_id) setActiveItem(_id);
+
     setActiveItem(id);
+    sessionStorage.setItem('page', id);
   };
 
   React.useEffect(() => {
     const storedScrollX = sessionStorage.getItem('navScrollX');
     if (storedScrollX) ref.current?.scrollTo({ left: parseInt(storedScrollX) });
   }, []);
+
+  const slicedId = (id: string) => {
+    if (id) {
+      return id.split('/').slice(-1)[0];
+    }
+    return id;
+  };
 
   return (
     <nav
@@ -33,7 +46,15 @@ export const Navigation = ({ collections }: NavbarProps) => {
       }
     >
       <Link key="All" href="/products/">
-        <a className={styles.navLink}>All Products</a>
+        <a
+          className={[
+            styles.navLink,
+            activeItem === '0' && styles.activeLink,
+          ].join(' ')}
+          onClick={() => handleClickedNavItem('0')}
+        >
+          All Products
+        </a>
       </Link>
       {collections &&
         collections.edges
@@ -45,10 +66,10 @@ export const Navigation = ({ collections }: NavbarProps) => {
               href={`/products/${edge.node.handle}`}
             >
               <a
-                onClick={() => handleClickedNavItem(edge.node.id)}
+                onClick={() => handleClickedNavItem(slicedId(edge.node.id))}
                 className={[
                   styles.navLink,
-                  activeItem === edge.node.id && styles.activeLink,
+                  activeItem === slicedId(edge.node.id) && styles.activeLink,
                 ].join(' ')}
               >
                 {edge.node.handle}
