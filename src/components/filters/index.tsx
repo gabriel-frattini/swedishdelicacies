@@ -1,12 +1,20 @@
 import * as React from 'react';
-import { CheckFilter } from './check-filter';
-import { CurrencyField } from './currency-field';
-import {
-  priceFilterStyle,
-  clearButton,
-  priceFields,
-  summary,
-} from './filters.module.css';
+
+import { CheckFilter } from '../check-filter';
+import { CurrencyField } from '../currency-field';
+
+import styles from './filters.module.css';
+
+import { queryTypes } from '@/utils/search';
+
+interface CompProps {
+  currencyCode: string;
+  productTypes: { edges: [{ node: string }] };
+  tags: { edges: [{ node: string }] };
+  vendors: { edges: [{ node: string }] };
+  filters: queryTypes;
+  setFilters: (filters: any) => void;
+}
 
 export function Filters({
   currencyCode,
@@ -15,18 +23,16 @@ export function Filters({
   vendors,
   filters,
   setFilters,
-}) {
-  const updateFilter = (key, value) => {
-    setFilters((filters) => ({ ...filters, [key]: value }));
+}: CompProps) {
+  const updateFilter = (key: string, value: string | number) => {
+    setFilters((filters: CompProps['filters']) => ({
+      ...filters,
+      [key]: value,
+    }));
   };
 
-  const updateNumeric = (key, value) => {
-    if (
-      !isNaN(Number(value)) ||
-      (value.endsWith('.') && !isNaN(Number(value.substring(0, -1))))
-    ) {
-      updateFilter(key, value);
-    }
+  const updateNumeric = (key: string, value: string) => {
+    updateFilter(key, value);
   };
 
   return (
@@ -35,18 +41,20 @@ export function Filters({
         name="Type"
         items={productTypes}
         selectedItems={filters.productTypes}
-        setSelectedItems={(value) => updateFilter('productTypes', value)}
+        setSelectedItems={(value: string) =>
+          updateFilter('productTypes', value)
+        }
       />
       <hr />
-      <details className={priceFilterStyle} open={true}>
+      <details className={styles.priceFilterStyle} open={true}>
         <summary>
-          <div className={summary}>
+          <div className={styles.summary}>
             Price
             {(filters.maxPrice || filters.minPrice) && (
               <button
-                className={clearButton}
+                className={styles.clearButton}
                 onClick={() =>
-                  setFilters((filters) => ({
+                  setFilters((filters: CompProps['filters']) => ({
                     ...filters,
                     maxPrice: '',
                     minPrice: '',
@@ -58,12 +66,12 @@ export function Filters({
             )}
           </div>
         </summary>
-        <div className={priceFields}>
+        <div className={styles.priceFields}>
           <CurrencyField
             symbol="EUR"
             aria-label="Minimum price"
             price={filters.minPrice}
-            onPriceChange={(event) =>
+            onPriceChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               updateNumeric('minPrice', event.currentTarget.value)
             }
           />{' '}
@@ -72,7 +80,7 @@ export function Filters({
             symbol="EUR"
             aria-label="Maximum price"
             price={filters.maxPrice}
-            onPriceChange={(event) =>
+            onPriceChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               updateNumeric('maxPrice', event.currentTarget.value)
             }
           />
@@ -83,7 +91,7 @@ export function Filters({
         name="Brands"
         items={vendors}
         selectedItems={filters.vendors}
-        setSelectedItems={(value) => updateFilter('vendors', value)}
+        setSelectedItems={(value: string) => updateFilter('vendors', value)}
       />
       <hr />
       <CheckFilter
@@ -91,7 +99,7 @@ export function Filters({
         name="Tags"
         items={tags}
         selectedItems={filters.tags}
-        setSelectedItems={(value) => updateFilter('tags', value)}
+        setSelectedItems={(value: string) => updateFilter('tags', value)}
       />
     </>
   );

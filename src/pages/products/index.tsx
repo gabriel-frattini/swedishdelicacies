@@ -7,7 +7,6 @@ import { AllProductsType } from '@/lib/types';
 import { Layout } from '@/components/layout';
 import { ProductListing } from '@/components/product-listing';
 import { Seo } from '@/components/seo';
-import { MoreButton } from '@/components/more-button';
 
 import styles from './index.module.css';
 

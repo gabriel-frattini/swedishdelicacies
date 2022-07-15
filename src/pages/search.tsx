@@ -28,13 +28,13 @@ interface PageProps {
     products: AllProductsType['data']['products'];
     shop: {
       productTypes: {
-        edges: [node: string];
-      };
+        edges: [{node: string}];
+      }
       productVendors: {
-        edges: [node: string];
-      };
+        edges: [{node: string}];
+      }
       productTags: {
-        edges: [node: string];
+        edges: [{node: string}];
       };
     };
   };

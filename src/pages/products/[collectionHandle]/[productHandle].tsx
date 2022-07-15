@@ -16,7 +16,7 @@ import ProductSkeleton from '@/components/product-skeleton';
 import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
 import { NextButton, PreviousButton } from '@/icons/pagination';
 
-import { AllCollectionsType, SingleProductType } from '@/lib/types';
+import { SingleProductType } from '@/lib/types';
 import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
 
 import styles from '../product-page.module.css';

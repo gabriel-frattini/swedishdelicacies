@@ -13,7 +13,7 @@ interface pageProps {
   name: any;
   selectedItems: any;
   setSelectedItems: any;
-  open: boolean;
+  open?: boolean;
 }
 
 export function CheckFilter({

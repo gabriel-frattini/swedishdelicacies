@@ -3,8 +3,8 @@ import * as React from 'react';
 import styles from './currency-field.module.css';
 
 interface ComponentProps {
-  price: string;
-  onPriceChange: () => void;
+  price: number;
+  onPriceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   symbol?: string;
 }
 

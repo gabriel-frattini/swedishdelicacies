@@ -8,7 +8,7 @@ import { AllProductsType, ShopType } from '@/lib/types';
 import { queryTypes } from '@/utils/search';
 
 interface filterType {
-  [key: string]: [node: string] | [];
+  [key: string]: [{node: string}] | [];
 }
 
 export interface useSearchType {
