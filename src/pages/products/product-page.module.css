@@ -136,13 +136,13 @@
   color: var(--text-color-secondary);
 }
 
-.tagList a {
+.tagList {
   font-weight: var(--semibold);
   color: var(--text-color-secondary);
   padding-right: var(--space-md);
 }
 
-.tagList a:hover {
+.tagList:hover {
   color: var(--text-color);
   text-decoration: underline;
 }
@@ -161,10 +161,23 @@
 }
 
 .metaSection {
-  padding-top: var(--space-3xl);
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 650px;
+}
+
+.metaProduct {
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: baseline;
+}
+
+.metaShipping > div {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 @media (min-width: 640px) {

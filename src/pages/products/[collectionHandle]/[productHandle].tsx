@@ -198,24 +198,69 @@ export default function Product({ collections }: any) {
                   variantId={variant && variant.id}
                   quantity={quantity}
                   available={true}
+                  compareAtPriceRange={compareAtPriceRange}
+                  initialPrice={initialvariant.price}
                 />
               </div>
               <div className={styles.metaSection}>
-                <span className={styles.labelFont}>Type</span>
-                <span className={styles.tagList}>
-                  <Link
-                    replace
-                    href={`/products/${productCollection.edges[0].node.handle}`}
-                  >
-                    {productCollection.edges[0].node.title}
-                  </Link>
-                </span>
-                <span className={styles.labelFont}>Tags</span>
-                <span className={styles.tagList}>
-                  {tags.map((tag) => (
-                    <Link href={`/search?t=${tag}`}>{tag}</Link>
-                  ))}
-                </span>
+                <div className={styles.metaShipping}>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      width="24"
+                      fill="#808080"
+                    >
+                      <path d="M5.85 19.55q-1.175 0-1.988-.812-.812-.813-.812-1.988h-1.7V6.3q0-.75.525-1.275Q2.4 4.5 3.15 4.5h13.625v3.8h2.65l3.225 4.325v4.125h-1.8q0 1.175-.825 1.988-.825.812-2 .812-1.15 0-1.975-.812-.825-.813-.825-1.988H8.65q0 1.175-.812 1.988-.813.812-1.988.812Zm0-1.5q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.925.375t-.375.925q0 .55.375.925t.925.375Zm12.2 0q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.937.375-.388.375-.388.925t.388.925q.387.375.937.375Zm-1.275-4.8h4.475l-2.6-3.45h-1.875Z" />
+                    </svg>
+                    <p className={styles.tagList}>
+                      Free shipping for order over £60
+                    </p>
+                  </div>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      width="24"
+                      fill="#808080"
+                    >
+                      <path d="M5.85 19.55q-1.175 0-1.988-.812-.812-.813-.812-1.988h-1.7V6.3q0-.75.525-1.275Q2.4 4.5 3.15 4.5h13.625v3.8h2.65l3.225 4.325v4.125h-1.8q0 1.175-.825 1.988-.825.812-2 .812-1.15 0-1.975-.812-.825-.813-.825-1.988H8.65q0 1.175-.812 1.988-.813.812-1.988.812Zm0-1.5q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.925.375t-.375.925q0 .55.375.925t.925.375Zm12.2 0q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.937.375-.388.375-.388.925t.388.925q.387.375.937.375Zm-1.275-4.8h4.475l-2.6-3.45h-1.875Z" />
+                    </svg>
+                    <p className={styles.tagList}>
+                      Upd {'&'} Fedex 4-8 days £29
+                    </p>
+                  </div>
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      height="24"
+                      width="24"
+                      fill="#808080"
+                    >
+                      <path d="M5.85 19.55q-1.175 0-1.988-.812-.812-.813-.812-1.988h-1.7V6.3q0-.75.525-1.275Q2.4 4.5 3.15 4.5h13.625v3.8h2.65l3.225 4.325v4.125h-1.8q0 1.175-.825 1.988-.825.812-2 .812-1.15 0-1.975-.812-.825-.813-.825-1.988H8.65q0 1.175-.812 1.988-.813.812-1.988.812Zm0-1.5q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.925.375t-.375.925q0 .55.375.925t.925.375Zm12.2 0q.55 0 .925-.375t.375-.925q0-.55-.375-.925t-.925-.375q-.55 0-.937.375-.388.375-.388.925t.388.925q.387.375.937.375Zm-1.275-4.8h4.475l-2.6-3.45h-1.875Z" />
+                    </svg>
+                    <p className={styles.tagList}>
+                      Express shipping 1-2 days £59{' '}
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.metaProduct}>
+                  <span className={styles.labelFont}>Type</span>
+                  <span className={styles.tagList}>
+                    <Link
+                      replace
+                      href={`/products/${productCollection.edges[0].node.handle}`}
+                    >
+                      {productCollection.edges[0].node.title}
+                    </Link>
+                  </span>
+                  <span className={styles.labelFont}>Tags</span>
+                  <span className={styles.tagList}>
+                    {tags.map((tag) => (
+                      <Link href={`/search?t=${tag}`}>{tag}</Link>
+                    ))}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

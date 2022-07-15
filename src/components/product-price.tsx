@@ -26,9 +26,11 @@ export const ProductPrice = ({
     parseInt(initialPrice),
   );
 
-  const onSale = compareAtPriceRange.minVariantPrice.amount !== initialPrice;
+  const onSale =
+    parseInt(compareAtPriceRange.minVariantPrice.amount) !==
+    parseInt(initialPrice);
 
-  return (
+    return (
     <h2 className={styles.priceValue}>
       <span className={styles.onSale}>
         {onSale &&

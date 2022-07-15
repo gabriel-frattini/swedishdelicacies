@@ -123,9 +123,11 @@
 }
 
 .emptyStateContainer > p {
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--text-color-primary);
+  padding-bottom: var(--space-lg);
+  line-height: var(--dense);
+  font-size: var(--text-lg);
+  color: var(--text-color-secondary);
+  font-weight: 400;
 }
 
 .emptyStateHeading {
