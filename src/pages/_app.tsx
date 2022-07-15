@@ -1,16 +1,17 @@
 import { AppProps } from 'next/app';
+import { QueryClientProvider } from 'react-query';
 
 import { StoreProvider } from '@/context/store-context';
-import { QueryProvider } from '@/lib/queryClient';
+import { queryClient } from '@/lib/queryClient';
 
 import '@/styles/styles.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StoreProvider>
-      <QueryProvider>
+      <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
-      </QueryProvider>
+      </QueryClientProvider>
     </StoreProvider>
   );
 }

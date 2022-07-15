@@ -15,7 +15,7 @@ import {
 import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { StoreContext } from '@/context/store-context';
+import { queryClient } from '@/lib/queryClient';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   React.useEffect(() => {
@@ -33,7 +33,6 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
     return null;
   }
 
-  const { queryClient } = React.useContext(StoreContext);
   const { collectionByHandle, collections } = data;
 
   return (

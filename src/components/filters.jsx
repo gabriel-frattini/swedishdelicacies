@@ -69,7 +69,6 @@ export function Filters({
           />{" "}
           –{" "}
           <CurrencyField
-            {...currencyCode}
             aria-label="Maximum price"
             value={filters.maxPrice}
             onChange={(event) =>

@@ -16,13 +16,8 @@ export function CurrencyField({
         .join(' ')}
       style={style}
     >
-      <span className={styles.currencySymbol}>{symbol}</span>
-      <input
-        type="numeric"
-        className={styles.nput}
-        data-currency={symbol}
-        {...props}
-      />
+      <span className={styles.currencySymbol}>EUR</span>
+      <input type="numeric" className={styles.input} data-currency={'EUR'} />
     </span>
   );
 }

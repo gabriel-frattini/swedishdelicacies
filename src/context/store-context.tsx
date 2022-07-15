@@ -2,7 +2,6 @@ import * as React from 'react';
 import Client from 'shopify-buy';
 
 import { LineItemsType } from '@/lib/types';
-import { QueryClient } from 'react-query';
 
 const client = Client.buildClient({
   domain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_URL,
@@ -24,7 +23,6 @@ interface defaultValuesType {
     quantity: string,
   ) => {};
   client: any;
-  queryClient: any;
   checkout: {
     id: string;
     totalPrice: string;
@@ -71,7 +69,6 @@ export const StoreProvider = ({ children }: any) => {
     setCheckout(checkout);
   };
 
-  const queryClient = React.useMemo(() => new QueryClient(), []);
 
   React.useEffect(() => {
     const initializeCheckout = async () => {
@@ -162,7 +159,6 @@ export const StoreProvider = ({ children }: any) => {
         checkout,
         loading,
         didJustAddToCart,
-        queryClient,
       }}
     >
       {children}
