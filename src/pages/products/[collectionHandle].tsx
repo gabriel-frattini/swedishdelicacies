@@ -16,8 +16,11 @@ import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { queryClient } from '@/lib/queryClient';
+import { useRouter } from 'next/router';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
+  const router = useRouter();
+
   React.useEffect(() => {
     if (Object.keys(data).length > 0) {
       collectionByHandle.products.edges.forEach((product) => {
@@ -28,9 +31,8 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
       });
     }
   }, []);
-
-  if (!Object.keys(data).length) {
-    return null;
+  if (router.isFallback) {
+    return <></>;
   }
 
   const { collectionByHandle, collections } = data;
