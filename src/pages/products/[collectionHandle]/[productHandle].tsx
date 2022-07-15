@@ -22,6 +22,7 @@ import { AllCollectionsType, SingleProductType } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ProductPrice } from '@/components/product-price';
+import ProductSkeleton from '@/components/product-skeleton';
 
 export interface OptionValue {
   name: string;
@@ -47,10 +48,10 @@ export default function Product({ collections }: any) {
     }
   }, [data]);
 
-  if (isLoading || isError) {
+  if (isLoading) {
     return (
       <Layout collections={collections}>
-        <></>
+        <ProductSkeleton />
       </Layout>
     );
   }
@@ -122,7 +123,7 @@ export default function Product({ collections }: any) {
                       >
                         <Image
                           width={700}
-                          height={500}
+                          height={450}
                           objectFit="contain"
                           loading={index === 0 ? 'eager' : 'lazy'}
                           alt={
@@ -269,17 +270,10 @@ export default function Product({ collections }: any) {
   }
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const collections = await getAllCollections();
 
   return {
     props: { collections },
   };
 }
-
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: true, //indicates the type of fallback
-  };
-};
