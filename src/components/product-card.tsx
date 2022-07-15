@@ -22,9 +22,12 @@ export function ProductCard({ product: { node }, eager }: Props) {
     vendor,
     collections,
   } = node;
+
+  const productPrice = priceRangeV2 ?? priceRange;
+
   const price = formatPrice(
     priceRange.minVariantPrice.currencyCode,
-    parseInt(priceRangeV2.minVariantPrice.amount),
+    parseInt(productPrice.minVariantPrice.amount),
   );
   const defaultImageHeight = 200;
   const defaultImageWidth = 400;
