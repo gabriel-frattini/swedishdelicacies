@@ -4,8 +4,8 @@ import { StoreContext } from '../context/store-context';
 import styles from './add-to-cart.module.css';
 
 interface CompProps {
-  initialPrice: string;
-  compareAtPriceRange: {
+  initialPrice?: string;
+  compareAtPriceRange?: {
     maxVariantPrice: {
       amount: string;
       currencyCode: string;
@@ -18,6 +18,7 @@ interface CompProps {
   variantId: string;
   quantity: number;
   available: boolean;
+  simple?: boolean;
 }
 
 export function AddToCart({
@@ -26,6 +27,7 @@ export function AddToCart({
   available,
   initialPrice,
   compareAtPriceRange,
+  simple,
 }: CompProps) {
   const { addVariantToCart, loading } = React.useContext(StoreContext);
 
@@ -33,17 +35,30 @@ export function AddToCart({
     e.preventDefault();
     addVariantToCart(variantId, quantity.toString());
   }
+
+  if (simple) {
+    return (
+      <button
+        type="submit"
+        className={styles.addToCart}
+        onClick={addToCart}
+        disabled={!available || loading}
+      >
+        {available ? 'Add to Cart' : 'Out of Stock'}
+      </button>
+    );
+  }
+
   const calculateDiscount = (num: any, denom: any) => {
     const numerator = Number(num);
     const denominator = Number(denom);
     return Math.round(((denominator - numerator) / denominator) * 100);
   };
-  console.log(compareAtPriceRange, initialPrice);
 
   const onSale =
-    parseInt(compareAtPriceRange.minVariantPrice.amount) !==
-      parseInt(initialPrice) &&
-    parseInt(compareAtPriceRange.minVariantPrice.amount) !== 0;
+    parseInt(compareAtPriceRange!.minVariantPrice.amount) !==
+      parseInt(initialPrice!) &&
+    parseInt(compareAtPriceRange!.minVariantPrice.amount) !== 0;
 
   return (
     <>
@@ -60,7 +75,7 @@ export function AddToCart({
           You save{' '}
           {calculateDiscount(
             initialPrice,
-            compareAtPriceRange.minVariantPrice.amount,
+            compareAtPriceRange!.minVariantPrice.amount,
           )}{' '}
           %
         </p>

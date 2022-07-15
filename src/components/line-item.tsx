@@ -97,11 +97,13 @@ export function LineItem({ item }: SingleLineItemType) {
       <td>
         <NumericInput
           disabled={loading}
-          value={quantity}
+          quantity={quantity}
           aria-label="Quantity"
           onIncrement={doIncrement}
           onDecrement={doDecrement}
-          onChange={(e: any) => handleQuantityChange(e.currentTarget.value)}
+          onChangeQuantity={(e) => handleQuantityChange(e.currentTarget.value)}
+          min="1"
+          max="20"
         />
       </td>
       <td className={styles.totals}>

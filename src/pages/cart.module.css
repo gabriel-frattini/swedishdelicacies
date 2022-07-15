@@ -188,6 +188,11 @@
   padding: 2rem;
 }
 
+.quickbuy {
+  display: flex;
+  gap: 4px;
+}
+
 @media (min-width: 640px) {
   .recommendedSection {
     max-width: 640px;

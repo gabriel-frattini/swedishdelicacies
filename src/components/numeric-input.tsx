@@ -1,20 +1,38 @@
 import * as React from 'react';
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/md';
 import styles from './numeric-input.module.css';
+
+interface CompProps {
+  onIncrement: () => void;
+  onDecrement: () => void;
+  className?: any;
+  disabled?: boolean;
+  quantity: number;
+  onChangeQuantity: (e: any) => void;
+  min: string;
+  max: string;
+}
+
 export function NumericInput({
   onIncrement,
   onDecrement,
   className,
   disabled,
-  ...props
-}: any) {
+  quantity,
+  onChangeQuantity,
+  min,
+  max,
+}: CompProps) {
   return (
     <div className={styles.wrap}>
       <input
         disabled={disabled}
         type="numeric"
         className={[styles.input, className].join(' ')}
-        {...props}
+        value={quantity}
+        onChange={onChangeQuantity}
+        max={max}
+        min={min}
       />
       <button
         disabled={disabled}

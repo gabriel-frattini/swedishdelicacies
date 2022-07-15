@@ -143,6 +143,7 @@ export default function Product({ collections }: any) {
                         <Image
                           width={700}
                           height={450}
+                          quality={100}
                           objectFit="contain"
                           loading={index === 0 ? 'eager' : 'lazy'}
                           alt={
@@ -210,12 +211,13 @@ export default function Product({ collections }: any) {
               <div className={styles.addToCartStyle}>
                 <NumericInput
                   aria-label="Quantity"
+                  disabled={false}
                   onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
                   onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-                  onChange={(event: any) =>
+                  onChangeQuantity={(event: any) =>
                     setQuantity(event.currentTarget.value)
                   }
-                  value={quantity}
+                  quantity={quantity}
                   min="1"
                   max="20"
                 />

@@ -13,6 +13,8 @@ import { ProductCard } from '@/components/product-card';
 
 import styles from './cart.module.css';
 import { useQuery } from 'react-query';
+import { NumericInput } from '@/components/numeric-input';
+import { AddToCart } from '@/components/add-to-cart';
 
 interface pageProps {
   collections: AllCollectionsType;
@@ -132,9 +134,11 @@ export default function CartPage({ collections }: pageProps) {
 }
 
 const RecommendedSection = ({ data }: AllProductsType) => {
+  const [quantity, setQuantity] = React.useState<number>(1);
   if (!data) {
     return <div></div>;
   }
+  console.log(data.products.edges);
   return (
     <section className={styles.recommendedSection}>
       <h2 className={styles.recommendedText}>Other customers also bought</h2>
@@ -142,6 +146,25 @@ const RecommendedSection = ({ data }: AllProductsType) => {
         {data.products.edges.map((node, idx) => (
           <li key={idx} className={styles.recommendedProduct}>
             <ProductCard product={node} />
+            <div className={styles.quickbuy}>
+              <NumericInput
+                aria-label="Quantity"
+                onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
+                onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
+                onChangeQuantity={(event: any) =>
+                  setQuantity(event.currentTarget.value)
+                }
+                quantity={quantity}
+                min="1"
+                max="20"
+              />
+              <AddToCart
+                available={true}
+                simple={true}
+                quantity={quantity}
+                variantId={node.node.variants.nodes[0].id}
+              />
+            </div>
           </li>
         ))}
       </ul>

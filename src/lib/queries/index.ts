@@ -403,8 +403,7 @@ export async function getAllProductsWithMetaFields() {
           }
       }
           variants(first: 5) {
-          edges {
-              node {
+          nodes {
                   id 
                   title 
                   price
@@ -416,7 +415,7 @@ export async function getAllProductsWithMetaFields() {
               }
           }
       } 
-      }
+
     }
   }
 
@@ -492,7 +491,18 @@ export async function getRecommendedProducts() {
           }
       }
      
-         
+     variants(first: 1) {
+              nodes {
+                  id 
+                  title 
+                  price
+                  availableForSale
+                  selectedOptions {
+                      name
+                      value
+                  }
+              }
+          }   
       
           }
         }
