@@ -14,9 +14,9 @@
   grid-template-columns: 1fr;
   grid-template-rows: min-content 1fr;
   grid-template-areas:
-    "search"
-    "results"
-    "filters";
+    'search'
+    'results'
+    'filters';
 }
 
 .filterStyle {
@@ -119,7 +119,7 @@
 .searchForm {
   display: grid;
   grid-template-columns: 1fr max-content;
-  grid-template-areas: "input clear";
+  grid-template-areas: 'input clear';
   align-items: center;
   background-color: var(--input-background);
   border-radius: var(--radius-md);
@@ -243,7 +243,7 @@
 
   .searchForm {
     grid-template-columns: 30px 1fr max-content;
-    grid-template-areas: "icon input clear";
+    grid-template-areas: 'icon input clear';
   }
 
   .search input {
@@ -253,8 +253,8 @@
   .main {
     grid-template-columns: max-content 1fr;
     grid-template-areas:
-      "search search"
-      "filters results";
+      'search search'
+      'filters results';
   }
 
   .sortSelector {
@@ -279,8 +279,8 @@
 @media (min-width: 1280px) {
   .main {
     grid-template-areas:
-      "filters search"
-      "filters results";
+      'filters search'
+      'filters results';
     padding-top: var(--space-2xl);
   }
 
@@ -383,6 +383,7 @@
 
 .resultsStyle {
   font-size: var(--text-md);
+  font-weight: 400;
   color: var(--text-color);
   padding: var(--space-xl) 0;
 }

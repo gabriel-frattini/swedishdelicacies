@@ -2,22 +2,28 @@
 import * as React from 'react';
 import styles from './currency-field.module.css';
 
+interface ComponentProps {
+  price: string;
+  onPriceChange: () => void;
+  symbol?: string;
+}
+
 export function CurrencyField({
   symbol,
-  symbolAtEnd,
-  style,
-  className,
-  ...props
-}: any) {
+  onPriceChange,
+  price,
+}: ComponentProps) {
   return (
     <span
-      className={[className, styles.wrap, symbolAtEnd && styles.symbolAfter]
-        .filter(Boolean)
-        .join(' ')}
-      style={style}
+      className={[styles.wrap, styles.symbolAfter].filter(Boolean).join(' ')}
     >
       <span className={styles.currencySymbol}>EUR</span>
-      <input type="numeric" className={styles.input} data-currency={'EUR'} />
+      <input
+        className={styles.input}
+        data-currency={symbol}
+        onChange={onPriceChange}
+        value={price}
+      />
     </span>
   );
 }

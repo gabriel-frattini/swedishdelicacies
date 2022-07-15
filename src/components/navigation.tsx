@@ -36,23 +36,25 @@ export const Navigation = ({ collections }: NavbarProps) => {
         <a className={styles.navLink}>All Products</a>
       </Link>
       {collections &&
-        collections.edges.map((edge) => (
-          <Link
-            key={edge.node.handle}
-            replace
-            href={`/products/${edge.node.handle}`}
-          >
-            <a
-              onClick={() => handleClickedNavItem(edge.node.id)}
-              className={[
-                styles.navLink,
-                activeItem === edge.node.id && styles.activeLink,
-              ].join(' ')}
+        collections.edges
+          .filter((item) => item.node.handle !== 'frontpage')
+          .map((edge) => (
+            <Link
+              key={edge.node.handle}
+              replace
+              href={`/products/${edge.node.handle}`}
             >
-              {edge.node.handle}
-            </a>
-          </Link>
-        ))}
+              <a
+                onClick={() => handleClickedNavItem(edge.node.id)}
+                className={[
+                  styles.navLink,
+                  activeItem === edge.node.id && styles.activeLink,
+                ].join(' ')}
+              >
+                {edge.node.handle}
+              </a>
+            </Link>
+          ))}
     </nav>
   );
 };
