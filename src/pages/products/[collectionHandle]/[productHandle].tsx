@@ -2,6 +2,8 @@ import * as React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import isEqual from 'lodash.isequal';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
@@ -11,18 +13,16 @@ import { AddToCart } from '@/components/add-to-cart';
 import { NumericInput } from '@/components/numeric-input';
 import { formatPrice } from '@/utils/format-price';
 import { Seo } from '@/components/seo';
-
-import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
-
-import styles from '../product-page.module.css';
-
-import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
-
-import { AllCollectionsType, SingleProductType } from '@/lib/types';
-import Image from 'next/image';
-import Link from 'next/link';
 import { ProductPrice } from '@/components/product-price';
 import ProductSkeleton from '@/components/product-skeleton';
+
+import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
+import { NextButton, PreviousButton } from '@/icons/pagination';
+
+import { AllCollectionsType, SingleProductType } from '@/lib/types';
+import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
+
+import styles from '../product-page.module.css';
 
 export interface OptionValue {
   name: string;
@@ -137,12 +137,6 @@ export default function Product({ collections }: any) {
                     ))}
                   </ul>
                 </div>
-                {hasMultipleImages && (
-                  <div className={styles.scrollForMore} id="instructions">
-                    <span aria-hidden="true">←</span> scroll for more{' '}
-                    <span aria-hidden="true">→</span>
-                  </div>
-                )}
               </div>
             )}
             {!hasImages && (

@@ -12,12 +12,12 @@ interface LayoutProps {
 
 export function Layout({ children, collections }: LayoutProps) {
   return (
-    <div>
+    <>
       <Seo />
       <SkipNavLink />
       <Header collections={collections} />
       <SkipNavContent>{children}</SkipNavContent>
       <Footer />
-    </div>
+    </>
   );
 }
