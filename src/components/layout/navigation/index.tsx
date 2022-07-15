@@ -25,7 +25,11 @@ export const Navigation = ({ collections }: NavbarProps) => {
 
   React.useEffect(() => {
     const storedScrollX = sessionStorage.getItem('navScrollX');
-    if (storedScrollX) ref.current?.scrollTo({ left: parseInt(storedScrollX) });
+    if (storedScrollX)
+      ref.current?.scrollTo({
+        left: parseInt(storedScrollX),
+        behavior: 'smooth',
+      });
   }, []);
 
   const slicedId = (id: string) => {

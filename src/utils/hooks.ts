@@ -8,7 +8,7 @@ import { AllProductsType, ShopType } from '@/lib/types';
 import { queryTypes } from '@/utils/search';
 
 interface filterType {
-  [key: string]: [{node: string}] | [];
+  [key: string]: [{ node: string }] | [];
 }
 
 export interface useSearchType {
@@ -31,7 +31,6 @@ function makeQueryStringValue(allItems: any, selectedItems: any) {
 export function useProductSearch(
   filters: queryTypes,
   { allTags, allProductTypes, allVendors }: filterType,
-
   sortKey: string,
   pause = false,
   count = 20,
@@ -58,7 +57,7 @@ export function useProductSearch(
     [query, pause, initialFilters],
   );
   const [result, setResult] = useState<AllProductsType['data']>();
-  const { isLoading } = useQuery(
+  const { isLoading, refetch } = useQuery(
     ['getProductsBySearch', query],
     async () =>
       await getProductsFromQuery({
@@ -93,6 +92,7 @@ export function useProductSearch(
     url.hash = '';
     window.history.replaceState({}, '', url.toString());
     setQuery(createQuery(filters));
+    refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters, cursors, sortKey]);
 

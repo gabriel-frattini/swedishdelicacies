@@ -56,15 +56,17 @@
   border-radius: var(--radius-md);
   color: var(--text-color-inverted);
   display: flex;
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   font-weight: var(--semibold);
   height: var(--size-input);
   justify-content: center;
   line-height: var(--solid);
   margin: var(--space-3xl) auto var(--space-md);
-  padding: var(--space-sm) var(--space-xl);
-  width: max-content;
-  transition: var(--transition);
+  padding: var(--space-md) var(--space-2xl);
+}
+
+.checkoutButton:hover {
+  background-color: #ffd481;
 }
 
 /* Apply only to first of class */
@@ -160,16 +162,15 @@
 }
 
 .recommendedSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 3rem auto auto auto;
-  min-width: 100%;
+  margin-top: var(--space-3xl);
 }
+
 .recommendedText {
   font-size: var(--text-lg);
   font-weight: 700;
+  max-width: 1024px;
+  margin: auto;
+  margin-bottom: var(--space-lg);
 }
 
 .recommendedProduct {
@@ -191,7 +192,6 @@
 
 .quickbuy {
   display: flex;
-  flex-direction: column;
   gap: 0.6rem;
   justify-content: center;
   align-items: center;

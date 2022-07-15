@@ -100,6 +100,7 @@
 
 .inactiveOption,
 .activeOption {
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: var(--space-md);

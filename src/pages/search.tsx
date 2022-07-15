@@ -28,13 +28,13 @@ interface PageProps {
     products: AllProductsType['data']['products'];
     shop: {
       productTypes: {
-        edges: [{node: string}];
-      }
+        edges: [{ node: string }];
+      };
       productVendors: {
-        edges: [{node: string}];
-      }
+        edges: [{ node: string }];
+      };
       productTags: {
-        edges: [{node: string}];
+        edges: [{ node: string }];
       };
     };
   };
@@ -141,7 +141,7 @@ export default function SearchPage({ data }: PageProps) {
               <FilterIcon />
             </button>
             <div className={styles.sortSelector}>
-              {/* <label>
+              <label>
                 <span>Sort by:</span>
                 <select
                   value={sortKey}
@@ -154,7 +154,7 @@ export default function SearchPage({ data }: PageProps) {
                   <option value="CREATED_AT">New items</option>
                   <option value="BEST_SELLING">Trending</option>
                 </select>
-              </label> */}
+              </label>
               <SortIcon className={styles.sortIcon} />
             </div>
           </div>
