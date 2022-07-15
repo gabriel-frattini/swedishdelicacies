@@ -302,7 +302,7 @@ function Pagination({
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await getAllProductsWithMetaFields();
   if (data) {
     return {
