@@ -38,10 +38,12 @@ export function AddToCart({
     const denominator = Number(denom);
     return Math.round(((denominator - numerator) / denominator) * 100);
   };
+  console.log(compareAtPriceRange, initialPrice);
 
   const onSale =
     parseInt(compareAtPriceRange.minVariantPrice.amount) !==
-    parseInt(initialPrice);
+      parseInt(initialPrice) &&
+    parseInt(compareAtPriceRange.minVariantPrice.amount) !== 0;
 
   return (
     <>
