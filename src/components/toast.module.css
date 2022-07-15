@@ -19,7 +19,33 @@
   white-space: nowrap;
 }
 
-@keyframes showing {
+@keyframes showingMobile {
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes hidingMobile {
+  50% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(200px);
+    opacity: 0;
+  }
+}
+
+@keyframes showingDesktop {
   0% {
     transform: translateX(200px);
     opacity: 0;
@@ -34,7 +60,7 @@
   }
 }
 
-@keyframes hiding {
+@keyframes hidingDesktop {
   50% {
     transform: translateX(200px);
     opacity: 0;
@@ -46,9 +72,19 @@
 }
 
 .hiding {
-  animation: hiding 1s ease;
+  animation: hidingMobile 1s ease;
 }
 
 .showing {
-  animation: showing 1s ease-out;
+  animation: showingMobile 1s ease-out;
+}
+
+@media (min-width: 600px) {
+  .hiding {
+    animation: hidingDesktop 1s ease;
+  }
+
+  .showing {
+    animation: showingDesktop 1s ease-out;
+  }
 }

@@ -36,6 +36,8 @@ export default function Product({ collections }: any) {
   const [quantity, setQuantity] = React.useState(1);
   const [variant, setVariant] = React.useState<any>();
   const [available, setAvailable] = React.useState<any>();
+  const [viewActiveImage, setViewActiveImage] = React.useState<string>();
+
   const { data, isLoading, isError } = useQuery(
     'getSingleProductByHandle',
     async () =>
@@ -45,6 +47,7 @@ export default function Product({ collections }: any) {
   React.useEffect(() => {
     if (data) {
       setVariant({ ...data.productByHandle.variants.nodes[0] });
+      setViewActiveImage(data.productByHandle.images.edges[0].node.id);
     }
   }, [data]);
 
@@ -119,8 +122,23 @@ export default function Product({ collections }: any) {
                     {images.edges.map((image, index) => (
                       <li
                         key={`product-image-${image.node.id}`}
-                        className={styles.productImageListItem}
+                        className={`${
+                          viewActiveImage === image.node.id
+                            ? styles.activeImageListItem
+                            : styles.inactiveImageListItem
+                        }`}
                       >
+                        <div className={styles.previous}>
+                          <PreviousButton
+                            className={styles.previousbutton}
+                            onClick={() => {
+                              index !== 0 &&
+                                setViewActiveImage(
+                                  images.edges[index - 1].node.id,
+                                );
+                            }}
+                          />
+                        </div>
                         <Image
                           width={700}
                           height={450}
@@ -133,6 +151,17 @@ export default function Product({ collections }: any) {
                           }
                           src={image.node.originalSrc}
                         />
+                        <div className={styles.previous}>
+                          <NextButton
+                            className={styles.nextbutton}
+                            onClick={() => {
+                              index !== images.edges.length - 1 &&
+                                setViewActiveImage(
+                                  images.edges[index + 1].node.id,
+                                );
+                            }}
+                          />
+                        </div>
                       </li>
                     ))}
                   </ul>

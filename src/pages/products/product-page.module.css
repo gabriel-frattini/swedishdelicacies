@@ -28,23 +28,23 @@
 
 .productImageList {
   display: flex;
-  overflow-x: auto;
-  max-width: 600px;
+  overflow-x: hidden;
+  max-width: 800px;
 }
 
-.productImageListItem {
+.activeImageListItem {
   display: flex;
   flex: 0 0 100%;
   white-space: nowrap;
 }
 
-.scrollForMore {
-  display: flex;
-  position: absolute;
-  width: 100%;
-  justify-content: space-between;
+.inactiveImageListItem {
+  display: none;
+}
 
-  font-size: var(--text-lg);
+.next,
+.previous {
+  display: none;
 }
 
 .noImagePreview {
@@ -188,6 +188,25 @@
   }
   .addToCartStyle {
     grid-template-columns: min-content 17.5rem;
+  }
+
+  .next,
+  .previous {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 24px;
+  }
+  .previousbutton,
+  .nextbutton {
+    background-color: var(--input-background);
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    fill: var(--text-color-secondary);
+  }
+  .previousbutton {
+    padding-left: 14px;
   }
 }
 
