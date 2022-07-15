@@ -35,7 +35,7 @@
 
 .productImageList {
   display: flex;
-  overflow-x: hidden;
+  overflow-x: scroll;
   max-width: 800px;
 }
 
@@ -46,7 +46,9 @@
 }
 
 .inactiveImageListItem {
-  display: none;
+  display: flex;
+  flex: 0 0 100%;
+  white-space: nowrap;
 }
 
 .next,
@@ -196,8 +198,14 @@
 
     grid-template-columns: 1fr 1fr;
   }
+  .productImageList {
+    overflow: hidden;
+  }
   .addToCartStyle {
     grid-template-columns: min-content 17.5rem;
+  }
+  .inactiveImageListItem {
+    display: none;
   }
 
   .next,
@@ -215,8 +223,14 @@
     cursor: pointer;
     fill: var(--text-color-secondary);
   }
+
+  .nextbutton:hover,
+  .previousbutton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
   .previousbutton {
-    padding-left: 14px;
+    transform: rotate(180deg);
   }
 }
 

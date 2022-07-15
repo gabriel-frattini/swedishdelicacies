@@ -14,7 +14,7 @@ import { ProductPrice } from '@/components/product-price';
 import ProductSkeleton from '@/components/product-skeleton';
 
 import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
-import { NextButton, PreviousButton } from '@/icons/pagination';
+import { PaginationButton } from '@/icons/pagination';
 
 import { SingleProductType } from '@/lib/types';
 import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
@@ -124,7 +124,7 @@ export default function Product({ collections }: any) {
                         }`}
                       >
                         <div className={styles.previous}>
-                          <PreviousButton
+                          <PaginationButton
                             show={hasMultipleImages}
                             className={styles.previousbutton}
                             onPress={() => {
@@ -149,7 +149,7 @@ export default function Product({ collections }: any) {
                           src={image.node.originalSrc}
                         />
                         <div className={styles.previous}>
-                          <NextButton
+                          <PaginationButton
                             show={hasMultipleImages}
                             className={styles.nextbutton}
                             onPress={() => {

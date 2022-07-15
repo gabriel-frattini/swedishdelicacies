@@ -1,7 +1,7 @@
 /* AVERAGE REVIEW BARS SECTION */
 .container {
   max-width: 740px;
-  margin-top: var(--space-2xl);
+  margin-top: var(--space-3xl);
   margin-left: var(--space-lg);
   margin-right: var(--space-lg);
 }
@@ -181,6 +181,9 @@
   display: flex;
   justify-content: space-between;
   font-size: var(--text-mg);
+}
+
+.answerHeader h1 {
   font-weight: 500;
 }
 
