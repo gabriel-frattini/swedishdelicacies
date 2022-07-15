@@ -22,8 +22,8 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (!router.isFallback) {
-      collectionByHandle.products.edges.forEach((product) => {
+    if (Object.keys(data).length > 0) {
+      data.collectionByHandle.products.edges.forEach((product) => {
         const handle = product.node.handle;
         queryClient.prefetchQuery('getSingleProductByHandle', async () => {
           await getSingleProductByHandle(handle);
@@ -31,7 +31,8 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
       });
     }
   }, []);
-  if (router.isFallback) {
+
+  if (Object.keys(data).length === 0) {
     return <></>;
   }
 
@@ -56,11 +57,9 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const { edges }: AllCollectionsType = await getAllCollections();
 
-  const paths = edges
-    .filter((p) => p.node !== null)
-    .map((param) => ({
-      params: { collectionHandle: param.node.handle },
-    }));
+  const paths = edges.map((param) => ({
+    params: { collectionHandle: param.node.handle },
+  }));
 
   return { paths, fallback: true };
 };
