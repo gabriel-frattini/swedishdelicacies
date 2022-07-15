@@ -57,7 +57,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { edges }: AllCollectionsType = await getAllCollections();
 
   const paths = edges
-    .filter((p) => p.node.handle !== null)
+    .filter((p) => p.node !== null)
     .map((param) => ({
       params: { collectionHandle: param.node.handle },
     }));
