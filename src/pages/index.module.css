@@ -9,20 +9,22 @@
 .intro {
   padding-bottom: var(--space-lg);
   line-height: var(--dense);
-  font-size: var(--text-display);
+  font-size: var(--text-xl);
   color: var(--text-color-secondary);
   font-weight: 400;
 }
 
 .callOut {
   padding-bottom: var(--space-lg);
-  font-size: var(--text-display);
+  font-size: var(--text-lg);
   font-weight: 600;
   line-height: var(--default);
   letter-spacing: var(--tight);
   color: var(--text-color-secondary);
 }
 
-.callOut > strong {
-  text-decoration: underline;
+@media (min-width: 640px) {
+  .callOut {
+    font-size: var(--text-display);
+  }
 }

@@ -4,6 +4,7 @@ import { Layout } from '../components/layout';
 import { AllCollectionsType } from '@/lib/types';
 
 import styles from './404.module.css';
+import { getAllCollections } from '@/lib/queries';
 
 interface pageProps {
   collections: AllCollectionsType;
