@@ -38,6 +38,7 @@
 
 @media (min-width: 640px) {
   .header {
+    grid-template-columns: var(--size-input) minmax(100px, 1fr) min-content min-content;
     grid-template-areas: 'logo navHeader searchButton cartButton';
   }
 }

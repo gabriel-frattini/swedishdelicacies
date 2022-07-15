@@ -185,16 +185,19 @@
   overflow-x: auto;
   gap: 2rem;
   margin: auto;
-  padding: 2rem;
+  padding: 18px;
 }
 
 .quickbuy {
   display: flex;
-  gap: 4px;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 640px) {
   .recommendedSection {
+    display: none;
     max-width: 640px;
   }
   .recommendedListing {

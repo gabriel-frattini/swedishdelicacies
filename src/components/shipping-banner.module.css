@@ -7,7 +7,7 @@
 }
 
 .bannerText {
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   margin-bottom: 1rem;
 }
 
@@ -24,4 +24,10 @@
   background-color: var(--yellow-80);
   border-radius: var(--radius-md);
   transition: width 300ms;
+}
+
+@media (min-with: 800px) {
+  .bannerText {
+    font-size: var(--text-lg);
+  }
 }

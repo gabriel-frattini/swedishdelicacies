@@ -1,7 +1,7 @@
 .wrap {
   display: inline-grid;
   grid-template-columns: 1fr min-content;
-  grid-template-areas: "input increment" "input decrement";
+  grid-template-areas: 'input increment' 'input decrement';
   background-color: var(--input-background);
   border-radius: var(--radius-md);
   height: var(--size-input);
@@ -63,7 +63,7 @@
 @media (pointer: coarse) {
   .wrap {
     grid-template-columns: var(--size-input) 1fr var(--size-input);
-    grid-template-areas: "decrement input increment";
+    grid-template-areas: 'decrement input increment';
     color: var(--input-color);
   }
 
