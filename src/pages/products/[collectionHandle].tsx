@@ -60,7 +60,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { collectionHandle: param.node.handle },
   }));
 
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
