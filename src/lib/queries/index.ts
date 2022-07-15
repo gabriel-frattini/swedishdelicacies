@@ -444,3 +444,65 @@ export async function getAllProductsWithMetaFields() {
 
   return data;
 }
+
+export async function getRecommendedProducts() {
+  const query = `
+  query ( $sortKey: ProductSortKeys, $first: Int) {
+  products(
+    sortKey: $sortKey
+    first: $first
+  ) {
+    
+    edges {
+      node {
+      id
+      title
+      handle
+
+      options {
+          id
+          name
+          values
+      }
+      collections(first:1) {
+          edges {
+              node {
+                  handle
+                  title
+              }
+          }
+      }
+      images(first: 5) {
+                edges {
+                  node {
+                    id
+                    originalSrc
+                    altText
+                  }
+                }
+              } 
+      priceRange{
+          maxVariantPrice {
+              amount
+              currencyCode
+          }
+          minVariantPrice {
+              amount 
+              currencyCode
+          }
+      }
+     
+         
+      
+          }
+        }
+      }
+    }
+
+`;
+  const variables = { sortKey: 'BEST_SELLING', first: 5 };
+  const { data } = await useShopify(query, {
+    variables,
+  });
+  return data;
+}

@@ -1,19 +1,35 @@
 import * as React from 'react';
 import Link from 'next/link';
-import { Layout } from '../components/layout';
 import { StoreContext } from '../context/store-context';
-import { LineItem } from '../components/line-item';
-import { formatPrice } from '../utils/format-price';
-import styles from './cart.module.css';
-import { getAllCollections } from '@/lib/queries';
-import ShippingBanner from '@/components/shipping-banner';
 
-export default function CartPage({ collections }: any) {
+import { formatPrice } from '../utils/format-price';
+import { getAllCollections, getRecommendedProducts } from '@/lib/queries';
+import { AllCollectionsType, AllProductsType } from '@/lib/types';
+
+import ShippingBanner from '@/components/shipping-banner';
+import { Layout } from '../components/layout';
+import { LineItem } from '../components/line-item';
+import { ProductCard } from '@/components/product-card';
+
+import styles from './cart.module.css';
+import { useQuery } from 'react-query';
+
+interface pageProps {
+  collections: AllCollectionsType;
+}
+
+export default function CartPage({ collections }: pageProps) {
   const { checkout, loading } = React.useContext(StoreContext);
   const emptyCart = checkout.lineItems.length === 0;
   const handleCheckout = () => {
     window.open(checkout.webUrl);
   };
+
+  const { data, isLoading } = useQuery(
+    'getRecommendedProducts',
+    async () => await getRecommendedProducts(),
+  );
+
   return (
     <Layout collections={collections}>
       <div className={styles.wrap}>
@@ -107,12 +123,31 @@ export default function CartPage({ collections }: any) {
             >
               Checkout
             </button>
+            <RecommendedSection data={data} />
           </>
         )}
       </div>
     </Layout>
   );
 }
+
+const RecommendedSection = ({ data }: AllProductsType) => {
+  if (!data) {
+    return <div></div>;
+  }
+  return (
+    <section className={styles.recommendedSection}>
+      <h2 className={styles.recommendedText}>Other customers also bought</h2>
+      <ul className={styles.recommendedListing}>
+        {data.products.edges.map((node, idx) => (
+          <li key={idx} className={styles.recommendedProduct}>
+            <ProductCard product={node} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+};
 
 export async function getStaticProps() {
   const collections = await getAllCollections();

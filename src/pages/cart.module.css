@@ -1,7 +1,7 @@
 .title {
   font-size: var(--text-display);
   font-weight: var(--bold);
-  margin: 0;
+  margin: auto;
   padding: var(--space-2xl) 0 var(--space-2xl);
 }
 
@@ -156,6 +156,50 @@
 
   .table {
     grid-template-columns: 80px 1fr repeat(3, min-content);
+  }
+}
+
+.recommendedSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem auto auto auto;
+  min-width: 100%;
+}
+.recommendedText {
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.recommendedProduct {
+  min-width: 300px;
+  list-style: none;
+  max-width: 300px;
+}
+
+.recommendedListing {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: auto;
+  gap: 2rem;
+  margin: auto;
+  padding: 2rem;
+}
+
+@media (min-width: 640px) {
+  .recommendedSection {
+    max-width: 640px;
+  }
+  .recommendedListing {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .recommendedListing {
+    max-width: 1024px;
   }
 }
 

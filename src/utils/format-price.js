@@ -6,7 +6,7 @@
  */
 export const formatPrice = (currency, value) =>
   Intl.NumberFormat('en-US', {
-    currency: 'EUR',
+    currency: 'SEK',
     minimumFractionDigits: 2,
     style: 'currency',
   }).format(value);
