@@ -33,9 +33,7 @@ export function ProductCard({ product: { node }, eager }: Props) {
   const defaultImageWidth = 400;
   return (
     <Link
-      href={`/products/${
-        collections.edges.length && collections.edges[0].node.handle
-      }/${handle}`}
+      href={`/product/${handle}`}
       replace
       aria-label={`View ${title} product page`}
     >

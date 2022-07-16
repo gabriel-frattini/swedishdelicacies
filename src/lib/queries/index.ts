@@ -1,5 +1,23 @@
 import { useServerSideShopify, useShopify } from '../shopifyClient';
-import { AllCollectionsType, AllProductsType, variableProps } from '../types';
+import { variableProps } from '../types';
+
+export async function getAllProductHandles() {
+  const query = `
+ {
+  products(first: 50) {
+    
+    edges {
+      node {
+      handle
+      }
+    }
+  }
+}
+`;
+
+  const { data } = await useServerSideShopify(query, { variables: {} });
+  return data;
+}
 
 export async function getAllProducts() {
   const query = `
@@ -179,7 +197,14 @@ query getAllProductsByHandle($handle: String!) {
 export async function getSingleProductByHandle(handle: string) {
   const query = `
    query getProductByHandle($handle: String!) {
-    
+   collections(first: 20) {
+    edges {
+      node {
+        handle
+        id
+      }
+    }
+  }
     productByHandle(handle: $handle) {
     
       id
@@ -239,11 +264,10 @@ export async function getSingleProductByHandle(handle: string) {
                   }
           }
       }
-   
-  }
+    }
 }
 `;
-  const { data } = await useShopify(query, {
+  const data = await useShopify(query, {
     variables: {
       handle,
     },

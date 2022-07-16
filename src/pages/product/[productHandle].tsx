@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
 import isEqual from 'lodash.isequal';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,12 +15,21 @@ import ProductSkeleton from '@/components/product-skeleton';
 import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
 import { PaginationButton } from '@/icons/pagination';
 
-import { SingleProductType } from '@/lib/types';
-import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
+import {
+  AllCollectionsType,
+  AllProductsType,
+  SingleProductType,
+} from '@/lib/types';
+import {
+  getAllCollections,
+  getAllProductHandles,
+  getSingleProductByHandle,
+} from '@/lib/queries';
 
-import styles from '../product-page.module.css';
+import styles from './product-page.module.css';
 import Reviews from '@/components/reviews';
 import Head from 'next/head';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 export interface OptionValue {
   name: string;
@@ -29,28 +37,36 @@ export interface OptionValue {
   value: any;
 }
 
-export default function Product({ collections }: any) {
+interface pageProps {
+  data: {
+    productByHandle: SingleProductType;
+    collections: AllCollectionsType;
+  };
+}
+
+export default function Product({
+  data: { productByHandle, collections },
+}: pageProps) {
   const router = useRouter();
   const { client } = React.useContext(StoreContext);
   const [quantity, setQuantity] = React.useState(1);
   const [variant, setVariant] = React.useState<any>();
   const [available, setAvailable] = React.useState<any>();
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
-
-  const { data, isLoading, isError } = useQuery(
-    'getSingleProductByHandle',
-    async () =>
-      await getSingleProductByHandle(router.query.productHandle as string),
-  );
+  // const { data, isLoading, isError } = useQuery(
+  //   'getSingleProductByHandle',
+  //   async () =>
+  //     await getSingleProductByHandle(router.query.productHandle as string),
+  // );
 
   React.useEffect(() => {
-    if (data) {
-      setVariant({ ...data.productByHandle.variants.nodes[0] });
-      setViewActiveImage(data.productByHandle.images.edges[0].node.id);
+    if (productByHandle) {
+      setVariant({ ...productByHandle.variants.nodes[0] });
+      setViewActiveImage(productByHandle.images.edges[0].node.id);
     }
-  }, [data]);
+  }, [productByHandle]);
 
-  if (isLoading) {
+  if (router.isFallback || !productByHandle) {
     return (
       <Layout collections={collections}>
         <ProductSkeleton />
@@ -58,8 +74,7 @@ export default function Product({ collections }: any) {
     );
   }
 
-  if (data) {
-    const { productByHandle } = data;
+  if (productByHandle) {
     const {
       variants: {
         nodes: [initialvariant],
@@ -134,7 +149,7 @@ export default function Product({ collections }: any) {
                   <ul className={styles.productImageList}>
                     {images.edges.map((image, index) => (
                       <li
-                        key={`product-image-${image.node.id}`}
+                        key={index}
                         className={`${
                           viewActiveImage === image.node.id
                             ? styles.activeImageListItem
@@ -188,15 +203,17 @@ export default function Product({ collections }: any) {
               <span className={styles.noImagePreview}>No Preview image</span>
             )}
             <div className={styles.productInfo}>
-              <div className={styles.breadcrumb}>
-                <Link
-                  replace
-                  href={`/products/${productCollection.edges[0].node.handle}`}
-                >
-                  {productCollection.edges[0].node.title}
-                </Link>
-                <ChevronIcon size={12} />
-              </div>
+              {productCollection.edges.length ? (
+                <div className={styles.breadcrumb}>
+                  <Link
+                    replace
+                    href={`/products/${productCollection.edges[0].node.handle}`}
+                  >
+                    {productCollection.edges[0].node.title}
+                  </Link>
+                  <ChevronIcon size={12} />
+                </div>
+              ) : null}
               <div className={styles.header}>
                 <h1 className={styles.headerTitle}>{title}</h1>
                 <h2 className={styles.headerRating}>
@@ -230,14 +247,14 @@ export default function Product({ collections }: any) {
               <fieldset className={styles.optionsWrapper}>
                 {hasVariants &&
                   options.map(({ id, name, values }, index) => (
-                    <div className={styles.selectVariant} key={id}>
+                    <div className={styles.selectVariant} key={index}>
                       <select
                         aria-label="Variants"
                         onChange={(event) => handleOptionChange(index, event)}
                       >
                         <option value="">{`Select ${'Size' || name}`}</option>
-                        {values.map((value) => (
-                          <option value={value} key={`${name}-${value}`}>
+                        {values.map((value, index) => (
+                          <option value={value} key={index}>
                             {value}
                           </option>
                         ))}
@@ -308,23 +325,27 @@ export default function Product({ collections }: any) {
                     </p>
                   </div>
                 </div>
-                <div className={styles.metaProduct}>
-                  <span className={styles.labelFont}>Type</span>
-                  <span className={styles.tagList}>
-                    <Link
-                      replace
-                      href={`/products/${productCollection.edges[0].node.handle}`}
-                    >
-                      {productCollection.edges[0].node.title}
-                    </Link>
-                  </span>
-                  <span className={styles.labelFont}>Tags</span>
-                  <span className={styles.tagList}>
-                    {tags.map((tag) => (
-                      <Link href={`/search?t=${tag}`}>{tag}</Link>
-                    ))}
-                  </span>
-                </div>
+                {productCollection.edges.length ? (
+                  <div className={styles.metaProduct}>
+                    <span className={styles.labelFont}>Type</span>
+                    <span className={styles.tagList}>
+                      <Link
+                        replace
+                        href={`/products/${productCollection.edges[0].node.handle}`}
+                      >
+                        {productCollection.edges[0].node.title}
+                      </Link>
+                    </span>
+                    <span className={styles.labelFont}>Tags</span>
+                    <span className={styles.tagList}>
+                      {tags.map((tag, idx) => (
+                        <Link key={idx} href={`/search?t=${tag}`}>
+                          {tag}
+                        </Link>
+                      ))}
+                    </span>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -335,10 +356,32 @@ export default function Product({ collections }: any) {
   }
 }
 
-export async function getServerSideProps() {
-  const collections = await getAllCollections();
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { products }: AllProductsType['data'] = await getAllProductHandles();
 
+  const paths = products.edges
+    .filter((node) => node !== null || Object.keys(node).length > 0)
+    .map((param) => ({
+      params: { productHandle: param.node.handle },
+    }));
+
+  return { paths, fallback: 'blocking' };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  if (!context.params) {
+    return {
+      props: { data: {} },
+    };
+  }
+  const param = JSON.stringify(context.params).split(':')[1].slice(1, -2);
+  const { data } = await getSingleProductByHandle(param);
+  if (data) {
+    return {
+      props: { data },
+    };
+  }
   return {
-    props: { collections },
+    props: { data: {} },
   };
-}
+};

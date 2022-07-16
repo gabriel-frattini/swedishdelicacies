@@ -39,10 +39,6 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
 
   return (
     <Layout collections={collections}>
-      <Seo
-        title={collectionByHandle.title}
-        description={collectionByHandle.description}
-      />
       <h2 className={styles.subtitle}>{collectionByHandle.description}</h2>
       <h1 className={styles.title}>{collectionByHandle.title}</h1>
 
