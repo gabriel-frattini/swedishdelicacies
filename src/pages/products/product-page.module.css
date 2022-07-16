@@ -10,7 +10,7 @@
 
 .header {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
   margin-bottom: var(--space-xl);
 }
@@ -216,6 +216,9 @@
   .container {
     padding: 24px;
   }
+  .headerTitle {
+    font-size: var(--text-lg);
+  }
   .productBox {
     margin-top: 18px;
 
@@ -260,5 +263,8 @@
 @media (min-width: 1024px) {
   .productBox {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .headerTitle {
+    font-size: var(--text-xl);
   }
 }

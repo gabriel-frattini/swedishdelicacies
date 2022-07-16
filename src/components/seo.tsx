@@ -33,11 +33,16 @@ export function Seo({
     url: pathname ? `${siteUrl}${pathname}` : siteUrl,
     image: image ? image : siteImage,
   };
+  console.log(title, description);
+  console.log(seo);
 
   return (
     <Head>
-      <meta name="description" content={seo.description} />
-      <meta name="image" content={seo.image} />
+      <title>{seo.title}</title>
+      <meta name="description" content={seo.description}/>
+      <meta itemProp="name" content={seo.title} />
+      <meta itemProp="description" content={seo.description} />
+      <meta itemProp="image" content={seo.image} />
       <meta property="og:title" content={seo.title} />
       <meta property="og:url" content={seo.url} />
       <meta property="og:description" content={seo.description} />
