@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 
 function CartIcon(props) {
   return (
@@ -10,7 +10,6 @@ function CartIcon(props) {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <title>{"Cart"}</title>
       <path
         d="M3.077 5.05A2 2 0 015.076 3h13.848a2 2 0 012 2.05l-.35 14a2 2 0 01-2 1.95H5.426a2 2 0 01-2-1.95l-.35-14z"
         stroke="currentColor"
@@ -22,7 +21,7 @@ function CartIcon(props) {
         strokeWidth={2}
       />
     </svg>
-  )
+  );
 }
 
-export default CartIcon
+export default CartIcon;
