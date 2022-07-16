@@ -22,7 +22,7 @@ export function Seo({
     siteDescription:
       'It’s a simple concept that started in our family house in Halmstad Sweden, with 1000+ products and 30k customers already.',
     siteUrl: 'https://swedishdelicacies.vercel.app',
-    siteImage: "https://swedishdelicacies.vercel.app'/logo.png",
+    siteImage: "https://swedishdelicacies.vercel.app/logo.png",
   };
 
   const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
