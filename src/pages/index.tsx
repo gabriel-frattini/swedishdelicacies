@@ -3,6 +3,7 @@ import { AllproductsByHandleType } from '@/lib/types';
 import { getAllProducts, getAllProductsByHandle } from '@/lib/queries';
 import { GetStaticProps } from 'next';
 
+import { Seo } from '@/components/seo';
 import { Layout } from '../components/layout';
 import { ProductListing } from '@/components/product-listing';
 import styles from './index.module.css';
@@ -34,6 +35,7 @@ export default function IndexPage({ data }: AllproductsByHandleType) {
   }
   return (
     <Layout collections={data.collections}>
+      <Seo title="home" description="this is home" />
       <Hero />
       <ProductListing products={data.collectionByHandle.products} />
     </Layout>
