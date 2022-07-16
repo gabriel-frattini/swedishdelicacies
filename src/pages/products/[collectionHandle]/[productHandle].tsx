@@ -21,6 +21,7 @@ import { getAllCollections, getSingleProductByHandle } from '@/lib/queries';
 
 import styles from '../product-page.module.css';
 import Reviews from '@/components/reviews';
+import Head from 'next/head';
 
 export interface OptionValue {
   name: string;
@@ -104,12 +105,23 @@ export default function Product({ collections }: any) {
     const hasMultipleImages = images.edges.length > 1;
     return (
       <Layout collections={collections}>
-        <Seo
-          title={title}
-          description={description}
-          image={images.edges[0].node.originalSrc}
-          pathname={`/products/${productCollection.edges[0].node.handle}/${handle}`}
-        />
+        <Head>
+          <title>{title}</title>
+          <meta name="description" content={`description - ${description}`} />
+          <meta
+            property="og:title"
+            content={`title - ${title} - Swedish Delicacies`}
+          />
+          <meta />
+          <meta
+            property="og:description"
+            content={`description - ${description}`}
+          />
+          <meta
+            property="og:image"
+            content={images.edges[0].node.originalSrc}
+          />
+        </Head>
         <div className={styles.container}>
           <div className={styles.productBox}>
             {hasImages && (
