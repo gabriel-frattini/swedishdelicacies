@@ -13,7 +13,6 @@ interface LayoutProps {
 export function Layout({ children, collections }: LayoutProps) {
   return (
     <>
-      <Seo />
       <SkipNavLink />
       <Header collections={collections} />
       <SkipNavContent>{children}</SkipNavContent>

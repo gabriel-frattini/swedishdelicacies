@@ -29,7 +29,7 @@ export default function Products({ data }: AllProductsType) {
 
   return (
     <Layout collections={collections}>
-      <Seo title="All Products" />
+      <Seo title="All Products"  />
       <h1 className={styles.title}>Products</h1>
       <ProductListing products={products} />
     </Layout>

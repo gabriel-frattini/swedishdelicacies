@@ -2,10 +2,10 @@ import * as React from 'react';
 import Head from 'next/head';
 
 interface CompProps {
-  title: string;
-  description: string;
-  pathname: string;
-  image: string;
+  title?: string;
+  description?: string;
+  pathname?: string;
+  image?: string;
   children?: any;
 }
 
