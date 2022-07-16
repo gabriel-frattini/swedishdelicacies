@@ -21,3 +21,9 @@
   justify-content: center;
   color: var(--blue-80);
 }
+
+@media (min-width: 640px) {
+  .addToCart {
+    padding: 1rem 2rem;
+  }
+}

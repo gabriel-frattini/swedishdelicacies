@@ -1,29 +1,37 @@
 import * as React from 'react';
 import Head from 'next/head';
 
+interface CompProps {
+  title: string;
+  description: string;
+  pathname: string;
+  image: string;
+  children?: any;
+}
+
 export function Seo({
-  title = '',
-  description = '',
-  pathname = '',
-  image = '',
+  title,
+  description,
+  pathname,
+  image,
   children = null,
-}) {
+}: CompProps) {
   const siteMetadata = {
     siteTitle: 'Swedish Delicacies',
     siteTitleDefault: 'Swedish Delicacies',
     siteDescription: 'We sell swedish food',
     siteUrl: 'https://swedishdelicacies.vercel.app',
-    siteImage: '',
+    siteImage: '/public/favicon/favicon.ico',
   };
 
   const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
     siteMetadata;
 
   const seo = {
-    title: title,
-    description: description,
-    url: `${siteUrl}${pathname}`,
-    image: image,
+    title: title ? title : siteTitle,
+    description: description ? description : siteDescription,
+    url: pathname ? `${siteUrl}${pathname}` : siteUrl,
+    image: image ? image : siteImage,
   };
 
   return (

@@ -68,6 +68,7 @@ export default function Product({ collections }: any) {
       description,
       images,
       options,
+      handle,
       collections: productCollection,
       compareAtPriceRange,
       vendor,
@@ -101,13 +102,13 @@ export default function Product({ collections }: any) {
     const hasVariants = variants.nodes.length > 1;
     const hasImages = images.edges.length > 0;
     const hasMultipleImages = images.edges.length > 1;
-
     return (
       <Layout collections={collections}>
         <Seo
           title={title}
           description={description}
           image={images.edges[0].node.originalSrc}
+          pathname={`/products/${productCollection.edges[0].node.handle}/${handle}`}
         />
         <div className={styles.container}>
           <div className={styles.productBox}>

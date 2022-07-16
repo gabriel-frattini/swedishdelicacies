@@ -138,7 +138,6 @@ const RecommendedSection = ({ data }: AllProductsType) => {
   if (!data) {
     return <div></div>;
   }
-  console.log(data.products.edges);
   return (
     <section className={styles.recommendedSection}>
       <h2 className={styles.recommendedText}>Other customers also bought</h2>
