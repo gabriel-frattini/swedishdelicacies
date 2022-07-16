@@ -8,14 +8,14 @@
 
 .stars {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: var(--space-2xl);
 }
 .average {
   background-color: white;
   border-radius: var(--radius-md);
   padding: 1rem;
+  align-self: flex-end;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -25,7 +25,7 @@
   justify-content: space-around;
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--blue-100);
+  color: var(--blue-80);
 }
 
 .ratingSubTitle {
@@ -39,9 +39,37 @@
 }
 
 .reviewsHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-xl);
+}
+
+.headerAction {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.headerAction button {
+  font-size: var(--text-md);
   font-weight: 500;
-  color: var(--blue-100);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin-bottom: var(--space-xl);
+}
+
+.headerAction button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.reviewsIntro {
+  font-weight: 500;
   font-size: var(--text-lg);
+  width: max-content;
+  margin-top: var(--space-lg);
 }
 
 .desktopStar {
@@ -53,6 +81,7 @@
   flex-direction: column;
   gap: var(--space-xl);
   max-width: 800px;
+  margin: var(--space-xl) 0;
 }
 
 .barWrapper {
@@ -90,6 +119,8 @@
 /* USER REVIEWS SECTION */
 
 .userReviews {
+  background-color: white;
+
   margin-top: var(--space-xl);
 }
 
@@ -191,10 +222,61 @@
   margin-top: var(--space-md);
 }
 
+/* QUESTIONARE FORM*/
+
+.inactiveForm {
+  visibility: hidden;
+  height: 0px;
+}
+
+.questionForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content max-content 1fr;
+  gap: var(--space-lg);
+  max-height: 300px;
+}
+
+.questionForm label {
+  font-weight: 500;
+}
+
+.nameField {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.emailField {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.questionField {
+  grid-column: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.submitButton {
+  grid-column: 1 / -1;
+  background-color: var(--yellow-80);
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius-md);
+  color: var(--blue-80);
+  font-weight: 500;
+  font-size: var(--text-lg);
+}
+
+.questionForm input,
+.questionField textarea {
+  background-color: var(--input-background);
+  padding: 0.8rem 0.4rem;
+  border-radius: var(--radius-md);
+}
+
 @media (min-width: 640px) {
-  .reviewsHeader {
-    font-size: var(--text-3xl);
-  }
   .mobileStar {
     display: none;
   }
@@ -202,6 +284,25 @@
     display: block;
   }
   .reviewsHeader {
-    font-size: var(--text-xl);
+    flex-direction: row;
+  }
+  .reviewsIntro {
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+  .headerAction button {
+    margin: 0;
+  }
+
+  .nameField {
+    grid-column: 1;
+  }
+  .emailField {
+    grid-column: 2;
+  }
+  .submitButton {
+    grid-column: 2;
+    max-width: 15rem;
+    justify-self: end;
   }
 }

@@ -1,5 +1,5 @@
 .addToCart {
-  color: var(--text-color-inverted);
+  color: var(--blue-80);
   background-color: var(--primary);
   display: flex;
   justify-content: center;

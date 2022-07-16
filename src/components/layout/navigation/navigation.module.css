@@ -16,6 +16,7 @@
   align-items: center;
   padding-left: var(--space-md);
   padding-right: var(--space-md);
+  font-size: var(--text-lg);
 }
 
 .navLink:hover {
@@ -23,7 +24,7 @@
 }
 
 .activeLink,
-.navLink[aria-active="page"] {
+.navLink[aria-active='page'] {
   color: var(--primary);
   text-decoration: underline;
   text-decoration-thickness: 2px;
@@ -31,6 +32,6 @@
 }
 
 .activeLink:hover,
-.navLink[aria-active="page"]:hover {
+.navLink[aria-active='page']:hover {
   color: var(--primary);
 }

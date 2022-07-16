@@ -51,10 +51,10 @@
 }
 
 .checkoutButton {
+  color: var(--blue-80);
   align-items: center;
   background: var(--primary);
   border-radius: var(--radius-md);
-  color: var(--text-color-inverted);
   display: flex;
   font-size: var(--text-lg);
   font-weight: var(--semibold);

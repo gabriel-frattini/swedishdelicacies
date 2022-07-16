@@ -10,4 +10,6 @@
   margin: 0;
   padding: var(--space-2xl) var(--size-gutter-raw) var(--space-2xl);
   max-width: 1640px;
+  font-weight: 500;
+  color: var(--text-color-secondary);
 }

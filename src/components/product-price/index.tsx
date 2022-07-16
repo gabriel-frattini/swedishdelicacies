@@ -15,11 +15,13 @@ interface pageProps {
       currencyCode: string;
     };
   };
+  className: any;
 }
 
 export const ProductPrice = ({
   compareAtPriceRange,
   initialPrice,
+  className,
 }: pageProps) => {
   const price = formatPrice(
     compareAtPriceRange.maxVariantPrice.currencyCode,
@@ -32,21 +34,23 @@ export const ProductPrice = ({
     parseInt(compareAtPriceRange.minVariantPrice.amount) !== 0;
 
   return (
-    <h2 className={styles.priceValue}>
-      <span className={styles.onSale}>
-        {onSale &&
-          formatPrice(
-            compareAtPriceRange.minVariantPrice.currencyCode,
-            parseInt(initialPrice),
+    <div className={className}>
+      <h2 className={styles.priceValue}>
+        <span className={styles.onSale}>
+          {onSale &&
+            formatPrice(
+              compareAtPriceRange.minVariantPrice.currencyCode,
+              parseInt(initialPrice),
+            )}
+        </span>
+        <span className={`${onSale ? styles.oldSale : styles.regularSale}`}>
+          {formatPrice(
+            compareAtPriceRange.maxVariantPrice.currencyCode,
+            parseInt(compareAtPriceRange.maxVariantPrice.amount),
           )}
-      </span>
-      <span className={`${onSale ? styles.oldSale : styles.regularSale}`}>
-        {formatPrice(
-          compareAtPriceRange.maxVariantPrice.currencyCode,
-          parseInt(compareAtPriceRange.maxVariantPrice.amount),
-        )}
-      </span>
-      <p>inc.vat</p>
-    </h2>
+        </span>
+        <p>inc.vat</p>
+      </h2>
+    </div>
   );
 };

@@ -17,7 +17,7 @@
 .callOut {
   padding-bottom: var(--space-lg);
   font-size: var(--text-lg);
-  font-weight: 600;
+  font-weight: 500;
   line-height: var(--default);
   letter-spacing: var(--tight);
   color: var(--text-color-secondary);

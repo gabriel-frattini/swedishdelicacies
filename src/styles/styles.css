@@ -1,3 +1,6 @@
+/* IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Poppins:wght@300;400;500&display=swap');
+
 /* VARIABLES */
 
 :root {
@@ -130,7 +133,6 @@
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
-  font-family: system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
@@ -140,7 +142,7 @@ body {
   position: relative;
   min-height: 100%;
   font-feature-settings: 'kern';
-  font-family: var(--font-body);
+  font-family: 'Poppins', sans-serif;
   color: var(--text-color);
 }
 *,
