@@ -8,27 +8,26 @@ export function Seo({
   image = '',
   children = null,
 }) {
-  // const siteMetadata = {
-  //   siteTitle: 'Swedish Delicacies',
-  //   siteTitleDefault: 'Swedish Delicacies',
-  //   siteDescription: 'We sell swedish food',
-  //   siteUrl: 'https://swedishdelicacies.vercel.app',
-  //   siteImage: '',
-  // };
+  const siteMetadata = {
+    siteTitle: 'Swedish Delicacies',
+    siteTitleDefault: 'Swedish Delicacies',
+    siteDescription: 'We sell swedish food',
+    siteUrl: 'https://swedishdelicacies.vercel.app',
+    siteImage: '',
+  };
 
-  // const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
-  //   siteMetadata;
+  const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
+    siteMetadata;
 
-  // const seo = {
-  //   title: title || siteTitleDefault,
-  //   description: description || siteDescription,
-  //   url: `${siteUrl}${pathname}`,
-  //   image: `${siteUrl}${image || siteImage}`,
-  // };
+  const seo = {
+    title: title,
+    description: description,
+    url: `${siteUrl}${pathname}`,
+    image: image,
+  };
 
   return (
     <Head>
-      {/* <html />
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
       <meta property="og:title" content={seo.title} />
@@ -59,7 +58,7 @@ export function Seo({
         href="/apple-touch-icon.png"
       />
 
-      {children} */}
+      {children}
     </Head>
   );
 }

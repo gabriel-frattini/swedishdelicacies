@@ -162,8 +162,9 @@
   color: var(--text-color-secondary);
 }
 
-.tagList {
-  font-weight: var(--semibold);
+.tagList,
+.shipList {
+  font-weight: 500;
   color: var(--text-color-secondary);
   padding-right: var(--space-md);
 }
