@@ -53,11 +53,6 @@ export default function Product({
   const [variant, setVariant] = React.useState<any>();
   const [available, setAvailable] = React.useState<any>();
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
-  // const { data, isLoading, isError } = useQuery(
-  //   'getSingleProductByHandle',
-  //   async () =>
-  //     await getSingleProductByHandle(router.query.productHandle as string),
-  // );
 
   React.useEffect(() => {
     if (productByHandle) {
@@ -120,23 +115,12 @@ export default function Product({
     const hasMultipleImages = images.edges.length > 1;
     return (
       <Layout collections={collections}>
-        <Head>
-          <title>{title}</title>
-          <meta name="description" content={`description - ${description}`} />
-          <meta
-            property="og:title"
-            content={`title - ${title} - Swedish Delicacies`}
-          />
-          <meta />
-          <meta
-            property="og:description"
-            content={`description - ${description}`}
-          />
-          <meta
-            property="og:image"
-            content={images.edges[0].node.originalSrc}
-          />
-        </Head>
+        <Seo
+          title={title}
+          description={description}
+          pathname={`/product/${handle}`}
+          image={images.edges[0].node.originalSrc}
+        />
         <div className={styles.container}>
           <div className={styles.productBox}>
             {hasImages && (

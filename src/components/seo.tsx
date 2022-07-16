@@ -19,9 +19,10 @@ export function Seo({
   const siteMetadata = {
     siteTitle: 'Swedish Delicacies',
     siteTitleDefault: 'Swedish Delicacies',
-    siteDescription: 'We sell swedish food',
+    siteDescription:
+      'It’s a simple concept that started in our family house in Halmstad Sweden, with 1000+ products and 30k customers already.',
     siteUrl: 'https://swedishdelicacies.vercel.app',
-    siteImage: '/public/favicon/favicon.ico',
+    siteImage: "https://swedishdelicacies.vercel.app'/logo.png",
   };
 
   const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
