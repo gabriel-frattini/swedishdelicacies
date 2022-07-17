@@ -19,7 +19,6 @@
   display: flex;
   gap: 0.2rem;
   align-items: center;
-  color: var(--text-color-secondary);
 }
 
 .headerRating p {
@@ -32,7 +31,7 @@
 
 .headerTitle {
   font-size: var(--text-display);
-  font-weight: var(--bold);
+  font-weight: var(--extrabold);
   line-height: var(--dense);
   color: var(--blue-80);
   margin: 0 10px;
