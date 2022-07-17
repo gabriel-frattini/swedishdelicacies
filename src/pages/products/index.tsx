@@ -9,11 +9,12 @@ import { ProductListing } from '@/components/product-listing';
 import { Seo } from '@/components/seo';
 
 import styles from './index.module.css';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 export default function Products({ data }: AllProductsType) {
-  const router = useRouter();
   const { collections, products } = data;
+  const router = useRouter();
   React.useEffect(() => {
     if (Object.keys(data).length > 0) {
       products.edges.forEach((product) => {
@@ -23,11 +24,11 @@ export default function Products({ data }: AllProductsType) {
         });
       });
     }
+    router.push('/404');
   }, []);
 
   if (!Object.keys(data).length) {
-    router.push('/404');
-    return;
+    return null;
   }
 
   return (
@@ -39,7 +40,7 @@ export default function Products({ data }: AllProductsType) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   try {
     const { data } = await getAllProducts();
 
@@ -58,4 +59,4 @@ export async function getStaticProps() {
       props: { data: {} },
     };
   }
-}
+};

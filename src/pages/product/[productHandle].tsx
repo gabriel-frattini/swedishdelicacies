@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Layout } from '@/components/layout';
-import { StoreContext } from '@/context/store-context';
 import { AddToCart } from '@/components/add-to-cart';
 import { NumericInput } from '@/components/numeric-input';
 import { Seo } from '@/components/seo';
@@ -19,15 +18,10 @@ import {
   AllProductsType,
   SingleProductType,
 } from '@/lib/types';
-import {
-  getAllCollections,
-  getAllProductHandles,
-  getSingleProductByHandle,
-} from '@/lib/queries';
+import { getAllProductHandles, getSingleProductByHandle } from '@/lib/queries';
 
 import styles from './product-page.module.css';
 import Reviews from '@/components/reviews';
-import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 export interface OptionValue {
@@ -53,16 +47,12 @@ export default function Product({
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
 
   React.useEffect(() => {
-    if (productByHandle) {
+    if (productByHandle || collections) {
       setVariant({ ...productByHandle.variants.nodes[0] });
       setViewActiveImage(productByHandle.images.edges[0].node.id);
     }
-  }, [productByHandle]);
-
-  if (router.isFallback || !productByHandle || !collections) {
     router.push('/404');
-    return;
-  }
+  }, [productByHandle]);
 
   if (productByHandle) {
     const {
@@ -344,7 +334,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       params: { productHandle: param.node.handle },
     }));
 
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {

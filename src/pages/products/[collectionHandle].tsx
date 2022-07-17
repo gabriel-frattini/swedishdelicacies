@@ -29,11 +29,11 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
         });
       });
     }
+    router.push('/404');
   }, []);
 
   if (Object.keys(data).length === 0 || router.isFallback) {
-    router.push('/404');
-    return;
+    return null;
   }
 
   const { collectionByHandle, collections } = data;
@@ -51,11 +51,13 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const { edges }: AllCollectionsType = await getAllCollections();
 
-  const paths = edges.map((param) => ({
-    params: { collectionHandle: param.node.handle },
-  }));
+  const paths = edges
+    .filter((node) => node !== null)
+    .map((param) => ({
+      params: { collectionHandle: param.node.handle },
+    }));
 
-  return { paths, fallback: 'blocking' };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
