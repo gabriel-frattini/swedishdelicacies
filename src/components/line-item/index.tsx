@@ -69,6 +69,7 @@ export function LineItem({ item }: SingleLineItemType) {
             alt={variantImage.altText ?? item.variant.title}
             width={160}
             height={100}
+            objectFit="contain"
           />
         )}
       </td>

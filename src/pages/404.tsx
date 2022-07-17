@@ -11,38 +11,32 @@ interface pageProps {
   collections: AllCollectionsType;
 }
 
-export default function NotFoundPage({ collections }: pageProps) {
-  
-  if (Object.keys(collections).length === 0) {
-    return <></>;
-  }
+export default function NotFoundPage() {
   return (
-    <Layout collections={collections}>
-      <div className={styles.container}>
-        <h1 className={styles.heading}>Page Not Found</h1>
-        <p className={styles.paragraph}>
-          Sorry, we couldn't find what you were looking for
-        </p>
-      </div>
-    </Layout>
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Page Not Found</h1>
+      <p className={styles.paragraph}>
+        Sorry, we couldn't find what you were looking for
+      </p>
+    </div>
   );
 }
 
-export async function getStaticProps() {
-  try {
-    const collections = await getAllCollections();
-    if (collections) {
-      return {
-        props: { collections },
-      };
-    }
-    return {
-      props: { collections: {} },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      props: { collections: {} },
-    };
-  }
-}
+// export async function getStaticProps() {
+//   try {
+//     const collections = await getAllCollections();
+//     if (collections) {
+//       return {
+//         props: { collections },
+//       };
+//     }
+//     return {
+//       props: { collections: {} },
+//     };
+//   } catch (error) {
+//     console.error(error);
+//     return {
+//       props: { collections: {} },
+//     };
+//   }
+// }

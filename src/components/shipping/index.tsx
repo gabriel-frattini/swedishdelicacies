@@ -25,7 +25,7 @@ const ShippingBanner = ({
       {Number(total) >= freeShippingLimit ? (
         <div className={styles.banner}>
           <span className={styles.bannerText}>
-            You have <strong>Free Shipping</strong>
+            Congrats! You've earned <strong>Free Shipping</strong>
             &#127881;
           </span>
           <div className={styles.progresswrapper}>

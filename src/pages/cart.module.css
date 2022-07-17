@@ -51,18 +51,22 @@
 }
 
 .checkoutButton {
-  color: var(--blue-80);
+  color: var(--blue-100);
   align-items: center;
   background: var(--primary);
   border-radius: var(--radius-md);
   display: flex;
   font-size: var(--text-lg);
-  font-weight: 500;
+  font-weight: var(--extrabold);
   height: var(--size-input);
   justify-content: center;
   line-height: var(--solid);
   margin: var(--space-3xl) auto var(--space-md);
-  padding: var(--space-md) var(--space-2xl);
+  padding: var(--space-md) var(--space-3xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .checkoutButton:hover {

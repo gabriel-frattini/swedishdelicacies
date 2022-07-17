@@ -31,7 +31,7 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
         await getSingleProductByHandle(handle);
       });
     });
-  }, []);
+  }, [data]);
 
   if (Object.keys(data).length === 0 || router.isFallback) {
     return null;
