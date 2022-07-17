@@ -21,6 +21,8 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="shortcut icon" href="/favicon/favicon.ico" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+
           <body>
             <Main />
             <NextScript />

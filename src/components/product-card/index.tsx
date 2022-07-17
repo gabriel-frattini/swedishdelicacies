@@ -49,6 +49,7 @@ export function ProductCard({ product: { node }, eager }: Props) {
               height={200}
               objectFit="contain"
               loading={eager ? 'eager' : 'lazy'}
+              quality={100}
             />
           </div>
         ) : (
