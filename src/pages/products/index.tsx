@@ -17,7 +17,7 @@ export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
   const router = useRouter();
 
-  if (Object.keys(data).length === 0) {
+  if (Object.keys(collections).length === 0) {
     return <NotFound />;
   }
 
@@ -30,7 +30,6 @@ export default function Products({ data }: AllProductsType) {
         });
       });
     }
-    router.push('/404');
   }, []);
 
   if (!Object.keys(data).length) {
