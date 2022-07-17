@@ -21,15 +21,16 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   const router = useRouter();
 
   React.useEffect(() => {
-    if (Object.keys(data).length > 0) {
-      data.collectionByHandle.products.edges.forEach((product) => {
-        const handle = product.node.handle;
-        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-          await getSingleProductByHandle(handle);
-        });
-      });
+    if (Object.keys(data).length === 0) {
+      router.push('/404');
+      return;
     }
-    router.push('/404');
+    data.collectionByHandle.products.edges.forEach((product) => {
+      const handle = product.node.handle;
+      queryClient.prefetchQuery('getSingleProductByHandle', async () => {
+        await getSingleProductByHandle(handle);
+      });
+    });
   }, []);
 
   if (Object.keys(data).length === 0 || router.isFallback) {

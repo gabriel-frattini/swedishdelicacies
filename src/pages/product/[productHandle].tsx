@@ -47,11 +47,12 @@ export default function Product({
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
 
   React.useEffect(() => {
-    if (productByHandle || collections) {
-      setVariant({ ...productByHandle.variants.nodes[0] });
-      setViewActiveImage(productByHandle.images.edges[0].node.id);
+    if (!productByHandle || !collections) {
+      router.push('/404');
+      return;
     }
-    router.push('/404');
+    setVariant({ ...productByHandle.variants.nodes[0] });
+    setViewActiveImage(productByHandle.images.edges[0].node.id);
   }, [productByHandle]);
 
   if (productByHandle) {

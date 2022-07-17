@@ -16,16 +16,17 @@ export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
   const router = useRouter();
   React.useEffect(() => {
-    if (Object.keys(data).length > 0) {
-      products.edges.forEach((product) => {
-        const handle = product.node.handle;
-        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-          await getSingleProductByHandle(handle);
-        });
-      });
+    if (Object.keys(data).length === 0) {
+      router.push('/404');
+      return;
     }
-    router.push('/404');
-  }, []);
+    products.edges.forEach((product) => {
+      const handle = product.node.handle;
+      queryClient.prefetchQuery('getSingleProductByHandle', async () => {
+        await getSingleProductByHandle(handle);
+      });
+    });
+  }, [collections, products]);
 
   if (!Object.keys(data).length) {
     return null;
