@@ -10,7 +10,6 @@ import { AddToCart } from '@/components/add-to-cart';
 import { NumericInput } from '@/components/numeric-input';
 import { Seo } from '@/components/seo';
 import { ProductPrice } from '@/components/product-price';
-import ProductSkeleton from '@/components/product-skeleton';
 
 import { CgChevronRight as ChevronIcon } from 'react-icons/cg';
 import { PaginationButton } from '@/icons/pagination';
@@ -61,7 +60,8 @@ export default function Product({
   }, [productByHandle]);
 
   if (router.isFallback || !productByHandle || !collections) {
-    return <ProductSkeleton />;
+    router.push('/404');
+    return;
   }
 
   if (productByHandle) {

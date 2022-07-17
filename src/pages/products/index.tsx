@@ -9,9 +9,10 @@ import { ProductListing } from '@/components/product-listing';
 import { Seo } from '@/components/seo';
 
 import styles from './index.module.css';
-import ProductSkeleton from '@/components/product-skeleton';
+import { useRouter } from 'next/router';
 
 export default function Products({ data }: AllProductsType) {
+  const router = useRouter();
   const { collections, products } = data;
   React.useEffect(() => {
     if (Object.keys(data).length > 0) {
@@ -25,7 +26,8 @@ export default function Products({ data }: AllProductsType) {
   }, []);
 
   if (!Object.keys(data).length) {
-    return <ProductSkeleton />;
+    router.push('/404');
+    return;
   }
 
   return (

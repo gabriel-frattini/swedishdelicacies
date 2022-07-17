@@ -16,7 +16,6 @@ import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { queryClient } from '@/lib/queryClient';
 import { useRouter } from 'next/router';
-import ProductSkeleton from '@/components/product-skeleton';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   const router = useRouter();
@@ -33,7 +32,8 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   }, []);
 
   if (Object.keys(data).length === 0 || router.isFallback) {
-    return <ProductSkeleton />;
+    router.push('/404');
+    return;
   }
 
   const { collectionByHandle, collections } = data;
