@@ -15,25 +15,9 @@ import NotFound from '@/components/404';
 
 export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
-  const router = useRouter();
 
   if (Object.keys(collections).length === 0) {
     return <NotFound />;
-  }
-
-  React.useEffect(() => {
-    if (Object.keys(data).length > 0) {
-      products.edges.forEach((product) => {
-        const handle = product.node.handle;
-        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-          await getSingleProductByHandle(handle);
-        });
-      });
-    }
-  }, []);
-
-  if (!Object.keys(data).length) {
-    return null;
   }
 
   return (
