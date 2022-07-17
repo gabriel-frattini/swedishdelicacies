@@ -23,6 +23,7 @@ import { getAllProductHandles, getSingleProductByHandle } from '@/lib/queries';
 import styles from './product-page.module.css';
 import Reviews from '@/components/reviews';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import NotFound from '@/components/404';
 
 export interface OptionValue {
   name: string;
@@ -46,13 +47,15 @@ export default function Product({
   // const [available, setAvailable] = React.useState<any>();
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
 
+  if (Object.keys(productByHandle).length === 0) {
+    return <NotFound />;
+  }
+
   React.useEffect(() => {
-    if (!productByHandle || !collections) {
-      router.push('/404');
-      return;
+    if (productByHandle) {
+      setVariant({ ...productByHandle.variants.nodes[0] });
+      setViewActiveImage(productByHandle.images.edges[0].node.id);
     }
-    setVariant({ ...productByHandle.variants.nodes[0] });
-    setViewActiveImage(productByHandle.images.edges[0].node.id);
   }, [productByHandle]);
 
   if (productByHandle) {

@@ -16,22 +16,25 @@ import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { queryClient } from '@/lib/queryClient';
 import { useRouter } from 'next/router';
+import NotFound from '@/components/404';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   const router = useRouter();
 
+  if (Object.keys(data).length === 0) {
+    return <NotFound />;
+  }
+
   React.useEffect(() => {
-    if (Object.keys(data).length === 0) {
-      router.push('/404');
-      return;
-    }
-    data.collectionByHandle.products.edges.forEach((product) => {
-      const handle = product.node.handle;
-      queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-        await getSingleProductByHandle(handle);
+    if (Object.keys(data).length > 0) {
+      data.collectionByHandle.products.edges.forEach((product) => {
+        const handle = product.node.handle;
+        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
+          await getSingleProductByHandle(handle);
+        });
       });
-    });
-  }, [data]);
+    }
+  }, []);
 
   if (Object.keys(data).length === 0 || router.isFallback) {
     return null;

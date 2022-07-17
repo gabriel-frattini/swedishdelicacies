@@ -11,22 +11,27 @@ import { Seo } from '@/components/seo';
 import styles from './index.module.css';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
+import NotFound from '@/components/404';
 
 export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
   const router = useRouter();
+
+  if (Object.keys(data).length === 0) {
+    return <NotFound />;
+  }
+
   React.useEffect(() => {
-    if (Object.keys(data).length === 0) {
-      router.push('/404');
-      return;
-    }
-    products.edges.forEach((product) => {
-      const handle = product.node.handle;
-      queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-        await getSingleProductByHandle(handle);
+    if (Object.keys(data).length > 0) {
+      products.edges.forEach((product) => {
+        const handle = product.node.handle;
+        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
+          await getSingleProductByHandle(handle);
+        });
       });
-    });
-  }, [collections, products]);
+    }
+    router.push('/404');
+  }, []);
 
   if (!Object.keys(data).length) {
     return null;
