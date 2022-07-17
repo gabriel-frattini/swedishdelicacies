@@ -48,10 +48,9 @@ export default function Product({
   data: { productByHandle, collections },
 }: pageProps) {
   const router = useRouter();
-  const { client } = React.useContext(StoreContext);
   const [quantity, setQuantity] = React.useState(1);
   const [variant, setVariant] = React.useState<any>();
-  const [available, setAvailable] = React.useState<any>();
+  // const [available, setAvailable] = React.useState<any>();
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
 
   React.useEffect(() => {
@@ -61,12 +60,8 @@ export default function Product({
     }
   }, [productByHandle]);
 
-  if (router.isFallback || !productByHandle) {
-    return (
-      <Layout collections={collections}>
-        <ProductSkeleton />
-      </Layout>
-    );
+  if (router.isFallback || !productByHandle || !collections) {
+    return <ProductSkeleton />;
   }
 
   if (productByHandle) {
@@ -359,13 +354,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
     };
   }
   const param = JSON.stringify(context.params).split(':')[1].slice(1, -2);
-  const { data } = await getSingleProductByHandle(param);
-  if (data) {
+
+  try {
+    const { data } = await getSingleProductByHandle(param);
+    if (data) {
+      return {
+        props: { data },
+      };
+    }
     return {
-      props: { data },
+      props: { data: {} },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: { data: {} },
     };
   }
-  return {
-    props: { data: {} },
-  };
 };

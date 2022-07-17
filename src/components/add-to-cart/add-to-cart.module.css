@@ -1,11 +1,11 @@
 .addToCart {
-  color: var(--blue-80);
+  color: var(--blue-100);
   background-color: var(--primary);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: var(--radius-md);
-  font-weight: var(--bold);
+  font-weight: var(--extrabold);
   height: var(--size-input);
   font-size: large;
   padding: 1rem 1rem;

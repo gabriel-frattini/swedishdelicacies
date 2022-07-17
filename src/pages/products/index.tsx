@@ -9,6 +9,7 @@ import { ProductListing } from '@/components/product-listing';
 import { Seo } from '@/components/seo';
 
 import styles from './index.module.css';
+import ProductSkeleton from '@/components/product-skeleton';
 
 export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
@@ -24,12 +25,12 @@ export default function Products({ data }: AllProductsType) {
   }, []);
 
   if (!Object.keys(data).length) {
-    return null;
+    return <ProductSkeleton />;
   }
 
   return (
     <Layout collections={collections}>
-      <Seo title="All Products"  />
+      <Seo title="All Products" />
       <h1 className={styles.title}>Products</h1>
       <ProductListing products={products} />
     </Layout>
@@ -37,15 +38,22 @@ export default function Products({ data }: AllProductsType) {
 }
 
 export async function getStaticProps() {
-  const { data } = await getAllProducts();
+  try {
+    const { data } = await getAllProducts();
 
-  if (data) {
+    if (data) {
+      return {
+        props: { data },
+      };
+    }
+
     return {
-      props: { data },
+      props: { data: {} },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: { data: {} },
     };
   }
-
-  return {
-    props: { data: {} },
-  };
 }

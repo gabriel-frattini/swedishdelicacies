@@ -16,6 +16,7 @@ import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { queryClient } from '@/lib/queryClient';
 import { useRouter } from 'next/router';
+import ProductSkeleton from '@/components/product-skeleton';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
   const router = useRouter();
@@ -31,8 +32,8 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
     }
   }, []);
 
-  if (Object.keys(data).length === 0) {
-    return <></>;
+  if (Object.keys(data).length === 0 || router.isFallback) {
+    return <ProductSkeleton />;
   }
 
   const { collectionByHandle, collections } = data;
@@ -60,14 +61,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const param = JSON.stringify(context.params).split(':')[1].slice(1, -2);
 
-  const { data } = await getAllProductsByHandle(param);
+  try {
+    const { data } = await getAllProductsByHandle(param);
 
-  if (data) {
+    if (data) {
+      return {
+        props: { data },
+      };
+    }
     return {
-      props: { data },
+      props: { data: {} },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      props: { data: {} },
     };
   }
-  return {
-    props: { data: {} },
-  };
 };
