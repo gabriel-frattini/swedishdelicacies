@@ -89,7 +89,6 @@
 
 .results {
   grid-area: results;
-  padding: 0 var(--space-2xl);
 }
 
 .results ul {

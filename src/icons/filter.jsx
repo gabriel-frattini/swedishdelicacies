@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from 'react';
 
 function FilterIcon(props) {
   return (
@@ -15,7 +15,7 @@ function FilterIcon(props) {
         fill="currentColor"
       />
     </svg>
-  )
+  );
 }
 
-export default FilterIcon
+export default FilterIcon;

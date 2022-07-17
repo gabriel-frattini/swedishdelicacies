@@ -22,7 +22,7 @@ export function Seo({
     siteDescription:
       'It’s a simple concept that started in our family house in Halmstad Sweden, with 1000+ products and 30k customers already.',
     siteUrl: 'https://swedishdelicacies.vercel.app',
-    siteImage: "https://swedishdelicacies.vercel.app/logo.png",
+    siteImage: 'https://swedishdelicacies.vercel.app/logo.png',
   };
 
   const { siteTitle, siteTitleDefault, siteUrl, siteDescription, siteImage } =
@@ -52,6 +52,10 @@ export function Seo({
       <meta name="twitter:url" content={seo.url} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+      ></meta>
       <link
         rel="icon"
         type="image/png"
@@ -69,6 +73,7 @@ export function Seo({
         sizes="180x180"
         href="/apple-touch-icon.png"
       />
+      <link rel="shortcut icon" href="/favicon/favicon.ico" />
 
       {children}
     </Head>

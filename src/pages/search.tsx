@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { useRouter } from 'next/router';
 import debounce from 'debounce';
 import { CgChevronRight, CgChevronLeft } from 'react-icons/cg';
+
+import { Seo } from '@/components/seo';
 import { Layout } from '@/components/layout';
 import CrossIcon from '../icons/cross';
 import SortIcon from '../icons/sort';
@@ -9,12 +12,11 @@ import SearchIcon from '../icons/search';
 import { ProductCard } from '../components/product-card';
 import { useProductSearch } from '../utils/hooks';
 import { getValuesFromQuery } from '../utils/search';
-import { getCurrencySymbol } from '../utils/format-price';
 import { Spinner } from '../components/spinner';
 import { Filters } from '../components/filters';
 import styles from './search-page.module.css';
+
 import { getAllProductsWithMetaFields } from '@/lib/queries';
-import { useRouter } from 'next/router';
 
 import { queryTypes } from '@/utils/search';
 import { useSearchType } from '@/utils/hooks';
@@ -125,6 +127,7 @@ export default function SearchPage({ data }: PageProps) {
   return (
     <>
       <Layout collections={data.collections} activePage="">
+        <Seo />
         <div className={styles.main}>
           <div className={styles.search}>
             <SearchBar defaultTerm={filters.term} setFilters={setFilters} />
