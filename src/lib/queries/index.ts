@@ -41,6 +41,7 @@ export async function getAllProducts() {
       id
       title
       handle
+      vendor
       description
       collections(first:1) {
           edges {

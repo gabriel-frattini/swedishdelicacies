@@ -52,9 +52,7 @@ export function ProductCard({ product: { node }, eager }: Props) {
             />
           </div>
         ) : (
-          <div
-            style={{ height: defaultImageHeight, width: defaultImageWidth }}
-          />
+          <div style={{ height: 200, width: 400 }} />
         )}
         <div className={styles.productDetailsStyle}>
           <div className={styles.productVendorStyle}>{vendor}</div>
