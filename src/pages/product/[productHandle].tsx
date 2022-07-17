@@ -102,8 +102,11 @@ export default function Product({
     const hasVariants = variants.nodes.length > 1;
     const hasImages = images.edges.length > 0;
     const hasMultipleImages = images.edges.length > 1;
+    const collectionId = productCollection.edges.length
+      ? productCollection.edges[0].node.id
+      : '';
     return (
-      <Layout collections={collections}>
+      <Layout collections={collections} activePage={collectionId}>
         <Seo
           title={title}
           description={description}

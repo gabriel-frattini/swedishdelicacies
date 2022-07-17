@@ -5,7 +5,7 @@ import { AllproductsByHandleType } from '@/lib/types';
 // To optimize LCP we mark the first product card as eager so the image gets loaded faster
 
 type ProductListingType = Omit<
-  AllproductsByHandleType['data']['collectionByHandle'],
+  Omit<AllproductsByHandleType['data']['collectionByHandle'], 'id'>,
   'handle' | 'title'
 >;
 

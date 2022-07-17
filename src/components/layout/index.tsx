@@ -8,13 +8,14 @@ import { AllCollectionsType } from '@/lib/types';
 interface LayoutProps {
   children: any;
   collections: AllCollectionsType;
+  activePage: string;
 }
 
-export function Layout({ children, collections }: LayoutProps) {
+export function Layout({ children, collections, activePage }: LayoutProps) {
   return (
     <>
       <SkipNavLink />
-      <Header collections={collections} />
+      <Header collections={collections} activePage={activePage} />
       <SkipNavContent>{children}</SkipNavContent>
       <Footer />
     </>

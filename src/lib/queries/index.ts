@@ -115,6 +115,7 @@ query getAllProductsByHandle($handle: String!) {
     }
   }
   collectionByHandle(handle: $handle) {
+    id
     title
     handle
     description

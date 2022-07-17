@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { queryClient } from '@/lib/queryClient';
 import { getAllProducts, getSingleProductByHandle } from '@/lib/queries';
 import { AllProductsType } from '@/lib/types';
 
@@ -10,18 +9,17 @@ import { Seo } from '@/components/seo';
 
 import styles from './index.module.css';
 import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 import NotFound from '@/components/404';
 
 export default function Products({ data }: AllProductsType) {
   const { collections, products } = data;
 
-  if (Object.keys(collections).length === 0) {
+  if (Object.keys(data).length === 0) {
     return <NotFound />;
   }
 
   return (
-    <Layout collections={collections}>
+    <Layout collections={collections} activePage={'0'}>
       <Seo title="All Products" />
       <h1 className={styles.title}>Products</h1>
       <ProductListing products={products} />

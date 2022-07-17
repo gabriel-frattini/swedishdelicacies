@@ -33,7 +33,7 @@ export default function CartPage({ collections }: pageProps) {
   );
 
   return (
-    <Layout collections={collections}>
+    <Layout collections={collections} activePage="">
       <div className={styles.wrap}>
         {emptyCart ? (
           <div className={styles.emptyStateContainer}>

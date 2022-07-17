@@ -1,5 +1,4 @@
-import { LineItem } from '@/components/line-item';
-import { string, z } from 'zod';
+import {  z } from 'zod';
 
 const collections = z.object({
   edges: z.array(
@@ -134,6 +133,7 @@ const AllproductsByHandle = z.object({
   data: z.object({
     collections,
     collectionByHandle: z.object({
+      id: z.string(),
       description: z.string().optional(),
       title: z.string(),
       handle: z.string(),

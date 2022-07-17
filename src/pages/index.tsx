@@ -34,7 +34,7 @@ export default function IndexPage({ data }: AllproductsByHandleType) {
     return null;
   }
   return (
-    <Layout collections={data.collections}>
+    <Layout collections={data.collections} activePage=''>
       <Seo title="home" description="this is home" />
       <Hero />
       <ProductListing products={data.collectionByHandle.products} />

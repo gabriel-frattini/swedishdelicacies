@@ -11,9 +11,13 @@ import { CartButton } from '../../cart-button';
 
 interface HeaderProps {
   collections: AllCollectionsType;
+  activePage: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
+export const Header: React.FC<HeaderProps> = ({
+  collections,
+  activePage,
+}: HeaderProps) => {
   const { checkout, loading, didJustAddToCart } =
     React.useContext(StoreContext);
 
@@ -32,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ collections }: HeaderProps) => {
           </a>
         </Link>
         <div className={styles.nav}>
-          <Navigation collections={collections} />
+          <Navigation collections={collections} activePage={activePage} />
         </div>
         <Link replace href="/search">
           <a className={styles.searchButton}>

@@ -25,25 +25,12 @@ export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
     return <NotFound />;
   }
 
-  React.useEffect(() => {
-    if (Object.keys(data).length > 0) {
-      data.collectionByHandle.products.edges.forEach((product) => {
-        const handle = product.node.handle;
-        queryClient.prefetchQuery('getSingleProductByHandle', async () => {
-          await getSingleProductByHandle(handle);
-        });
-      });
-    }
-  }, []);
 
-  if (Object.keys(data).length === 0 || router.isFallback) {
-    return null;
-  }
 
   const { collectionByHandle, collections } = data;
 
   return (
-    <Layout collections={collections}>
+    <Layout collections={collections} activePage={collectionByHandle.id}>
       <h2 className={styles.subtitle}>{collectionByHandle.description}</h2>
       <h1 className={styles.title}>{collectionByHandle.title}</h1>
 

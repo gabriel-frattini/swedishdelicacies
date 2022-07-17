@@ -124,7 +124,7 @@ export default function SearchPage({ data }: PageProps) {
   }
   return (
     <>
-      <Layout collections={data.collections}>
+      <Layout collections={data.collections} activePage="">
         <div className={styles.main}>
           <div className={styles.search}>
             <SearchBar defaultTerm={filters.term} setFilters={setFilters} />
