@@ -29,8 +29,7 @@ export function ProductCard({ product: { node }, eager }: Props) {
     priceRange.minVariantPrice.currencyCode,
     parseInt(productPrice.minVariantPrice.amount),
   );
-  const defaultImageHeight = 200;
-  const defaultImageWidth = 400;
+
   return (
     <Link
       href={`/product/${handle}`}
@@ -46,8 +45,8 @@ export function ProductCard({ product: { node }, eager }: Props) {
             <Image
               alt={images.edges[0].node.altText ?? title}
               src={images.edges[0].node.originalSrc}
-              width={defaultImageWidth}
-              height={defaultImageHeight}
+              width={400}
+              height={200}
               objectFit="contain"
               loading={eager ? 'eager' : 'lazy'}
             />

@@ -50,8 +50,8 @@
   /* font-weight */
   --body: 400;
   --medium: 500;
-  --semibold: 600;
-  --bold: 700;
+  --semibold: 500;
+  --bold: 500;
 
   /* font-size */
   --text-xs: 12px;

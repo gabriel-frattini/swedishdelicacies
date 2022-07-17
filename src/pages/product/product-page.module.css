@@ -169,7 +169,7 @@
   padding-right: var(--space-md);
 }
 
-.tagList:hover {
+.tagList a:hover {
   color: var(--text-color);
   text-decoration: underline;
 }

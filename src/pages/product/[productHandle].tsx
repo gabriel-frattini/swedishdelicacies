@@ -324,7 +324,7 @@ export default function Product({
                     <span className={styles.tagList}>
                       {tags.map((tag, idx) => (
                         <Link key={idx} href={`/search?t=${tag}`}>
-                          {tag}
+                          <a>{tag} </a>
                         </Link>
                       ))}
                     </span>
