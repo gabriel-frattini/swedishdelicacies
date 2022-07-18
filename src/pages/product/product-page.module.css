@@ -6,6 +6,8 @@
 
 .container {
   max-width: 1600px;
+  margin: auto;
+  padding: 10px;
 }
 
 .header {
@@ -19,10 +21,12 @@
   display: flex;
   gap: 0.2rem;
   align-items: center;
+  min-width: 100px;
 }
 
 .headerRating p {
   margin-left: 0.4rem;
+  min-width: fit-content;
 }
 
 .stars {
