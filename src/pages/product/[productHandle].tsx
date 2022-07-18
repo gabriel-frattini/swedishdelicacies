@@ -44,7 +44,7 @@ export default function Product({
   const router = useRouter();
   const [quantity, setQuantity] = React.useState(1);
   const [variant, setVariant] = React.useState<any>();
-  // const [available, setAvailable] = React.useState<any>();
+
   const [viewActiveImage, setViewActiveImage] = React.useState<string>();
 
   if (Object.keys(productByHandle).length === 0) {
@@ -94,11 +94,6 @@ export default function Product({
       });
       setVariant({ ...selectedVariant! });
     };
-
-    // React.useEffect(() => {
-    //   checkAvailablity(data.storefrontId);
-    // }, [productVariant.id, checkAvailablity, id]);
-
     const hasVariants = variants.nodes.length > 1;
     const hasImages = images.edges.length > 0;
     const hasMultipleImages = images.edges.length > 1;

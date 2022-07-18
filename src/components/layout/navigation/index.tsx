@@ -12,18 +12,10 @@ interface NavbarProps {
 export const Navigation = ({ collections, activePage }: NavbarProps) => {
   const router = useRouter();
   const [scrollPosX, setScrollPosX] = React.useState('0');
-  const [activeItem, setActiveItem] = React.useState(activePage);
   const ref = React.useRef<HTMLParagraphElement>(null);
 
   const handleClickedNavItem = (id: string) => {
     sessionStorage.setItem('navScrollX', scrollPosX);
-
-    //   const _id = sessionStorage.getItem('page');
-
-    //   if (_id) setActiveItem(_id);
-
-    //   setActiveItem(id);
-    //   sessionStorage.setItem('page', id);
   };
 
   React.useEffect(() => {
