@@ -1,10 +1,16 @@
 import * as React from 'react';
 import Link from 'next/link';
+import debounce from 'lodash.debounce';
+
 import { StoreContext } from '../context/store-context';
 
 import { formatPrice } from '../utils/format-price';
 import { getAllCollections, getRecommendedProducts } from '@/lib/queries';
-import { AllCollectionsType, AllProductsType } from '@/lib/types';
+import {
+  AllCollectionsType,
+  AllProductsType,
+  SingleProductType,
+} from '@/lib/types';
 
 import ShippingBanner from '@/components/shipping';
 import { Layout } from '../components/layout';
@@ -27,7 +33,7 @@ export default function CartPage({ collections }: pageProps) {
     window.open(checkout.webUrl);
   };
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading } = useQuery<AllProductsType['data']>(
     'getRecommendedProducts',
     async () => await getRecommendedProducts(),
   );
@@ -133,7 +139,18 @@ export default function CartPage({ collections }: pageProps) {
               </svg>
               Checkout
             </button>
-            <RecommendedSection data={data} />
+            <section className={styles.recommendedSection}>
+              <h2 className={styles.recommendedText}>
+                Other customers also bought
+              </h2>
+              <ul className={styles.recommendedListing}>
+                {data?.products.edges.map(({ node }, idx) => (
+                  <li key={idx} className={styles.recommendedProduct}>
+                    <RecommendedProductCard node={node} />
+                  </li>
+                ))}
+              </ul>
+            </section>
           </>
         )}
       </div>
@@ -141,41 +158,54 @@ export default function CartPage({ collections }: pageProps) {
   );
 }
 
-const RecommendedSection = ({ data }: AllProductsType) => {
+interface RecommendedCardProps {
+  node: SingleProductType;
+}
+
+const RecommendedProductCard = (node: RecommendedCardProps) => {
   const [quantity, setQuantity] = React.useState<number>(1);
-  if (!data) {
+
+  const handleQuantityChange = (value: any) => {
+    if (value !== '' && Number(value) < 1) {
+      return;
+    }
+    setQuantity(value);
+    if (Number(value) >= 1) {
+    }
+  };
+
+  function doIncrement() {
+    handleQuantityChange(Number(quantity || 0) + 1);
+  }
+
+  function doDecrement() {
+    handleQuantityChange(Number(quantity || 0) - 1);
+  }
+
+  if (!node) {
     return <div></div>;
   }
   return (
-    <section className={styles.recommendedSection}>
-      <h2 className={styles.recommendedText}>Other customers also bought</h2>
-      <ul className={styles.recommendedListing}>
-        {data.products.edges.map((node, idx) => (
-          <li key={idx} className={styles.recommendedProduct}>
-            <ProductCard product={node} />
-            <div className={styles.quickbuy}>
-              <NumericInput
-                aria-label="Quantity"
-                onIncrement={() => setQuantity((q) => Math.min(q + 1, 20))}
-                onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-                onChangeQuantity={(event: any) =>
-                  setQuantity(event.currentTarget.value)
-                }
-                quantity={quantity}
-                min="1"
-                max="20"
-              />
-              <AddToCart
-                available={true}
-                simple={true}
-                quantity={quantity}
-                variantId={node.node.variants.nodes[0].id}
-              />
-            </div>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <>
+      <ProductCard product={node} />
+      <div className={styles.quickbuy}>
+        <NumericInput
+          quantity={quantity}
+          aria-label="Quantity"
+          onIncrement={doIncrement}
+          onDecrement={doDecrement}
+          onChangeQuantity={(e) => handleQuantityChange(e.currentTarget.value)}
+          min="1"
+          max="20"
+        />
+        <AddToCart
+          available={true}
+          simple={true}
+          quantity={quantity}
+          variantId={node.node.variants.nodes[0].id}
+        />
+      </div>
+    </>
   );
 };
 

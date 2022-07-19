@@ -60,7 +60,7 @@
 }
 
 /* On mobile, make the buttons easier to press */
-@media (pointer: coarse) {
+@media (max-width: 640px) {
   .wrap {
     grid-template-columns: var(--size-input) 1fr var(--size-input);
     grid-template-areas: 'decrement input increment';
