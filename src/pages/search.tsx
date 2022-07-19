@@ -204,7 +204,7 @@ export default function SearchPage({ data }: PageProps) {
                 {products &&
                   products.edges.map((node, index) => (
                     <li className={styles.productListItem} key={index}>
-                      <ProductCard eager={index === 0} product={node} />
+                      <ProductCard product={node} />
                     </li>
                   ))}
               </ul>

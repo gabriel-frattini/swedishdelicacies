@@ -6,20 +6,14 @@ import { AllCollectionsType } from '@/lib/types';
 import styles from './404.module.css';
 import { getAllCollections } from '@/lib/queries';
 import { object } from 'zod';
+import NotFound from '@/components/404';
 
 interface pageProps {
   collections: AllCollectionsType;
 }
 
 export default function NotFoundPage() {
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.heading}>Page Not Found</h1>
-      <p className={styles.paragraph}>
-        Sorry, we couldn't find what you were looking for
-      </p>
-    </div>
-  );
+  return <NotFound />;
 }
 
 // export async function getStaticProps() {

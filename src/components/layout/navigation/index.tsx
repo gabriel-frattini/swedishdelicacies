@@ -2,7 +2,6 @@ import * as React from 'react';
 import styles from './navigation.module.css';
 import Link from 'next/link';
 import { AllCollectionsType } from '@/lib/types';
-import { useRouter } from 'next/router';
 
 interface NavbarProps {
   collections: AllCollectionsType;
@@ -10,7 +9,6 @@ interface NavbarProps {
 }
 
 export const Navigation = ({ collections, activePage }: NavbarProps) => {
-  const router = useRouter();
   const [scrollPosX, setScrollPosX] = React.useState('0');
   const ref = React.useRef<HTMLParagraphElement>(null);
 

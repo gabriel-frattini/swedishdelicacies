@@ -1,4 +1,4 @@
-import {  z } from 'zod';
+import { z } from 'zod';
 
 const collections = z.object({
   edges: z.array(
@@ -6,16 +6,6 @@ const collections = z.object({
       node: z.object({
         id: z.string(),
         handle: z.string(),
-        products: z.object({
-          edges: z.array(
-            z.object({
-              node: z.object({
-                id: z.string(),
-                handle: z.string(),
-              }),
-            }),
-          ),
-        }),
       }),
     }),
   ),

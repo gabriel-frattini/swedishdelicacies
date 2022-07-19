@@ -78,7 +78,6 @@ export default function CartPage({ collections }: pageProps) {
                 {checkout.lineItems.map((item) => (
                   <LineItem item={item} key={item.id} />
                 ))}
-
                 <tr className={styles.summary}>
                   <td className={styles.collapseColumn}></td>
                   <td className={styles.collapseColumn}></td>

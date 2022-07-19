@@ -9,23 +9,17 @@ import styles from './index.module.css';
 import {
   getAllCollections,
   getAllProductsByHandle,
-  getSingleProductByHandle,
 } from '@/lib/queries';
 import { AllCollectionsType, AllproductsByHandleType } from '@/lib/types';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { queryClient } from '@/lib/queryClient';
-import { useRouter } from 'next/router';
 import NotFound from '@/components/404';
 
 export default function ProductTypeIndex({ data }: AllproductsByHandleType) {
-  const router = useRouter();
 
   if (Object.keys(data).length === 0) {
     return <NotFound />;
   }
-
-
 
   const { collectionByHandle, collections } = data;
 
