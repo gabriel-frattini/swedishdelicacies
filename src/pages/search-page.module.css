@@ -377,14 +377,14 @@
   flex-direction: row;
   align-items: center;
   gap: var(--size-gap);
-  padding: var(--space-xl) 0;
+  padding: var(--space-xl) 0 var(--space-xl) var(--space-xl);
 }
 
 .resultsStyle {
   font-size: var(--text-md);
   font-weight: 400;
   color: var(--text-color);
-  padding: var(--space-xl) 0;
+  padding: var(--space-xl) 0 var(--space-xl) var(--space-xl);
 }
 
 .resultsStyle span {
