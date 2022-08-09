@@ -320,7 +320,7 @@ export default function Product({
               </div>
             </div>
           </div>
-          <Reviews />
+          {/* <Reviews /> */}
         </div>
       </Layout>
     );
