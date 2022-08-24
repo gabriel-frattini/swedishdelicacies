@@ -144,7 +144,6 @@ export default function Product({
                           height={450}
                           quality={100}
                           objectFit="contain"
-                          loading={index === 0 ? 'eager' : 'lazy'}
                           alt={
                             image.node.altText
                               ? image.node.altText

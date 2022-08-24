@@ -86,7 +86,11 @@ export function LineItem({ item }: SingleLineItemType) {
       </td>
       <td className={styles.priceColumn}>
         <p className={styles.sale}>
-          {variantIsOnSale && item.variant.compareAtPrice}
+          {variantIsOnSale &&
+            formatPrice(
+              item.variant.priceV2.currencyCode,
+              parseInt(item.variant.compareAtPrice),
+            )}
         </p>
         <p className={[variantIsOnSale && styles.oldPrice].join(' ')}>
           {formatPrice(
